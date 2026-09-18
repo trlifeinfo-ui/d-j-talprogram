@@ -1,0 +1,5098 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#030712"
+    >
+
+    <meta
+        name="description"
+        content="10/D Dijital Sınıf gelişmiş akademik takvim sistemi."
+    >
+
+    <title>Takvim | 10/D Dijital Sınıf</title>
+
+    <style>
+
+        /* =========================================================
+           10/D DİJİTAL SINIF
+           GELİŞMİŞ AKADEMİK TAKVİM
+           ========================================================= */
+
+        :root {
+
+            --bg: #030712;
+            --bg-2: #06101c;
+            --bg-3: #0a1627;
+
+            --panel:
+                rgba(9, 18, 32, .88);
+
+            --panel-strong:
+                rgba(12, 23, 41, .97);
+
+            --panel-soft:
+                rgba(255,255,255,.026);
+
+            --border:
+                rgba(132,169,230,.12);
+
+            --border-soft:
+                rgba(255,255,255,.055);
+
+            --border-hover:
+                rgba(79,140,255,.28);
+
+            --text:
+                #f4f7ff;
+
+            --text-soft:
+                #b2c0d4;
+
+            --text-muted:
+                #6d7f98;
+
+            --blue:
+                #4f8cff;
+
+            --blue-light:
+                #79b0ff;
+
+            --cyan:
+                #57e9ff;
+
+            --green:
+                #42e69d;
+
+            --yellow:
+                #ffd15b;
+
+            --red:
+                #ff718c;
+
+            --purple:
+                #a181ff;
+
+            --orange:
+                #ffab6b;
+
+            --sidebar-width:
+                272px;
+
+            --radius-xl:
+                30px;
+
+            --radius-lg:
+                23px;
+
+            --radius-md:
+                17px;
+
+            --radius-sm:
+                12px;
+
+            --shadow:
+                0 26px 85px rgba(0,0,0,.32),
+                inset 0 1px 0 rgba(255,255,255,.02);
+
+            --ease:
+                cubic-bezier(.2,.8,.2,1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 7% 3%,
+                    rgba(79,140,255,.12),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 92% 10%,
+                    rgba(87,233,255,.05),
+                    transparent 23%
+                ),
+                radial-gradient(
+                    circle at 52% 93%,
+                    rgba(161,129,255,.035),
+                    transparent 22%
+                ),
+                linear-gradient(
+                    145deg,
+                    #02050b 0%,
+                    #06101c 54%,
+                    #030812 100%
+                );
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+        }
+
+        ::selection {
+            color: #fff;
+            background: rgba(79,140,255,.30);
+        }
+
+        /* =========================================================
+           BACKGROUND
+           ========================================================= */
+
+        .background-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+
+            opacity: .18;
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,.022) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.022) 1px,
+                    transparent 1px
+                );
+
+            background-size: 58px 58px;
+        }
+
+        .ambient {
+            position: fixed;
+
+            width: 550px;
+            height: 550px;
+
+            border-radius: 50%;
+
+            filter: blur(105px);
+
+            pointer-events: none;
+
+            opacity: .07;
+
+            z-index: -9;
+
+            animation:
+                ambientFloat
+                12s
+                ease-in-out
+                infinite;
+        }
+
+        .ambient.one {
+            left: -250px;
+            top: -260px;
+            background: #397fff;
+        }
+
+        .ambient.two {
+            right: -280px;
+            top: 25%;
+            background: #3ce4ff;
+
+            animation-delay: -4s;
+        }
+
+        .ambient.three {
+            left: 26%;
+            bottom: -380px;
+            background: #744eff;
+
+            animation-delay: -8s;
+        }
+
+        @keyframes ambientFloat {
+
+            0%,
+            100% {
+                transform:
+                    translate3d(0,0,0)
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    translate3d(0,-18px,0)
+                    scale(1.04);
+            }
+        }
+
+        /* =========================================================
+           APP
+           ========================================================= */
+
+        .app {
+            min-height: 100vh;
+        }
+
+        /* =========================================================
+           SIDEBAR
+           ========================================================= */
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+
+            width: var(--sidebar-width);
+            height: 100vh;
+
+            padding:
+                21px
+                14px;
+
+            display: flex;
+            flex-direction: column;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(6,14,25,.985),
+                    rgba(3,9,16,.975)
+                );
+
+            border-right:
+                1px solid
+                rgba(125,165,227,.11);
+
+            backdrop-filter:
+                blur(26px);
+
+            -webkit-backdrop-filter:
+                blur(26px);
+
+            z-index: 1300;
+
+            overflow-y: auto;
+
+            transition:
+                transform
+                .24s
+                var(--ease);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background:
+                rgba(255,255,255,.07);
+
+            border-radius: 99px;
+        }
+
+        /* =========================================================
+           BRAND
+           ========================================================= */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding:
+                5px
+                8px
+                22px;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            flex: 0 0 48px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 16px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 22%,
+                    rgba(107,175,255,.22),
+                    transparent 60%
+                ),
+                linear-gradient(
+                    145deg,
+                    #0a1b30,
+                    #071426
+                );
+
+            border:
+                1px solid
+                rgba(105,165,255,.22);
+
+            box-shadow:
+                0 0 35px
+                rgba(56,128,255,.12),
+                inset 0 1px 0
+                rgba(255,255,255,.06);
+        }
+
+        .brand-logo svg {
+            width: 31px;
+            height: 31px;
+        }
+
+        .brand-copy {
+            min-width: 0;
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: -.025em;
+        }
+
+        .brand-subtitle {
+            margin-top: 4px;
+
+            color: #66778f;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        /* =========================================================
+           NAVIGATION
+           ========================================================= */
+
+        .sidebar-section {
+            margin-top: 8px;
+        }
+
+        .sidebar-section-title {
+            padding:
+                0
+                11px
+                8px;
+
+            color: #536278;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .14em;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav-link {
+            position: relative;
+
+            min-height: 46px;
+
+            padding:
+                10px
+                11px;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            color: #98a8bc;
+
+            border:
+                1px solid
+                transparent;
+
+            border-radius: 14px;
+
+            font-size: 12px;
+            font-weight: 750;
+
+            transition:
+                color .18s,
+                background .18s,
+                border-color .18s,
+                transform .18s;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border-color:
+                rgba(255,255,255,.04);
+
+            transform:
+                translateX(2px);
+        }
+
+        .nav-link.active {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79,140,255,.18),
+                    rgba(87,233,255,.045)
+                );
+
+            border-color:
+                rgba(79,140,255,.20);
+        }
+
+        .nav-link.active::before {
+            content: "";
+
+            position: absolute;
+
+            left: -1px;
+            top: 10px;
+
+            width: 3px;
+            height: 26px;
+
+            border-radius:
+                0
+                6px
+                6px
+                0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--cyan),
+                    var(--blue)
+                );
+
+            box-shadow:
+                0 0 15px
+                rgba(87,233,255,.55);
+        }
+
+        .nav-icon {
+            width: 21px;
+            height: 21px;
+            flex: 0 0 21px;
+
+            display: grid;
+            place-items: center;
+        }
+
+        .nav-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* =========================================================
+           SIDEBAR FOOTER
+           ========================================================= */
+
+        .sidebar-footer {
+            margin-top: auto;
+
+            padding:
+                16px
+                7px
+                3px;
+        }
+
+        .sidebar-status {
+            padding: 14px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79,140,255,.075),
+                    rgba(255,255,255,.022)
+                );
+
+            border:
+                1px solid
+                rgba(79,140,255,.12);
+        }
+
+        .sidebar-status-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background:
+                var(--green);
+
+            box-shadow:
+                0 0 12px
+                rgba(66,230,157,.65);
+        }
+
+        .sidebar-status-title {
+            font-size: 11px;
+            font-weight: 850;
+        }
+
+        .sidebar-status-text {
+            margin-top: 7px;
+
+            color: #63758d;
+
+            font-size: 9px;
+            line-height: 1.55;
+        }
+
+        /* =========================================================
+           MAIN
+           ========================================================= */
+
+        .main {
+            width:
+                calc(
+                    100% -
+                    var(--sidebar-width)
+                );
+
+            margin-left:
+                var(--sidebar-width);
+
+            min-width: 0;
+        }
+
+        /* =========================================================
+           TOPBAR
+           ========================================================= */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+
+            z-index: 1000;
+
+            min-height: 77px;
+
+            padding:
+                14px
+                28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 18px;
+
+            background:
+                rgba(3,9,17,.70);
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.045);
+
+            backdrop-filter:
+                blur(20px);
+
+            -webkit-backdrop-filter:
+                blur(20px);
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mobile-menu {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.075);
+
+            border-radius: 13px;
+
+            cursor: pointer;
+        }
+
+        .mobile-menu svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .page-name {
+            font-size: 15px;
+            font-weight: 900;
+
+            letter-spacing: -.025em;
+        }
+
+        .page-subtitle {
+            margin-top: 4px;
+
+            color: #596c85;
+
+            font-size: 9px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-badge {
+            min-height: 37px;
+
+            padding:
+                0
+                11px;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            border-radius: 11px;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            white-space: nowrap;
+        }
+
+        .class-badge {
+            color: #c9dcff;
+
+            background:
+                rgba(79,140,255,.065);
+
+            border:
+                1px solid
+                rgba(79,140,255,.14);
+        }
+
+        .active-badge {
+            color: #b5f1d3;
+
+            background:
+                rgba(66,230,157,.045);
+
+            border:
+                1px solid
+                rgba(66,230,157,.10);
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background:
+                var(--green);
+
+            box-shadow:
+                0 0 11px
+                rgba(66,230,157,.72);
+        }
+
+        .clock-box {
+            min-width: 105px;
+            text-align: right;
+        }
+
+        .clock {
+            font-size: 12px;
+            font-weight: 900;
+
+            letter-spacing: .05em;
+        }
+
+        .date {
+            margin-top: 3px;
+
+            color: #596c85;
+
+            font-size: 8px;
+        }
+
+        /* =========================================================
+           CONTENT
+           ========================================================= */
+
+        .content {
+            width: min(1580px,100%);
+
+            margin:
+                0
+                auto;
+
+            padding:
+                28px
+                28px
+                48px;
+        }
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            padding:
+                29px
+                30px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0,1.35fr)
+                minmax(290px,.75fr);
+
+            gap: 24px;
+
+            border-radius:
+                var(--radius-xl);
+
+            background:
+                radial-gradient(
+                    circle at 76% 20%,
+                    rgba(79,140,255,.15),
+                    transparent 23%
+                ),
+                radial-gradient(
+                    circle at 92% 78%,
+                    rgba(87,233,255,.06),
+                    transparent 24%
+                ),
+                linear-gradient(
+                    135deg,
+                    rgba(13,26,45,.97),
+                    rgba(6,13,23,.94)
+                );
+
+            border:
+                1px solid
+                rgba(79,140,255,.20);
+
+            box-shadow:
+                var(--shadow);
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            right: -150px;
+            bottom: -175px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(79,140,255,.08);
+
+            filter: blur(35px);
+
+            pointer-events: none;
+        }
+
+        .hero-main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            width: fit-content;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding:
+                7px
+                10px;
+
+            color: #a9d2ff;
+
+            background:
+                rgba(79,140,255,.065);
+
+            border:
+                1px solid
+                rgba(79,140,255,.14);
+
+            border-radius: 999px;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .11em;
+        }
+
+        .eyebrow-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background:
+                var(--cyan);
+
+            box-shadow:
+                0 0 12px
+                rgba(87,233,255,.70);
+        }
+
+        .hero-title {
+            margin-top: 17px;
+
+            font-size:
+                clamp(
+                    34px,
+                    4.2vw,
+                    56px
+                );
+
+            line-height: .96;
+
+            letter-spacing: -.055em;
+
+            font-weight: 950;
+        }
+
+        .hero-title span {
+            display: block;
+
+            margin-top: 5px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #a4c9ff 48%,
+                    #60eaff
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            max-width: 770px;
+
+            margin-top: 16px;
+
+            color: #9aacc1;
+
+            font-size: 11px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            margin-top: 21px;
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .hero-button {
+            min-height: 41px;
+
+            padding:
+                0
+                14px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            border-radius: 11px;
+
+            color: #c9d9ed;
+
+            background:
+                rgba(255,255,255,.032);
+
+            border:
+                1px solid
+                rgba(255,255,255,.075);
+
+            font-size: 8px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition:
+                transform .18s,
+                background .18s,
+                border-color .18s;
+        }
+
+        .hero-button:hover {
+            color: #fff;
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(255,255,255,.05);
+
+            border-color:
+                rgba(255,255,255,.12);
+        }
+
+        .hero-button.primary {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f8cff,
+                    #396edb
+                );
+
+            border-color:
+                rgba(139,186,255,.22);
+
+            box-shadow:
+                0 12px 29px
+                rgba(49,105,224,.20);
+        }
+
+        .hero-button svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* =========================================================
+           HERO VISUAL
+           ========================================================= */
+
+        .hero-visual {
+            position: relative;
+            z-index: 1;
+
+            min-height: 245px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 21px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(79,140,255,.10),
+                    transparent 57%
+                ),
+                rgba(255,255,255,.018);
+
+            border:
+                1px solid
+                rgba(255,255,255,.065);
+        }
+
+        .visual-orbit {
+            position: absolute;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(87,233,255,.13);
+        }
+
+        .visual-orbit.a {
+            width: 180px;
+            height: 65px;
+
+            transform:
+                rotate(-28deg);
+
+            animation:
+                orbitA
+                8s
+                linear
+                infinite;
+        }
+
+        .visual-orbit.b {
+            width: 180px;
+            height: 180px;
+
+            transform:
+                rotate(28deg)
+                scaleX(.62);
+
+            border-color:
+                rgba(79,140,255,.14);
+
+            animation:
+                orbitB
+                10s
+                linear
+                infinite;
+        }
+
+        .visual-orbit.c {
+            width: 108px;
+            height: 190px;
+
+            transform:
+                rotate(58deg);
+
+            border-color:
+                rgba(161,129,255,.11);
+
+            animation:
+                orbitC
+                9s
+                linear
+                infinite
+                reverse;
+        }
+
+        @keyframes orbitA {
+
+            from {
+                transform:
+                    rotate(-28deg);
+            }
+
+            to {
+                transform:
+                    rotate(332deg);
+            }
+        }
+
+        @keyframes orbitB {
+
+            from {
+                transform:
+                    rotate(28deg)
+                    scaleX(.62);
+            }
+
+            to {
+                transform:
+                    rotate(388deg)
+                    scaleX(.62);
+            }
+        }
+
+        @keyframes orbitC {
+
+            from {
+                transform:
+                    rotate(58deg);
+            }
+
+            to {
+                transform:
+                    rotate(-302deg);
+            }
+        }
+
+        .visual-core {
+            position: relative;
+
+            width: 92px;
+            height: 92px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 27px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 27%,
+                    rgba(87,233,255,.18),
+                    transparent 58%
+                ),
+                linear-gradient(
+                    145deg,
+                    #0a1d33,
+                    #061526
+                );
+
+            border:
+                1px solid
+                rgba(105,199,255,.22);
+
+            box-shadow:
+                0 0 60px
+                rgba(79,140,255,.14),
+                inset 0 0 30px
+                rgba(79,140,255,.045);
+
+            animation:
+                visualFloat
+                4s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes visualFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-5px);
+            }
+        }
+
+        .visual-core svg {
+            width: 55px;
+            height: 55px;
+        }
+
+        .visual-label {
+            position: absolute;
+
+            bottom: 15px;
+
+            padding:
+                6px
+                8px;
+
+            color: #78a9e9;
+
+            background:
+                rgba(255,255,255,.026);
+
+            border:
+                1px solid
+                rgba(255,255,255,.05);
+
+            border-radius: 8px;
+
+            font-size: 6px;
+            font-weight: 900;
+
+            letter-spacing: .11em;
+        }
+
+        /* =========================================================
+           CALENDAR TOOLBAR
+           ========================================================= */
+
+        .section {
+            margin-top: 22px;
+        }
+
+        .calendar-toolbar {
+            padding:
+                10px;
+
+            display: grid;
+
+            grid-template-columns:
+                auto
+                minmax(250px,1fr)
+                auto;
+
+            gap: 9px;
+
+            border-radius: 17px;
+
+            background:
+                rgba(10,19,33,.70);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+        }
+
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toolbar-button {
+            min-height: 40px;
+
+            padding:
+                0
+                11px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            color: #bdcfe4;
+
+            background:
+                rgba(255,255,255,.027);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            border-radius: 10px;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition:
+                background .18s,
+                border-color .18s,
+                color .18s,
+                transform .18s;
+        }
+
+        .toolbar-button:hover {
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.05);
+
+            border-color:
+                rgba(255,255,255,.11);
+
+            transform:
+                translateY(-1px);
+        }
+
+        .toolbar-button.primary {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79,140,255,.90),
+                    rgba(57,108,220,.92)
+                );
+
+            border-color:
+                rgba(132,180,255,.20);
+        }
+
+        .toolbar-button svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .month-switch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+        }
+
+        .month-switch-button {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            color: #9cb0ca;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition:
+                color .18s,
+                background .18s,
+                border-color .18s;
+        }
+
+        .month-switch-button:hover {
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.05);
+
+            border-color:
+                rgba(255,255,255,.10);
+        }
+
+        .month-switch-button svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .current-month-label {
+            min-width: 180px;
+
+            text-align: center;
+
+            font-size: 15px;
+            font-weight: 950;
+
+            letter-spacing: -.035em;
+        }
+
+        .current-month-subtitle {
+            margin-top: 3px;
+
+            color: #63758d;
+
+            font-size: 7px;
+            font-weight: 800;
+
+            text-align: center;
+
+            text-transform: uppercase;
+            letter-spacing: .09em;
+        }
+
+        /* =========================================================
+           CALENDAR LAYOUT
+           ========================================================= */
+
+        .calendar-layout {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0,1.65fr)
+                minmax(290px,.75fr);
+
+            gap: 13px;
+        }
+
+        .calendar-panel {
+            position: relative;
+            overflow: hidden;
+
+            padding: 17px;
+
+            border-radius:
+                var(--radius-lg);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.037),
+                    rgba(255,255,255,.014)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.065);
+
+            box-shadow:
+                var(--shadow);
+        }
+
+        /* =========================================================
+           WEEK HEADER
+           ========================================================= */
+
+        .calendar-weekdays {
+            display: grid;
+
+            grid-template-columns:
+                repeat(7,minmax(0,1fr));
+
+            gap: 5px;
+        }
+
+        .weekday {
+            min-height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #6d819d;
+
+            background:
+                rgba(255,255,255,.018);
+
+            border:
+                1px solid
+                rgba(255,255,255,.04);
+
+            border-radius: 9px;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .09em;
+        }
+
+        /* =========================================================
+           CALENDAR DAYS
+           ========================================================= */
+
+        .calendar-grid {
+            margin-top: 5px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(7,minmax(0,1fr));
+
+            gap: 5px;
+        }
+
+        .calendar-day {
+            position: relative;
+
+            min-height: 108px;
+
+            padding: 8px;
+
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,.018);
+
+            border:
+                1px solid
+                rgba(255,255,255,.045);
+
+            cursor: pointer;
+
+            transition:
+                transform .18s var(--ease),
+                background .18s,
+                border-color .18s,
+                box-shadow .18s;
+        }
+
+        .calendar-day:hover {
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(255,255,255,.035);
+
+            border-color:
+                rgba(109,159,245,.17);
+        }
+
+        .calendar-day.other-month {
+            opacity: .32;
+        }
+
+        .calendar-day.today {
+            border-color:
+                rgba(87,233,255,.28);
+
+            background:
+                radial-gradient(
+                    circle at 90% 0%,
+                    rgba(87,233,255,.08),
+                    transparent 28%
+                ),
+                rgba(79,140,255,.035);
+
+            box-shadow:
+                inset 0 0 20px
+                rgba(79,140,255,.025);
+        }
+
+        .calendar-day.selected {
+            border-color:
+                rgba(79,140,255,.36);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79,140,255,.10),
+                    rgba(87,233,255,.025)
+                );
+
+            box-shadow:
+                0 0 0 1px
+                rgba(79,140,255,.035),
+                0 10px 28px
+                rgba(39,87,170,.08);
+        }
+
+        .day-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 5px;
+        }
+
+        .day-number {
+            width: 24px;
+            height: 24px;
+
+            display: grid;
+            place-items: center;
+
+            color: #a5b6cc;
+
+            border-radius: 8px;
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .today .day-number {
+            color: #071423;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #70dfff,
+                    #6ba8ff
+                );
+
+            box-shadow:
+                0 0 14px
+                rgba(87,233,255,.20);
+        }
+
+        .day-event-count {
+            color: #5f7695;
+
+            font-size: 6px;
+            font-weight: 900;
+        }
+
+        .day-events {
+            margin-top: 7px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 4px;
+        }
+
+        .day-event {
+            overflow: hidden;
+
+            padding:
+                5px
+                6px;
+
+            color: #b9cbe2;
+
+            background:
+                rgba(79,140,255,.055);
+
+            border-left:
+                2px solid
+                var(--blue);
+
+            border-radius:
+                5px;
+
+            font-size: 6px;
+            font-weight: 800;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .day-event.homework {
+            border-left-color:
+                var(--yellow);
+
+            background:
+                rgba(255,209,91,.045);
+        }
+
+        .day-event.exam {
+            border-left-color:
+                var(--red);
+
+            background:
+                rgba(255,113,140,.045);
+        }
+
+        .day-event.announcement {
+            border-left-color:
+                var(--cyan);
+
+            background:
+                rgba(87,233,255,.045);
+        }
+
+        .day-event.school {
+            border-left-color:
+                var(--purple);
+
+            background:
+                rgba(161,129,255,.045);
+        }
+
+        .more-events {
+            color: #6880a0;
+
+            font-size: 6px;
+            font-weight: 900;
+
+            text-align: center;
+        }
+
+        /* =========================================================
+           SIDE PANEL
+           ========================================================= */
+
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .side-card {
+            padding: 17px;
+
+            border-radius:
+                var(--radius-lg);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.037),
+                    rgba(255,255,255,.014)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.065);
+
+            box-shadow:
+                var(--shadow);
+        }
+
+        .side-card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .side-card-title {
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .side-card-count {
+            color: #789fe0;
+
+            font-size: 7px;
+            font-weight: 900;
+        }
+
+        .selected-date {
+            margin-top: 5px;
+
+            color: #647890;
+
+            font-size: 8px;
+        }
+
+        .selected-day-summary {
+            margin-top: 13px;
+
+            padding: 13px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(79,140,255,.035);
+
+            border:
+                1px solid
+                rgba(79,140,255,.08);
+        }
+
+        .selected-day-number {
+            font-size: 29px;
+            font-weight: 950;
+
+            letter-spacing: -.05em;
+        }
+
+        .selected-day-weekday {
+            margin-top: 2px;
+
+            color: #6d839f;
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           EVENT LIST
+           ========================================================= */
+
+        .event-list {
+            margin-top: 11px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 7px;
+
+            max-height: 310px;
+
+            overflow-y: auto;
+
+            padding-right: 2px;
+        }
+
+        .event-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .event-list::-webkit-scrollbar-thumb {
+            background:
+                rgba(255,255,255,.07);
+
+            border-radius: 999px;
+        }
+
+        .event-item {
+            position: relative;
+
+            padding:
+                10px;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,.02);
+
+            border:
+                1px solid
+                rgba(255,255,255,.045);
+
+            cursor: pointer;
+
+            transition:
+                background .18s,
+                border-color .18s,
+                transform .18s;
+        }
+
+        .event-item:hover {
+            transform:
+                translateX(2px);
+
+            background:
+                rgba(255,255,255,.035);
+
+            border-color:
+                rgba(101,155,242,.14);
+        }
+
+        .event-item-left {
+            position: absolute;
+
+            left: 0;
+            top: 10px;
+            bottom: 10px;
+
+            width: 3px;
+
+            border-radius:
+                0
+                6px
+                6px
+                0;
+        }
+
+        .event-item.homework .event-item-left {
+            background: var(--yellow);
+        }
+
+        .event-item.exam .event-item-left {
+            background: var(--red);
+        }
+
+        .event-item.announcement .event-item-left {
+            background: var(--cyan);
+        }
+
+        .event-item.school .event-item-left {
+            background: var(--purple);
+        }
+
+        .event-item-inner {
+            padding-left: 7px;
+        }
+
+        .event-item-date {
+            color: #68809e;
+
+            font-size: 6px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .event-item-title {
+            margin-top: 4px;
+
+            color: #dce8f7;
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .event-item-desc {
+            margin-top: 3px;
+
+            color: #667b95;
+
+            font-size: 7px;
+            line-height: 1.45;
+        }
+
+        .no-events {
+            padding:
+                20px
+                10px;
+
+            color: #687c96;
+
+            text-align: center;
+
+            font-size: 8px;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           QUICK UPCOMING
+           ========================================================= */
+
+        .upcoming-list {
+            margin-top: 12px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .upcoming-item {
+            padding: 10px;
+
+            display: grid;
+
+            grid-template-columns:
+                45px
+                minmax(0,1fr)
+                auto;
+
+            align-items: center;
+
+            gap: 8px;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,.02);
+
+            border:
+                1px solid
+                rgba(255,255,255,.045);
+        }
+
+        .upcoming-date-box {
+            text-align: center;
+        }
+
+        .upcoming-day {
+            font-size: 14px;
+            font-weight: 950;
+
+            letter-spacing: -.03em;
+        }
+
+        .upcoming-month {
+            margin-top: 1px;
+
+            color: #657992;
+
+            font-size: 6px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+        .upcoming-title {
+            overflow: hidden;
+
+            color: #dbe7f6;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .upcoming-desc {
+            margin-top: 3px;
+
+            overflow: hidden;
+
+            color: #63758e;
+
+            font-size: 6px;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .upcoming-type {
+            padding:
+                5px
+                6px;
+
+            border-radius: 7px;
+
+            font-size: 6px;
+            font-weight: 900;
+        }
+
+        .upcoming-type.homework {
+            color: #ffe29a;
+
+            background:
+                rgba(255,209,91,.045);
+
+            border:
+                1px solid
+                rgba(255,209,91,.07);
+        }
+
+        .upcoming-type.exam {
+            color: #ffb5c2;
+
+            background:
+                rgba(255,113,140,.045);
+
+            border:
+                1px solid
+                rgba(255,113,140,.07);
+        }
+
+        /* =========================================================
+           LEGEND
+           ========================================================= */
+
+        .legend {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,minmax(0,1fr));
+
+            gap: 7px;
+
+            margin-top: 11px;
+        }
+
+        .legend-item {
+            min-height: 31px;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #71849d;
+
+            font-size: 6px;
+            font-weight: 850;
+        }
+
+        .legend-dot {
+            width: 7px;
+            height: 7px;
+
+            flex: 0 0 7px;
+
+            border-radius: 3px;
+        }
+
+        .legend-dot.homework {
+            background:
+                var(--yellow);
+        }
+
+        .legend-dot.exam {
+            background:
+                var(--red);
+        }
+
+        .legend-dot.announcement {
+            background:
+                var(--cyan);
+        }
+
+        .legend-dot.school {
+            background:
+                var(--purple);
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        .site-footer {
+            margin-top: 27px;
+
+            padding:
+                19px
+                3px
+                6px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.05);
+
+            color: #5e7088;
+
+            font-size: 8px;
+        }
+
+        .footer-brand {
+            color: #93a7c0;
+            font-weight: 900;
+        }
+
+        .footer-mail {
+            color: #7086a3;
+        }
+
+        /* =========================================================
+           MODAL
+           ========================================================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+
+            z-index: 3000;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 18px;
+
+            background:
+                rgba(0,0,0,.68);
+
+            backdrop-filter:
+                blur(10px);
+
+            -webkit-backdrop-filter:
+                blur(10px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            position: relative;
+
+            width: min(620px,100%);
+
+            max-height:
+                min(
+                    780px,
+                    90vh
+                );
+
+            overflow-y: auto;
+
+            padding:
+                22px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(13,26,45,.98),
+                    rgba(5,12,21,.98)
+                );
+
+            border:
+                1px solid
+                rgba(98,158,245,.18);
+
+            box-shadow:
+                0 30px 100px
+                rgba(0,0,0,.55);
+
+            animation:
+                modalIn
+                .22s
+                var(--ease);
+        }
+
+        @keyframes modalIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(10px)
+                    scale(.985);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+
+            top: 14px;
+            right: 14px;
+
+            width: 35px;
+            height: 35px;
+
+            display: grid;
+            place-items: center;
+
+            color: #9fb1c9;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            border-radius: 10px;
+
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+        .modal-close svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .modal-type {
+            color: #84b4ff;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .10em;
+        }
+
+        .modal-title {
+            padding-right: 45px;
+
+            margin-top: 8px;
+
+            font-size: 25px;
+            font-weight: 950;
+
+            letter-spacing: -.045em;
+        }
+
+        .modal-description {
+            margin-top: 9px;
+
+            color: #98abc1;
+
+            font-size: 9px;
+            line-height: 1.7;
+        }
+
+        .modal-grid {
+            margin-top: 15px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,minmax(0,1fr));
+
+            gap: 8px;
+        }
+
+        .modal-data {
+            padding:
+                11px;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,.024);
+
+            border:
+                1px solid
+                rgba(255,255,255,.05);
+        }
+
+        .modal-label {
+            color: #60738c;
+
+            font-size: 6px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .modal-value {
+            margin-top: 5px;
+
+            color: #e3edf9;
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1180px) {
+
+            .hero {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .calendar-layout {
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+        @media (max-width: 950px) {
+
+            .sidebar {
+                transform:
+                    translateX(-105%);
+
+                box-shadow:
+                    30px 0 80px
+                    rgba(0,0,0,.43);
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .topbar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .calendar-toolbar {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .toolbar-group {
+                justify-content: center;
+            }
+
+            .calendar-day {
+                min-height: 95px;
+            }
+        }
+
+        @media (max-width: 720px) {
+
+            .content {
+                padding:
+                    17px
+                    13px
+                    35px;
+            }
+
+            .topbar {
+                min-height: 68px;
+
+                padding:
+                    10px
+                    13px;
+            }
+
+            .clock-box {
+                display: none;
+            }
+
+            .hero {
+                padding:
+                    22px
+                    18px;
+
+                border-radius: 23px;
+            }
+
+            .hero-title {
+                font-size: 37px;
+            }
+
+            .hero-visual {
+                min-height: 215px;
+            }
+
+            .calendar-panel {
+                padding:
+                    10px;
+            }
+
+            .weekday {
+                min-height: 28px;
+
+                font-size: 6px;
+            }
+
+            .calendar-day {
+                min-height: 72px;
+
+                padding: 5px;
+
+                border-radius: 8px;
+            }
+
+            .day-number {
+                width: 20px;
+                height: 20px;
+
+                font-size: 7px;
+            }
+
+            .day-event {
+                padding:
+                    4px
+                    4px;
+
+                font-size: 5px;
+            }
+
+            .day-event:nth-child(n+2) {
+                display: none;
+            }
+
+            .more-events {
+                font-size: 5px;
+            }
+
+            .legend {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .site-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .class-badge {
+                display: none;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-button {
+                width: 100%;
+            }
+
+            .current-month-label {
+                min-width: 130px;
+
+                font-size: 12px;
+            }
+
+            .month-switch-button {
+                width: 34px;
+                height: 34px;
+            }
+
+            .calendar-day {
+                min-height: 59px;
+            }
+
+            .day-events {
+                margin-top: 3px;
+            }
+
+            .day-event {
+                display: none;
+            }
+
+            .day-event:first-child {
+                display: block;
+            }
+
+            .modal-grid {
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+        /* =========================================================
+           REDUCED MOTION
+           ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+
+                scroll-behavior:
+                    auto !important;
+            }
+        }
+
+        /* =========================================================
+           REVEAL
+           ========================================================= */
+
+        .reveal {
+            opacity: 0;
+
+            transform:
+                translateY(14px);
+
+            animation:
+                revealIn
+                .60s
+                var(--ease)
+                forwards;
+        }
+
+        .delay-1 {
+            animation-delay: .07s;
+        }
+
+        .delay-2 {
+            animation-delay: .14s;
+        }
+
+        @keyframes revealIn {
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         BACKGROUND
+         ========================================================== -->
+
+    <div class="background-grid"></div>
+
+    <div class="ambient one"></div>
+    <div class="ambient two"></div>
+    <div class="ambient three"></div>
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+    <!-- =========================================================
+         SIDEBAR
+         ========================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <div class="brand-logo">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                >
+
+                    <defs>
+
+                        <linearGradient
+                            id="brandGradient"
+                            x1="10"
+                            y1="8"
+                            x2="54"
+                            y2="57"
+                        >
+
+                            <stop
+                                stop-color="#FFFFFF"
+                            />
+
+                            <stop
+                                offset=".52"
+                                stop-color="#70B0FF"
+                            />
+
+                            <stop
+                                offset="1"
+                                stop-color="#54EAFF"
+                            />
+
+                        </linearGradient>
+
+                    </defs>
+
+                    <circle
+                        cx="32"
+                        cy="32"
+                        r="23"
+                        stroke="url(#brandGradient)"
+                        stroke-width="1.5"
+                        opacity=".42"
+                    />
+
+                    <path
+                        d="M18 30C21 20.5 26.4 16 32 16C37.6 16 43 20.5 46 30"
+                        stroke="url(#brandGradient)"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                    />
+
+                    <rect
+                        x="17"
+                        y="27"
+                        width="30"
+                        height="20"
+                        rx="8"
+                        fill="#0A1B30"
+                        stroke="url(#brandGradient)"
+                        stroke-width="2"
+                    />
+
+                    <circle
+                        cx="27"
+                        cy="36"
+                        r="3"
+                        fill="#6FEAFF"
+                    />
+
+                    <circle
+                        cx="37"
+                        cy="36"
+                        r="3"
+                        fill="#72A8FF"
+                    />
+
+                    <path
+                        d="M27 42H37"
+                        stroke="#B9EFFF"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d="M32 9V14"
+                        stroke="#70C5FF"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                    <circle
+                        cx="32"
+                        cy="7"
+                        r="2"
+                        fill="#5EEAFF"
+                    />
+
+                </svg>
+
+            </div>
+
+            <div class="brand-copy">
+
+                <div class="brand-title">
+                    10/D Dijital Sınıf
+                </div>
+
+                <div class="brand-subtitle">
+                    ZYNX Education System
+                </div>
+
+            </div>
+
+        </a>
+
+        <!-- GENEL -->
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-section-title">
+                Genel
+            </div>
+
+            <nav class="nav">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+
+                    <span class="nav-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <path
+                                d="M4 10.5L12 4L20 10.5V20H4V10.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linejoin="round"
+                            />
+
+                            <path
+                                d="M9 20V14H15V20"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Ana Sayfa
+
+                </a>
+
+                <a
+                    href="program.html"
+                    class="nav-link"
+                >
+
+                    <span class="nav-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <rect
+                                x="4"
+                                y="5"
+                                width="16"
+                                height="15"
+                                rx="2"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <path
+                                d="M8 3V7M16 3V7M4 10H20"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Ders Programı
+
+                </a>
+
+                <a
+                    href="odevler.html"
+                    class="nav-link"
+                >
+
+                    <span class="nav-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <path
+                                d="M6 4.5H18C19.1 4.5 20 5.4 20 6.5V19.5H4V6.5C4 5.4 4.9 4.5 6 4.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M8 9H16M8 12.5H16M8 16H13"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Ödevler
+
+                </a>
+
+                <a
+                    href="sinavlar.html"
+                    class="nav-link"
+                >
+
+                    <span class="nav-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <path
+                                d="M7 3.5H17C18.1 3.5 19 4.4 19 5.5V20.5H5V5.5C5 4.4 5.9 3.5 7 3.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <path
+                                d="M8 8H16M8 12H16M8 16H12"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Sınavlar
+
+                </a>
+
+                <a
+                    href="takvim.html"
+                    class="nav-link active"
+                >
+
+                    <span class="nav-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <rect
+                                x="4"
+                                y="5"
+                                width="16"
+                                height="15"
+                                rx="2"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <path
+                                d="M8 3V7M16 3V7M4 10H20"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+
+                            <path
+                                d="M8 14H10M12 14H14M16 14H16.1M8 17H10M12 17H14"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Takvim
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <!-- EĞİTİM -->
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-section-title">
+                Eğitim
+            </div>
+
+            <nav class="nav">
+
+                <a
+                    href="dersler.html"
+                    class="nav-link"
+                >
+
+                    <span class="nav-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <path
+                                d="M4 6.5C4 5.4 4.9 4.5 6 4.5H11V19.5H6C4.9 19.5 4 18.6 4 17.5V6.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M20 6.5C20 5.4 19.1 4.5 18 4.5H13V19.5H18C19.1 19.5 20 18.6 20 17.5V6.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Dersler
+
+                </a>
+
+                <a
+                    href="zynx.html"
+                    class="nav-link"
+                >
+
+                    <span class="nav-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <rect
+                                x="6.5"
+                                y="9"
+                                width="11"
+                                height="8"
+                                rx="3"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                            />
+
+                            <circle
+                                cx="10"
+                                cy="12.8"
+                                r="1"
+                                fill="currentColor"
+                            />
+
+                            <circle
+                                cx="14"
+                                cy="12.8"
+                                r="1"
+                                fill="currentColor"
+                            />
+
+                            <path
+                                d="M10 15H14"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    ZYNX AI
+
+                </a>
+
+                <a
+                    href="duyurular.html"
+                    class="nav-link"
+                >
+
+                    <span class="nav-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <path
+                                d="M5 12V8.5C5 7.7 5.7 7 6.5 7H17L20 4V20L17 17H6.5C5.7 17 5 16.3 5 15.5V12Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linejoin="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Duyurular
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <!-- SİSTEM -->
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-section-title">
+                Sistem
+            </div>
+
+            <nav class="nav">
+
+                <a
+                    href="hakkimizda.html"
+                    class="nav-link"
+                >
+
+                    <span class="nav-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="8.5"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M12 10V16"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+
+                            <circle
+                                cx="12"
+                                cy="7.5"
+                                r="1"
+                                fill="currentColor"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Hakkımızda
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <div class="sidebar-status-head">
+
+                    <span class="status-dot"></span>
+
+                    <span class="sidebar-status-title">
+                        Takvim sistemi aktif
+                    </span>
+
+                </div>
+
+                <div class="sidebar-status-text">
+                    Ders, ödev, sınav ve duyurular
+                    tek bir akademik takvim üzerinden
+                    görüntülenebilir.
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- =========================================================
+         MAIN
+         ========================================================== -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    type="button"
+                    aria-label="Menüyü aç"
+                    aria-expanded="false"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                    >
+
+                        <path
+                            d="M4 7H20M4 12H20M4 17H20"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+
+                    </svg>
+
+                </button>
+
+                <div>
+
+                    <div class="page-name">
+                        Akademik Takvim
+                    </div>
+
+                    <div class="page-subtitle">
+                        10/D · Ders · Ödev · Sınav · Duyuru
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="top-badge class-badge">
+                    10 / D
+                </div>
+
+                <div class="top-badge active-badge">
+
+                    <span class="live-dot"></span>
+
+                    AKTİF
+
+                </div>
+
+                <div class="clock-box">
+
+                    <div
+                        class="clock"
+                        id="clock"
+                    >
+                        --:--:--
+                    </div>
+
+                    <div
+                        class="date"
+                        id="date"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+            <!-- =================================================
+                 HERO
+                 ================================================== -->
+
+            <section class="hero reveal">
+
+                <div class="hero-main">
+
+                    <div class="eyebrow">
+
+                        <span class="eyebrow-dot"></span>
+
+                        AKADEMİK TAKVİM
+
+                    </div>
+
+                    <h1 class="hero-title">
+                        Planını gör.
+                        <span>
+                            Gününü yönet.
+                        </span>
+                    </h1>
+
+                    <p class="hero-description">
+                        10/D sınıfının önemli akademik tarihlerini,
+                        ödevlerini, sınavlarını, duyurularını ve
+                        okul planlamasını tek bir profesyonel
+                        takvim sistemi üzerinden takip et.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <button
+                            class="hero-button primary"
+                            id="todayButton"
+                            type="button"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <rect
+                                    x="4"
+                                    y="5"
+                                    width="16"
+                                    height="15"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+
+                                <path
+                                    d="M8 3V7M16 3V7M4 10H20"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                            Bugüne Git
+
+                        </button>
+
+                        <a
+                            href="odevler.html"
+                            class="hero-button"
+                        >
+
+                            Ödevleri Aç
+
+                        </a>
+
+                        <a
+                            href="sinavlar.html"
+                            class="hero-button"
+                        >
+
+                            Sınavları Aç
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="hero-visual">
+
+                    <div class="visual-orbit a"></div>
+                    <div class="visual-orbit b"></div>
+                    <div class="visual-orbit c"></div>
+
+                    <div class="visual-core">
+
+                        <svg
+                            viewBox="0 0 64 64"
+                            fill="none"
+                        >
+
+                            <defs>
+
+                                <linearGradient
+                                    id="calendarCore"
+                                    x1="10"
+                                    y1="8"
+                                    x2="54"
+                                    y2="57"
+                                >
+
+                                    <stop
+                                        stop-color="#FFFFFF"
+                                    />
+
+                                    <stop
+                                        offset=".52"
+                                        stop-color="#70B0FF"
+                                    />
+
+                                    <stop
+                                        offset="1"
+                                        stop-color="#54EAFF"
+                                    />
+
+                                </linearGradient>
+
+                            </defs>
+
+                            <rect
+                                x="12"
+                                y="15"
+                                width="40"
+                                height="37"
+                                rx="8"
+                                fill="#0A1B30"
+                                stroke="url(#calendarCore)"
+                                stroke-width="2"
+                            />
+
+                            <path
+                                d="M12 25H52"
+                                stroke="url(#calendarCore)"
+                                stroke-width="2"
+                            />
+
+                            <path
+                                d="M22 10V19M42 10V19"
+                                stroke="url(#calendarCore)"
+                                stroke-width="3"
+                                stroke-linecap="round"
+                            />
+
+                            <circle
+                                cx="22"
+                                cy="33"
+                                r="2.3"
+                                fill="#6FEAFF"
+                            />
+
+                            <circle
+                                cx="32"
+                                cy="33"
+                                r="2.3"
+                                fill="#72A8FF"
+                            />
+
+                            <circle
+                                cx="42"
+                                cy="33"
+                                r="2.3"
+                                fill="#AF96FF"
+                            />
+
+                            <circle
+                                cx="22"
+                                cy="42"
+                                r="2.3"
+                                fill="#72A8FF"
+                            />
+
+                            <circle
+                                cx="32"
+                                cy="42"
+                                r="2.3"
+                                fill="#6FEAFF"
+                            />
+
+                            <circle
+                                cx="42"
+                                cy="42"
+                                r="2.3"
+                                fill="#72A8FF"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                    <div class="visual-label">
+                        ZYNX CALENDAR ENGINE
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 TOOLBAR
+                 ================================================== -->
+
+            <section class="section reveal delay-1">
+
+                <div class="calendar-toolbar">
+
+                    <div class="toolbar-group">
+
+                        <button
+                            class="toolbar-button"
+                            id="previousMonth"
+                            type="button"
+                            title="Önceki ay"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <path
+                                    d="M15 18L9 12L15 6"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+
+                            </svg>
+
+                        </button>
+
+                        <button
+                            class="toolbar-button"
+                            id="nextMonth"
+                            type="button"
+                            title="Sonraki ay"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <path
+                                    d="M9 18L15 12L9 6"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                    <div class="month-switch">
+
+                        <div>
+
+                            <div
+                                class="current-month-label"
+                                id="monthLabel"
+                            >
+                                --
+                            </div>
+
+                            <div
+                                class="current-month-subtitle"
+                                id="monthSubtitle"
+                            >
+                                --
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="toolbar-group">
+
+                        <button
+                            class="toolbar-button primary"
+                            id="todayToolbar"
+                            type="button"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="8.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="2.5"
+                                    fill="currentColor"
+                                />
+
+                            </svg>
+
+                            Bugün
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 CALENDAR
+                 ================================================== -->
+
+            <section class="section">
+
+                <div class="calendar-layout">
+
+                    <!-- MAIN CALENDAR -->
+
+                    <div class="calendar-panel">
+
+                        <div class="calendar-weekdays">
+
+                            <div class="weekday">
+                                Pzt
+                            </div>
+
+                            <div class="weekday">
+                                Sal
+                            </div>
+
+                            <div class="weekday">
+                                Çar
+                            </div>
+
+                            <div class="weekday">
+                                Per
+                            </div>
+
+                            <div class="weekday">
+                                Cum
+                            </div>
+
+                            <div class="weekday">
+                                Cmt
+                            </div>
+
+                            <div class="weekday">
+                                Paz
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="calendar-grid"
+                            id="calendarGrid"
+                        >
+                        </div>
+
+                        <div class="legend">
+
+                            <div class="legend-item">
+                                <span class="legend-dot homework"></span>
+                                Ödev
+                            </div>
+
+                            <div class="legend-item">
+                                <span class="legend-dot exam"></span>
+                                Sınav
+                            </div>
+
+                            <div class="legend-item">
+                                <span class="legend-dot announcement"></span>
+                                Duyuru
+                            </div>
+
+                            <div class="legend-item">
+                                <span class="legend-dot school"></span>
+                                Okul
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- SIDE -->
+
+                    <div class="side-panel">
+
+                        <!-- SELECTED DAY -->
+
+                        <div class="side-card">
+
+                            <div class="side-card-head">
+
+                                <div class="side-card-title">
+                                    Seçili Gün
+                                </div>
+
+                                <div
+                                    class="side-card-count"
+                                    id="selectedCount"
+                                >
+                                    0 etkinlik
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="selected-date"
+                                id="selectedDate"
+                            >
+                                --
+                            </div>
+
+                            <div class="selected-day-summary">
+
+                                <div
+                                    class="selected-day-number"
+                                    id="selectedDayNumber"
+                                >
+                                    --
+                                </div>
+
+                                <div
+                                    class="selected-day-weekday"
+                                    id="selectedWeekday"
+                                >
+                                    --
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="event-list"
+                                id="selectedEvents"
+                            >
+                            </div>
+
+                        </div>
+
+                        <!-- UPCOMING -->
+
+                        <div class="side-card">
+
+                            <div class="side-card-head">
+
+                                <div class="side-card-title">
+                                    Yaklaşanlar
+                                </div>
+
+                                <div class="side-card-count">
+                                    İLERİ TARİHLER
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="upcoming-list"
+                                id="upcomingList"
+                            >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================== -->
+
+            <footer class="site-footer">
+
+                <div>
+
+                    <span class="footer-brand">
+                        10/D Dijital Sınıf
+                    </span>
+
+                    <span>
+                        · ZYNX Education System
+                    </span>
+
+                </div>
+
+                <div class="footer-mail">
+                    Ttlife Studios · trlifeinfo@gmail.com
+                </div>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+    <!-- =========================================================
+         EVENT MODAL
+         ========================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="modalOverlay"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalTitle"
+        >
+
+            <button
+                class="modal-close"
+                id="modalClose"
+                type="button"
+                aria-label="Kapat"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                >
+
+                    <path
+                        d="M7 7L17 17M17 7L7 17"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+            </button>
+
+            <div
+                class="modal-type"
+                id="modalType"
+            >
+                --
+            </div>
+
+            <div
+                class="modal-title"
+                id="modalTitle"
+            >
+                --
+            </div>
+
+            <div
+                class="modal-description"
+                id="modalDescription"
+            >
+                --
+            </div>
+
+            <div class="modal-grid">
+
+                <div class="modal-data">
+
+                    <div class="modal-label">
+                        Tarih
+                    </div>
+
+                    <div
+                        class="modal-value"
+                        id="modalDate"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+                <div class="modal-data">
+
+                    <div class="modal-label">
+                        Kategori
+                    </div>
+
+                    <div
+                        class="modal-value"
+                        id="modalCategory"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+                <div class="modal-data">
+
+                    <div class="modal-label">
+                        Kaynak
+                    </div>
+
+                    <div
+                        class="modal-value"
+                        id="modalSource"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+                <div class="modal-data">
+
+                    <div class="modal-label">
+                        Durum
+                    </div>
+
+                    <div
+                        class="modal-value"
+                        id="modalStatus"
+                    >
+                        Aktif
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================== -->
+
+    <script>
+
+        "use strict";
+
+        /* =========================================================
+           TARİH AYARLARI
+           ========================================================= */
+
+        const MONTH_NAMES = [
+            "Ocak",
+            "Şubat",
+            "Mart",
+            "Nisan",
+            "Mayıs",
+            "Haziran",
+            "Temmuz",
+            "Ağustos",
+            "Eylül",
+            "Ekim",
+            "Kasım",
+            "Aralık"
+        ];
+
+        const DAY_NAMES = [
+            "Pazar",
+            "Pazartesi",
+            "Salı",
+            "Çarşamba",
+            "Perşembe",
+            "Cuma",
+            "Cumartesi"
+        ];
+
+        const DAY_NAMES_SHORT = [
+            "Paz",
+            "Pzt",
+            "Sal",
+            "Çar",
+            "Per",
+            "Cum",
+            "Cmt"
+        ];
+
+        /* =========================================================
+           TAKVİM ETKİNLİKLERİ
+           ========================================================= */
+
+        const EVENTS = [
+            {
+                id: "hw-1",
+                type: "homework",
+                title: "300 Adet Özlü Söz Yaz",
+                description:
+                    "Türk Dili ve Edebiyatı dersi için 300 adet özlü söz yazma görevi.",
+                date: "2026-11-16",
+                category: "Ödev",
+                source: "Türk Dili ve Edebiyatı",
+                status: "Aktif"
+            },
+
+            {
+                id: "exam-tde",
+                type: "exam",
+                title: "Türk Dili ve Edebiyatı Ortak Yazılı",
+                description:
+                    "10. sınıf için ülke geneli ortak yazılı sınav tarihi.",
+                date: "2026-11-12",
+                category: "Sınav",
+                source: "MEB",
+                status: "Takvimde"
+            },
+
+            {
+                id: "exam-math",
+                type: "exam",
+                title: "Matematik Ortak Yazılı",
+                description:
+                    "10. sınıf için ülke geneli ortak yazılı sınav tarihi.",
+                date: "2027-01-06",
+                category: "Sınav",
+                source: "MEB",
+                status: "Takvimde"
+            },
+
+            {
+                id: "english-next",
+                type: "homework",
+                title: "İngilizce Sayfa 18 G Bölümü",
+                description:
+                    "Sayfa 18 G bölümü kendine göre küçük bir deftere yazılacak.",
+                date: null,
+                category: "Ödev",
+                source: "İngilizce",
+                status: "Bir sonraki ders"
+            },
+
+            {
+                id: "school-year",
+                type: "school",
+                title: "2026-2027 Eğitim Öğretim Dönemi",
+                description:
+                    "10/D akademik takvim ve eğitim planlama dönemi.",
+                date: "2026-09-01",
+                category: "Okul",
+                source: "10/D Dijital Sınıf",
+                status: "Aktif"
+            }
+        ];
+
+        /* =========================================================
+           DOM
+           ========================================================= */
+
+        const elements = {
+
+            clock:
+                document.getElementById("clock"),
+
+            date:
+                document.getElementById("date"),
+
+            monthLabel:
+                document.getElementById("monthLabel"),
+
+            monthSubtitle:
+                document.getElementById("monthSubtitle"),
+
+            calendarGrid:
+                document.getElementById("calendarGrid"),
+
+            previousMonth:
+                document.getElementById("previousMonth"),
+
+            nextMonth:
+                document.getElementById("nextMonth"),
+
+            todayButton:
+                document.getElementById("todayButton"),
+
+            todayToolbar:
+                document.getElementById("todayToolbar"),
+
+            selectedDate:
+                document.getElementById("selectedDate"),
+
+            selectedDayNumber:
+                document.getElementById("selectedDayNumber"),
+
+            selectedWeekday:
+                document.getElementById("selectedWeekday"),
+
+            selectedEvents:
+                document.getElementById("selectedEvents"),
+
+            selectedCount:
+                document.getElementById("selectedCount"),
+
+            upcomingList:
+                document.getElementById("upcomingList"),
+
+            mobileMenu:
+                document.getElementById("mobileMenu"),
+
+            sidebar:
+                document.getElementById("sidebar"),
+
+            sidebarOverlay:
+                document.getElementById("sidebarOverlay"),
+
+            modalOverlay:
+                document.getElementById("modalOverlay"),
+
+            modalClose:
+                document.getElementById("modalClose"),
+
+            modalType:
+                document.getElementById("modalType"),
+
+            modalTitle:
+                document.getElementById("modalTitle"),
+
+            modalDescription:
+                document.getElementById("modalDescription"),
+
+            modalDate:
+                document.getElementById("modalDate"),
+
+            modalCategory:
+                document.getElementById("modalCategory"),
+
+            modalSource:
+                document.getElementById("modalSource"),
+
+            modalStatus:
+                document.getElementById("modalStatus")
+        };
+
+        /* =========================================================
+           STATE
+           ========================================================= */
+
+        const today =
+            new Date();
+
+        let currentMonth =
+            today.getMonth();
+
+        let currentYear =
+            today.getFullYear();
+
+        let selectedDate =
+            normalizeDate(
+                today
+            );
+
+        /* =========================================================
+           NORMALIZE DATE
+           ========================================================= */
+
+        function normalizeDate(date) {
+
+            const year =
+                date.getFullYear();
+
+            const month =
+                String(
+                    date.getMonth() + 1
+                ).padStart(2, "0");
+
+            const day =
+                String(
+                    date.getDate()
+                ).padStart(2, "0");
+
+            return `${year}-${month}-${day}`;
+        }
+
+        function dateFromKey(key) {
+
+            const [
+                year,
+                month,
+                day
+            ] = key
+                .split("-")
+                .map(Number);
+
+            return new Date(
+                year,
+                month - 1,
+                day
+            );
+        }
+
+        function formatDateLong(key) {
+
+            const date =
+                dateFromKey(key);
+
+            return (
+                `${date.getDate()} ` +
+                `${MONTH_NAMES[date.getMonth()]} ` +
+                `${date.getFullYear()}`
+            );
+        }
+
+        function formatDateFull(key) {
+
+            const date =
+                dateFromKey(key);
+
+            return (
+                `${DAY_NAMES[date.getDay()]}, ` +
+                `${date.getDate()} ` +
+                `${MONTH_NAMES[date.getMonth()]} ` +
+                `${date.getFullYear()}`
+            );
+        }
+
+        /* =========================================================
+           CLOCK
+           ========================================================= */
+
+        function updateClock() {
+
+            const now =
+                new Date();
+
+            elements.clock.textContent =
+                `${String(now.getHours()).padStart(2,"0")}:` +
+                `${String(now.getMinutes()).padStart(2,"0")}:` +
+                `${String(now.getSeconds()).padStart(2,"0")}`;
+
+            elements.date.textContent =
+                `${DAY_NAMES[now.getDay()]} · ` +
+                `${now.getDate()} ` +
+                `${MONTH_NAMES[now.getMonth()]} ` +
+                `${now.getFullYear()}`;
+        }
+
+        /* =========================================================
+           EVENT HELPERS
+           ========================================================= */
+
+        function eventsForDate(dateKey) {
+
+            return EVENTS.filter(
+                event =>
+                    event.date === dateKey
+            );
+        }
+
+        function eventTypeLabel(type) {
+
+            const map = {
+                homework: "Ödev",
+                exam: "Sınav",
+                announcement: "Duyuru",
+                school: "Okul"
+            };
+
+            return (
+                map[type] ||
+                "Etkinlik"
+            );
+        }
+
+        function eventClass(type) {
+
+            return [
+                "day-event",
+                type
+            ].join(" ");
+        }
+
+        function openEventModal(event) {
+
+            elements.modalType.textContent =
+                eventTypeLabel(
+                    event.type
+                );
+
+            elements.modalTitle.textContent =
+                event.title;
+
+            elements.modalDescription.textContent =
+                event.description;
+
+            elements.modalDate.textContent =
+                event.date
+                    ? formatDateFull(
+                        event.date
+                    )
+                    : "Bir sonraki ders";
+
+            elements.modalCategory.textContent =
+                event.category;
+
+            elements.modalSource.textContent =
+                event.source;
+
+            elements.modalStatus.textContent =
+                event.status;
+
+            elements.modalOverlay.classList.add(
+                "show"
+            );
+
+            elements.modalOverlay.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.classList.add(
+                "no-scroll"
+            );
+        }
+
+        /* =========================================================
+           CALENDAR GRID
+           ========================================================= */
+
+        function renderCalendar() {
+
+            elements.calendarGrid.innerHTML =
+                "";
+
+            elements.monthLabel.textContent =
+                `${MONTH_NAMES[currentMonth]} ${currentYear}`;
+
+            elements.monthSubtitle.textContent =
+                `${currentYear} · ${DAY_NAMES_SHORT[
+                    new Date(
+                        currentYear,
+                        currentMonth,
+                        1
+                    ).getDay()
+                ]}`;
+
+            const firstDay =
+                new Date(
+                    currentYear,
+                    currentMonth,
+                    1
+                );
+
+            const lastDay =
+                new Date(
+                    currentYear,
+                    currentMonth + 1,
+                    0
+                );
+
+            let firstWeekday =
+                firstDay.getDay();
+
+            /*
+             * Pazartesi = 0
+             * Pazar = 6
+             */
+            firstWeekday =
+                firstWeekday === 0
+                    ? 6
+                    : firstWeekday - 1;
+
+            const daysInMonth =
+                lastDay.getDate();
+
+            const previousMonthLastDay =
+                new Date(
+                    currentYear,
+                    currentMonth,
+                    0
+                ).getDate();
+
+            /*
+             * 6 satırlı sabit takvim
+             */
+            const totalCells =
+                42;
+
+            for (
+                let cell = 0;
+                cell < totalCells;
+                cell++
+            ) {
+
+                const dayOffset =
+                    cell -
+                    firstWeekday +
+                    1;
+
+                let cellDate;
+                let isOtherMonth =
+                    false;
+
+                if (
+                    dayOffset < 1
+                ) {
+
+                    cellDate =
+                        new Date(
+                            currentYear,
+                            currentMonth - 1,
+                            previousMonthLastDay +
+                            dayOffset
+                        );
+
+                    isOtherMonth = true;
+
+                } else if (
+                    dayOffset >
+                    daysInMonth
+                ) {
+
+                    cellDate =
+                        new Date(
+                            currentYear,
+                            currentMonth,
+                            dayOffset
+                        );
+
+                    isOtherMonth = true;
+
+                } else {
+
+                    cellDate =
+                        new Date(
+                            currentYear,
+                            currentMonth,
+                            dayOffset
+                        );
+                }
+
+                const key =
+                    normalizeDate(
+                        cellDate
+                    );
+
+                const dayEvents =
+                    eventsForDate(
+                        key
+                    );
+
+                const cell =
+                    document.createElement(
+                        "div"
+                    );
+
+                cell.className =
+                    "calendar-day";
+
+                if (isOtherMonth) {
+
+                    cell.classList.add(
+                        "other-month"
+                    );
+                }
+
+                if (
+                    key ===
+                    normalizeDate(
+                        today
+                    )
+                ) {
+
+                    cell.classList.add(
+                        "today"
+                    );
+                }
+
+                if (
+                    key === selectedDate
+                ) {
+
+                    cell.classList.add(
+                        "selected"
+                    );
+                }
+
+                const eventsHtml =
+                    dayEvents
+                        .slice(0,3)
+                        .map(
+                            event => `
+                                <div
+                                    class="${eventClass(
+                                        event.type
+                                    )}"
+                                    title="${escapeHtml(
+                                        event.title
+                                    )}"
+                                >
+                                    ${escapeHtml(
+                                        event.title
+                                    )}
+                                </div>
+                            `
+                        )
+                        .join("");
+
+                const moreCount =
+                    Math.max(
+                        0,
+                        dayEvents.length - 3
+                    );
+
+                cell.innerHTML = `
+                    <div class="day-top">
+
+                        <div class="day-number">
+                            ${cellDate.getDate()}
+                        </div>
+
+                        <div class="day-event-count">
+                            ${
+                                dayEvents.length
+                                    ? `${dayEvents.length} etkinlik`
+                                    : ""
+                            }
+                        </div>
+
+                    </div>
+
+                    <div class="day-events">
+
+                        ${eventsHtml}
+
+                        ${
+                            moreCount > 0
+                                ? `
+                                    <div class="more-events">
+                                        +${moreCount} daha
+                                    </div>
+                                `
+                                : ""
+                        }
+
+                    </div>
+                `;
+
+                cell.addEventListener(
+                    "click",
+                    () => {
+
+                        selectedDate =
+                            key;
+
+                        currentMonth =
+                            cellDate.getMonth();
+
+                        currentYear =
+                            cellDate.getFullYear();
+
+                        renderCalendar();
+
+                        renderSelectedDay();
+
+                    }
+                );
+
+                elements.calendarGrid.appendChild(
+                    cell
+                );
+            }
+
+            renderSelectedDay();
+            renderUpcoming();
+        }
+
+        /* =========================================================
+           ESCAPE
+           ========================================================= */
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+        }
+
+        /* =========================================================
+           SELECTED DAY
+           ========================================================= */
+
+        function renderSelectedDay() {
+
+            const date =
+                dateFromKey(
+                    selectedDate
+                );
+
+            const events =
+                eventsForDate(
+                    selectedDate
+                );
+
+            elements.selectedDate.textContent =
+                formatDateFull(
+                    selectedDate
+                );
+
+            elements.selectedDayNumber.textContent =
+                date.getDate();
+
+            elements.selectedWeekday.textContent =
+                DAY_NAMES[
+                    date.getDay()
+                ];
+
+            elements.selectedCount.textContent =
+                `${events.length} etkinlik`;
+
+            elements.selectedEvents.innerHTML =
+                "";
+
+            if (!events.length) {
+
+                elements.selectedEvents.innerHTML = `
+                    <div class="no-events">
+                        Bu gün için kayıtlı özel
+                        bir etkinlik bulunmuyor.
+                        <br>
+                        Takvim normal ders,
+                        çalışma ve kişisel planlama
+                        için kullanılabilir.
+                    </div>
+                `;
+
+                return;
+            }
+
+            events.forEach(
+                event => {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+                    item.className =
+                        `event-item ${event.type}`;
+
+                    item.innerHTML = `
+                        <div class="event-item-left"></div>
+
+                        <div class="event-item-inner">
+
+                            <div class="event-item-date">
+                                ${escapeHtml(
+                                    eventTypeLabel(
+                                        event.type
+                                    )
+                                )}
+                            </div>
+
+                            <div class="event-item-title">
+                                ${escapeHtml(
+                                    event.title
+                                )}
+                            </div>
+
+                            <div class="event-item-desc">
+                                ${escapeHtml(
+                                    event.description
+                                )}
+                            </div>
+
+                        </div>
+                    `;
+
+                    item.addEventListener(
+                        "click",
+                        () => {
+                            openEventModal(
+                                event
+                            );
+                        }
+                    );
+
+                    elements.selectedEvents.appendChild(
+                        item
+                    );
+                }
+            );
+        }
+
+        /* =========================================================
+           UPCOMING
+           ========================================================= */
+
+        function getUpcomingEvents() {
+
+            const todayKey =
+                normalizeDate(
+                    today
+                );
+
+            return EVENTS
+                .filter(
+                    event =>
+                        event.date &&
+                        event.date >=
+                        todayKey
+                )
+                .sort(
+                    (a,b) =>
+                        a.date.localeCompare(
+                            b.date
+                        )
+                )
+                .slice(0,5);
+        }
+
+        function renderUpcoming() {
+
+            const upcoming =
+                getUpcomingEvents();
+
+            elements.upcomingList.innerHTML =
+                "";
+
+            if (!upcoming.length) {
+
+                elements.upcomingList.innerHTML = `
+                    <div class="no-events">
+                        Yaklaşan kayıt bulunmuyor.
+                    </div>
+                `;
+
+                return;
+            }
+
+            upcoming.forEach(
+                event => {
+
+                    const date =
+                        dateFromKey(
+                            event.date
+                        );
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+                    item.className =
+                        "upcoming-item";
+
+                    item.innerHTML = `
+                        <div class="upcoming-date-box">
+
+                            <div class="upcoming-day">
+                                ${date.getDate()}
+                            </div>
+
+                            <div class="upcoming-month">
+                                ${MONTH_NAMES[
+                                    date.getMonth()
+                                ].slice(0,3)}
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            <div class="upcoming-title">
+                                ${escapeHtml(
+                                    event.title
+                                )}
+                            </div>
+
+                            <div class="upcoming-desc">
+                                ${escapeHtml(
+                                    event.source
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="upcoming-type ${event.type}"
+                        >
+                            ${escapeHtml(
+                                eventTypeLabel(
+                                    event.type
+                                )
+                            )}
+                        </div>
+                    `;
+
+                    item.addEventListener(
+                        "click",
+                        () => {
+
+                            selectedDate =
+                                event.date;
+
+                            currentMonth =
+                                date.getMonth();
+
+                            currentYear =
+                                date.getFullYear();
+
+                            renderCalendar();
+
+                            renderSelectedDay();
+
+                        }
+                    );
+
+                    elements.upcomingList.appendChild(
+                        item
+                    );
+                }
+            );
+        }
+
+        /* =========================================================
+           MONTH NAVIGATION
+           ========================================================= */
+
+        elements.previousMonth.addEventListener(
+            "click",
+            () => {
+
+                currentMonth--;
+
+                if (
+                    currentMonth < 0
+                ) {
+
+                    currentMonth = 11;
+                    currentYear--;
+                }
+
+                selectedDate =
+                    normalizeDate(
+                        new Date(
+                            currentYear,
+                            currentMonth,
+                            1
+                        )
+                    );
+
+                renderCalendar();
+            }
+        );
+
+        elements.nextMonth.addEventListener(
+            "click",
+            () => {
+
+                currentMonth++;
+
+                if (
+                    currentMonth > 11
+                ) {
+
+                    currentMonth = 0;
+                    currentYear++;
+                }
+
+                selectedDate =
+                    normalizeDate(
+                        new Date(
+                            currentYear,
+                            currentMonth,
+                            1
+                        )
+                    );
+
+                renderCalendar();
+            }
+        );
+
+        /* =========================================================
+           TODAY
+           ========================================================= */
+
+        function goToday() {
+
+            currentMonth =
+                today.getMonth();
+
+            currentYear =
+                today.getFullYear();
+
+            selectedDate =
+                normalizeDate(
+                    today
+                );
+
+            renderCalendar();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        elements.todayButton.addEventListener(
+            "click",
+            goToday
+        );
+
+        elements.todayToolbar.addEventListener(
+            "click",
+            goToday
+        );
+
+        /* =========================================================
+           MODAL
+           ========================================================= */
+
+        function closeModal() {
+
+            elements.modalOverlay.classList.remove(
+                "show"
+            );
+
+            elements.modalOverlay.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            document.body.classList.remove(
+                "no-scroll"
+            );
+        }
+
+        elements.modalClose.addEventListener(
+            "click",
+            closeModal
+        );
+
+        elements.modalOverlay.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    elements.modalOverlay
+                ) {
+
+                    closeModal();
+                }
+            }
+        );
+
+        /* =========================================================
+           KEYBOARD
+           ========================================================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeModal();
+
+                    if (
+                        elements.sidebar.classList.contains(
+                            "open"
+                        )
+                    ) {
+                        closeSidebar();
+                    }
+                }
+
+                if (
+                    event.key ===
+                    "ArrowLeft"
+                ) {
+
+                    elements.previousMonth.click();
+                }
+
+                if (
+                    event.key ===
+                    "ArrowRight"
+                ) {
+
+                    elements.nextMonth.click();
+                }
+
+                if (
+                    event.key ===
+                    "Home"
+                ) {
+
+                    goToday();
+                }
+            }
+        );
+
+        /* =========================================================
+           MOBILE SIDEBAR
+           ========================================================= */
+
+        const mobileMenu =
+            elements.mobileMenu;
+
+        function openSidebar() {
+
+            elements.sidebar.classList.add(
+                "open"
+            );
+
+            elements.sidebarOverlay.classList.add(
+                "show"
+            );
+
+            mobileMenu.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+            document.body.classList.add(
+                "no-scroll"
+            );
+        }
+
+        function closeSidebar() {
+
+            elements.sidebar.classList.remove(
+                "open"
+            );
+
+            elements.sidebarOverlay.classList.remove(
+                "show"
+            );
+
+            mobileMenu.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            document.body.classList.remove(
+                "no-scroll"
+            );
+        }
+
+        mobileMenu.addEventListener(
+            "click",
+            () => {
+
+                const open =
+                    elements.sidebar.classList.contains(
+                        "open"
+                    );
+
+                if (open) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            }
+        );
+
+        elements.sidebarOverlay.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+        document
+            .querySelectorAll(".nav-link")
+            .forEach(
+                link => {
+
+                    link.addEventListener(
+                        "click",
+                        closeSidebar
+                    );
+                }
+            );
+
+        /* =========================================================
+           LIVE CLOCK
+           ========================================================= */
+
+        updateClock();
+
+        setInterval(
+            updateClock,
+            1000
+        );
+
+        /* =========================================================
+           INIT
+           ========================================================= */
+
+        renderCalendar();
+
+    </script>
+
+</body>
+</html>

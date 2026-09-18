@@ -1,0 +1,4715 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050a12">
+
+    <title>Ders Programı | 10/D Dijital Sınıf</title>
+
+    <meta
+        name="description"
+        content="10/D haftalık ders programı. Şehit Abdullah Tayyip Olçok Anadolu Lisesi."
+    >
+
+    <style>
+        /* =========================================================
+           10/D DİJİTAL SINIF
+           PROGRAM SAYFASI
+           ========================================================= */
+
+        :root {
+            --bg: #040810;
+            --bg-soft: #07111e;
+            --panel: rgba(11, 20, 34, 0.86);
+            --panel-strong: rgba(13, 24, 41, 0.97);
+
+            --border: rgba(126, 167, 235, 0.13);
+            --border-hover: rgba(100, 156, 255, 0.28);
+
+            --text: #f4f7fd;
+            --text-soft: #a7b5c9;
+            --text-muted: #718096;
+
+            --blue: #4f8cff;
+            --blue-2: #79aeff;
+            --cyan: #54e7ff;
+
+            --green: #40e69b;
+            --yellow: #ffd25c;
+            --red: #ff758f;
+            --purple: #9b80ff;
+
+            --sidebar-width: 270px;
+
+            --radius-xl: 28px;
+            --radius-lg: 22px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+
+            --shadow:
+                0 20px 65px rgba(0, 0, 0, 0.30),
+                inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 8% 4%,
+                    rgba(79, 140, 255, 0.11),
+                    transparent 29%
+                ),
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(84, 231, 255, 0.055),
+                    transparent 23%
+                ),
+                linear-gradient(
+                    145deg,
+                    #02060b 0%,
+                    #07111d 58%,
+                    #040910 100%
+                );
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+        }
+
+        ::selection {
+            background: rgba(79, 140, 255, 0.3);
+            color: #fff;
+        }
+
+        /* =========================================================
+           ARKA PLAN
+           ========================================================= */
+
+        .background-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -5;
+
+            pointer-events: none;
+            opacity: 0.19;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 55px 55px;
+        }
+
+        .ambient {
+            position: fixed;
+
+            width: 540px;
+            height: 540px;
+
+            border-radius: 50%;
+
+            filter: blur(95px);
+            pointer-events: none;
+
+            opacity: 0.07;
+            z-index: -4;
+        }
+
+        .ambient.one {
+            left: -230px;
+            top: -250px;
+            background: #3e82ff;
+        }
+
+        .ambient.two {
+            right: -280px;
+            top: 25%;
+            background: #36ddff;
+        }
+
+        .ambient.three {
+            left: 30%;
+            bottom: -370px;
+            background: #794dff;
+        }
+
+        /* =========================================================
+           APP
+           ========================================================= */
+
+        .app {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* =========================================================
+           SIDEBAR
+           ========================================================= */
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+
+            width: var(--sidebar-width);
+            height: 100vh;
+
+            padding: 22px 15px;
+
+            display: flex;
+            flex-direction: column;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(7, 15, 27, 0.98),
+                    rgba(4, 10, 18, 0.97)
+                );
+
+            border-right: 1px solid var(--border);
+
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+
+            z-index: 1200;
+
+            overflow-y: auto;
+
+            transform: translateX(0);
+            transition: transform 0.22s ease;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 99px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 5px 8px 23px;
+        }
+
+        .brand-logo {
+            width: 47px;
+            height: 47px;
+            flex: 0 0 47px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 15px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 25%,
+                    rgba(93, 168, 255, 0.24),
+                    transparent 63%
+                ),
+                #081527;
+
+            border: 1px solid rgba(112, 165, 255, 0.22);
+
+            box-shadow:
+                0 0 32px rgba(61, 134, 255, 0.11),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .brand-logo svg {
+            width: 31px;
+            height: 31px;
+        }
+
+        .brand-copy {
+            min-width: 0;
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 850;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-subtitle {
+            margin-top: 4px;
+            color: var(--text-muted);
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+        .sidebar-section {
+            margin-top: 8px;
+        }
+
+        .sidebar-section-title {
+            padding: 0 11px 8px;
+
+            color: #5d6b80;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav-link {
+            position: relative;
+
+            min-height: 47px;
+            padding: 10px 11px;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            border: 1px solid transparent;
+            border-radius: 14px;
+
+            color: var(--text-soft);
+
+            font-size: 13px;
+            font-weight: 650;
+
+            transition:
+                background 0.18s ease,
+                border-color 0.18s ease,
+                color 0.18s ease,
+                transform 0.18s ease;
+        }
+
+        .nav-link:hover {
+            transform: translateX(2px);
+
+            color: #fff;
+
+            background: rgba(255, 255, 255, 0.035);
+            border-color: rgba(255, 255, 255, 0.045);
+        }
+
+        .nav-link.active {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79, 140, 255, 0.17),
+                    rgba(84, 231, 255, 0.045)
+                );
+
+            border-color: rgba(79, 140, 255, 0.20);
+
+            box-shadow:
+                inset 0 0 25px rgba(79, 140, 255, 0.045);
+        }
+
+        .nav-link.active::before {
+            content: "";
+
+            position: absolute;
+
+            left: -1px;
+            top: 11px;
+
+            width: 3px;
+            height: 25px;
+
+            border-radius: 0 5px 5px 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--cyan),
+                    var(--blue)
+                );
+
+            box-shadow:
+                0 0 15px rgba(84, 231, 255, 0.50);
+        }
+
+        .nav-icon {
+            width: 21px;
+            height: 21px;
+            flex: 0 0 21px;
+
+            display: grid;
+            place-items: center;
+        }
+
+        .nav-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 16px 7px 2px;
+        }
+
+        .footer-card {
+            padding: 14px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79, 140, 255, 0.08),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            border: 1px solid rgba(79, 140, 255, 0.13);
+        }
+
+        .footer-top {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .footer-status {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 13px rgba(64, 230, 155, 0.65);
+        }
+
+        .footer-title {
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .footer-text {
+            margin-top: 8px;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+            line-height: 1.55;
+        }
+
+        /* =========================================================
+           MAIN
+           ========================================================= */
+
+        .main {
+            width: calc(100% - var(--sidebar-width));
+            margin-left: var(--sidebar-width);
+            min-width: 0;
+        }
+
+        /* =========================================================
+           TOPBAR
+           ========================================================= */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 900;
+
+            min-height: 78px;
+            padding: 15px 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+
+            background: rgba(4, 9, 17, 0.72);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mobile-menu {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #fff;
+
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+
+            cursor: pointer;
+        }
+
+        .mobile-menu svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .page-title {
+            font-size: 16px;
+            font-weight: 850;
+            letter-spacing: -0.02em;
+        }
+
+        .page-subtitle {
+            margin-top: 4px;
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .class-badge,
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 10px 12px;
+
+            border-radius: 12px;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .class-badge {
+            color: #d4e2ff;
+
+            background: rgba(79, 140, 255, 0.07);
+            border: 1px solid rgba(79, 140, 255, 0.17);
+        }
+
+        .live-badge {
+            color: #baf8df;
+
+            background: rgba(64, 230, 155, 0.05);
+            border: 1px solid rgba(64, 230, 155, 0.13);
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 12px rgba(64, 230, 155, 0.65);
+
+            animation: pulse 1.7s infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.55;
+                transform: scale(0.78);
+            }
+        }
+
+        .clock-box {
+            min-width: 98px;
+            text-align: right;
+        }
+
+        .clock {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+        }
+
+        .date {
+            margin-top: 3px;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+        }
+
+        /* =========================================================
+           CONTENT
+           ========================================================= */
+
+        .content {
+            width: min(1550px, 100%);
+            margin: 0 auto;
+
+            padding: 30px 28px 42px;
+        }
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .page-hero {
+            position: relative;
+            overflow: hidden;
+
+            padding: 28px 30px;
+
+            border-radius: var(--radius-xl);
+
+            background:
+                radial-gradient(
+                    circle at 80% 32%,
+                    rgba(79, 140, 255, 0.13),
+                    transparent 24%
+                ),
+                radial-gradient(
+                    circle at 94% 10%,
+                    rgba(84, 231, 255, 0.06),
+                    transparent 22%
+                ),
+                linear-gradient(
+                    135deg,
+                    rgba(14, 27, 47, 0.93),
+                    rgba(7, 15, 26, 0.91)
+                );
+
+            border: 1px solid rgba(79, 140, 255, 0.20);
+
+            box-shadow: var(--shadow);
+        }
+
+        .page-hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 270px;
+            height: 270px;
+
+            right: -110px;
+            bottom: -150px;
+
+            border-radius: 50%;
+
+            background: rgba(79, 140, 255, 0.10);
+
+            filter: blur(35px);
+
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                auto;
+
+            align-items: center;
+
+            gap: 30px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 10px;
+
+            color: #a9d2ff;
+
+            background: rgba(79, 140, 255, 0.075);
+            border: 1px solid rgba(79, 140, 255, 0.16);
+            border-radius: 999px;
+
+            font-size: 10px;
+            font-weight: 850;
+
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 12px rgba(84, 231, 255, 0.70);
+        }
+
+        .hero-title {
+            margin-top: 15px;
+
+            font-size: clamp(32px, 4vw, 50px);
+            line-height: 0.99;
+
+            letter-spacing: -0.05em;
+            font-weight: 900;
+        }
+
+        .hero-title span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #fff,
+                    #9fc6ff 50%,
+                    #65e8ff
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text {
+            max-width: 790px;
+            margin-top: 15px;
+
+            color: var(--text-soft);
+
+            font-size: 12px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            margin-top: 20px;
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .hero-button {
+            min-height: 42px;
+            padding: 0 14px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            border-radius: 12px;
+
+            font-size: 10px;
+            font-weight: 850;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.18s ease,
+                background 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-button.primary {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79, 140, 255, 0.95),
+                    rgba(61, 109, 220, 0.96)
+                );
+
+            border: 1px solid rgba(132, 180, 255, 0.24);
+
+            box-shadow:
+                0 10px 26px rgba(40, 96, 218, 0.20);
+        }
+
+        .hero-button.secondary {
+            color: #c9d8ee;
+
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .hero-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.055);
+        }
+
+        .hero-button svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        /* =========================================================
+           HERO SUMMARY
+           ========================================================= */
+
+        .hero-summary {
+            min-width: 230px;
+
+            padding: 18px;
+
+            border-radius: 19px;
+
+            background: rgba(255, 255, 255, 0.028);
+            border: 1px solid rgba(255, 255, 255, 0.065);
+        }
+
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .summary-label {
+            color: var(--text-muted);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 0.10em;
+        }
+
+        .summary-live {
+            padding: 5px 7px;
+
+            color: #a6f4d0;
+
+            background: rgba(64, 230, 155, 0.05);
+            border: 1px solid rgba(64, 230, 155, 0.10);
+            border-radius: 8px;
+
+            font-size: 8px;
+            font-weight: 850;
+        }
+
+        .summary-value {
+            margin-top: 10px;
+
+            font-size: 27px;
+            font-weight: 900;
+
+            letter-spacing: -0.04em;
+        }
+
+        .summary-detail {
+            margin-top: 3px;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+        }
+
+        .summary-divider {
+            width: 100%;
+            height: 1px;
+
+            margin: 15px 0;
+
+            background: rgba(255, 255, 255, 0.055);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 9px;
+        }
+
+        .summary-row + .summary-row {
+            margin-top: 9px;
+        }
+
+        .summary-row-label {
+            color: var(--text-muted);
+        }
+
+        .summary-row-value {
+            color: #d9e8fb;
+            font-weight: 850;
+            text-align: right;
+        }
+
+        /* =========================================================
+           TOOLBAR
+           ========================================================= */
+
+        .toolbar-section {
+            margin-top: 20px;
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
+            padding: 10px;
+
+            border-radius: 16px;
+
+            background: rgba(11, 20, 34, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.055);
+        }
+
+        .day-tabs {
+            min-width: 0;
+
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .day-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .day-tab {
+            min-width: 89px;
+            min-height: 39px;
+
+            padding: 0 11px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            color: #8798ae;
+
+            background: transparent;
+
+            border: 1px solid transparent;
+            border-radius: 11px;
+
+            font-size: 9px;
+            font-weight: 850;
+
+            white-space: nowrap;
+
+            cursor: pointer;
+
+            transition:
+                color 0.18s ease,
+                background 0.18s ease,
+                border-color 0.18s ease,
+                transform 0.18s ease;
+        }
+
+        .day-tab:hover {
+            color: #d4e2f5;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .day-tab.active {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79, 140, 255, 0.18),
+                    rgba(84, 231, 255, 0.05)
+                );
+
+            border-color: rgba(79, 140, 255, 0.20);
+
+            box-shadow:
+                inset 0 0 20px rgba(79, 140, 255, 0.04);
+        }
+
+        .day-tab.today::after {
+            content: "";
+
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 10px rgba(84, 231, 255, 0.7);
+        }
+
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .small-tool {
+            min-height: 39px;
+            padding: 0 11px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            color: #b8c8de;
+
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.065);
+            border-radius: 11px;
+
+            font-size: 9px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            transition:
+                background 0.18s ease,
+                border-color 0.18s ease,
+                color 0.18s ease;
+        }
+
+        .small-tool:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .small-tool.primary {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79, 140, 255, 0.90),
+                    rgba(60, 108, 220, 0.93)
+                );
+
+            border-color: rgba(130, 177, 255, 0.22);
+        }
+
+        .small-tool svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* =========================================================
+           PROGRAM PANEL
+           ========================================================= */
+
+        .program-section {
+            margin-top: 20px;
+        }
+
+        .program-panel {
+            position: relative;
+            overflow: hidden;
+
+            border-radius: var(--radius-lg);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.038),
+                    rgba(255, 255, 255, 0.014)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.067);
+
+            box-shadow: var(--shadow);
+        }
+
+        .program-panel::before {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            right: -120px;
+            top: -130px;
+
+            border-radius: 50%;
+
+            background: rgba(79, 140, 255, 0.045);
+            filter: blur(25px);
+
+            pointer-events: none;
+        }
+
+        .program-header {
+            position: relative;
+            z-index: 1;
+
+            padding: 19px 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+        }
+
+        .program-heading-left {
+            min-width: 0;
+        }
+
+        .program-title {
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+        }
+
+        .program-subtitle {
+            margin-top: 5px;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+        }
+
+        .program-current-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 7px 9px;
+
+            color: #b8f3d4;
+
+            background: rgba(64, 230, 155, 0.045);
+            border: 1px solid rgba(64, 230, 155, 0.10);
+            border-radius: 9px;
+
+            font-size: 8px;
+            font-weight: 850;
+
+            white-space: nowrap;
+        }
+
+        .program-current-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 10px rgba(64, 230, 155, 0.65);
+        }
+
+        /* =========================================================
+           DERSLER
+           ========================================================= */
+
+        .schedule-wrap {
+            position: relative;
+            z-index: 1;
+
+            width: 100%;
+
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            scrollbar-width: thin;
+            scrollbar-color:
+                rgba(120, 150, 195, 0.16)
+                transparent;
+        }
+
+        .schedule-wrap::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .schedule-wrap::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .schedule-wrap::-webkit-scrollbar-thumb {
+            background: rgba(120, 150, 195, 0.16);
+            border-radius: 999px;
+        }
+
+        .schedule-table {
+            width: 100%;
+
+            min-width: 1000px;
+
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .schedule-table th {
+            padding: 14px 11px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.032),
+                    rgba(255, 255, 255, 0.018)
+                );
+
+            border-right: 1px solid rgba(255, 255, 255, 0.045);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+
+            color: #a6b6cc;
+
+            font-size: 9px;
+            font-weight: 850;
+
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .schedule-table th:first-child {
+            width: 102px;
+            text-align: center;
+        }
+
+        .schedule-table th:not(:first-child) {
+            min-width: 163px;
+        }
+
+        .day-head {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .day-head-name {
+            color: #dce8f9;
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .day-head-label {
+            color: var(--text-muted);
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .day-head.today .day-head-name {
+            color: #8dc2ff;
+        }
+
+        .day-head.today::before {
+            content: "";
+
+            position: absolute;
+
+            width: 5px;
+            height: 5px;
+
+            top: -2px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 10px rgba(84, 231, 255, 0.7);
+        }
+
+        .schedule-table td {
+            padding: 8px;
+
+            border-right: 1px solid rgba(255, 255, 255, 0.045);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+
+            background: rgba(255, 255, 255, 0.009);
+
+            vertical-align: middle;
+        }
+
+        .time-cell {
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(79, 140, 255, 0.025),
+                    rgba(255, 255, 255, 0.008)
+                ) !important;
+        }
+
+        .period-number {
+            color: #7a9fd3;
+
+            font-size: 8px;
+            font-weight: 850;
+
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+
+            text-align: center;
+        }
+
+        .period-time {
+            margin-top: 4px;
+
+            color: #d5e3f7;
+
+            font-size: 10px;
+            font-weight: 850;
+
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .lesson-card {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 82px;
+
+            padding: 12px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.032),
+                    rgba(255, 255, 255, 0.012)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.055);
+
+            transition:
+                transform 0.18s ease,
+                background 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.05),
+                    rgba(255, 255, 255, 0.018)
+                );
+
+            border-color: rgba(109, 163, 255, 0.18);
+        }
+
+        .lesson-card.today-column {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79, 140, 255, 0.045),
+                    rgba(255, 255, 255, 0.012)
+                );
+        }
+
+        .lesson-card.current {
+            border-color: rgba(64, 230, 155, 0.26);
+
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(64, 230, 155, 0.08),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(64, 230, 155, 0.055),
+                    rgba(255, 255, 255, 0.012)
+                );
+
+            box-shadow:
+                0 0 0 1px rgba(64, 230, 155, 0.03),
+                0 9px 32px rgba(40, 181, 115, 0.06);
+        }
+
+        .lesson-card.current::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 3px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #62efa9,
+                    #38c980
+                );
+
+            box-shadow:
+                0 0 12px rgba(64, 230, 155, 0.38);
+        }
+
+        .lesson-card.past {
+            opacity: 0.78;
+        }
+
+        .lesson-card.break {
+            min-height: 82px;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(255,255,255,.019) 0,
+                    rgba(255,255,255,.019) 7px,
+                    rgba(255,255,255,.009) 7px,
+                    rgba(255,255,255,.009) 14px
+                );
+
+            border-style: dashed;
+        }
+
+        .lesson-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+        }
+
+        .lesson-index {
+            color: #6489be;
+
+            font-size: 8px;
+            font-weight: 900;
+        }
+
+        .lesson-status {
+            padding: 4px 6px;
+
+            border-radius: 7px;
+
+            color: #a4f3ca;
+
+            background: rgba(64, 230, 155, 0.05);
+            border: 1px solid rgba(64, 230, 155, 0.09);
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+        .lesson-name {
+            margin-top: 8px;
+
+            color: #edf4ff;
+
+            font-size: 12px;
+            font-weight: 900;
+
+            letter-spacing: -0.02em;
+
+            line-height: 1.15;
+        }
+
+        .lesson-code {
+            margin-top: 3px;
+
+            color: #7397ca;
+
+            font-size: 8px;
+            font-weight: 850;
+        }
+
+        .lesson-teacher {
+            margin-top: 10px;
+
+            color: var(--text-muted);
+
+            font-size: 8px;
+            font-weight: 750;
+        }
+
+        .break-text {
+            color: #687b96;
+
+            font-size: 8px;
+            font-weight: 850;
+
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        /* =========================================================
+           ALT BİLGİ / BUGÜN
+           ========================================================= */
+
+        .summary-section {
+            margin-top: 20px;
+        }
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.25fr)
+                repeat(2, minmax(0, 0.8fr));
+
+            gap: 13px;
+        }
+
+        .panel {
+            min-width: 0;
+            padding: 18px;
+
+            border-radius: var(--radius-lg);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.038),
+                    rgba(255,255,255,.014)
+                );
+
+            border: 1px solid rgba(255,255,255,.065);
+
+            box-shadow: var(--shadow);
+        }
+
+        .panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .panel-title {
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .panel-description {
+            margin-top: 4px;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+        .today-current {
+            margin-top: 15px;
+
+            padding: 13px;
+
+            border-radius: 14px;
+
+            background:
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(64,230,155,.07),
+                    transparent 28%
+                ),
+                rgba(255,255,255,.022);
+
+            border: 1px solid rgba(64,230,155,.11);
+        }
+
+        .today-small {
+            color: #93a8c5;
+
+            font-size: 8px;
+            font-weight: 850;
+
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .today-name {
+            margin-top: 7px;
+
+            font-size: 23px;
+            font-weight: 900;
+
+            letter-spacing: -.04em;
+        }
+
+        .today-info {
+            margin-top: 7px;
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .tiny-chip {
+            padding: 6px 8px;
+
+            border-radius: 8px;
+
+            color: #9fb1c9;
+
+            background: rgba(255,255,255,.03);
+            border: 1px solid rgba(255,255,255,.05);
+
+            font-size: 8px;
+            font-weight: 750;
+        }
+
+        .info-stat {
+            margin-top: 18px;
+        }
+
+        .info-stat-value {
+            font-size: 29px;
+            font-weight: 900;
+
+            letter-spacing: -.04em;
+        }
+
+        .info-stat-label {
+            margin-top: 3px;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+        }
+
+        .progress-line {
+            margin-top: 13px;
+
+            height: 7px;
+
+            overflow: hidden;
+
+            border-radius: 999px;
+
+            background: rgba(255,255,255,.05);
+        }
+
+        .progress-fill {
+            width: 0%;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--blue),
+                    var(--cyan)
+                );
+
+            box-shadow:
+                0 0 15px rgba(84,231,255,.20);
+
+            transition: width .5s ease;
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        .site-footer {
+            margin-top: 25px;
+            padding: 20px 4px 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            border-top: 1px solid rgba(255,255,255,.05);
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+        }
+
+        .footer-brand {
+            color: #9db0ca;
+            font-weight: 850;
+        }
+
+        .footer-mail {
+            color: #7894ba;
+        }
+
+        /* =========================================================
+           MOBİL SIDEBAR
+           ========================================================= */
+
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+
+            display: none;
+
+            background: rgba(0,0,0,.48);
+
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+
+        /* =========================================================
+           TOAST
+           ========================================================= */
+
+        .toast-container {
+            position: fixed;
+
+            right: 18px;
+            bottom: 18px;
+
+            z-index: 3000;
+
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            pointer-events: none;
+        }
+
+        .toast {
+            min-width: 250px;
+            max-width: 370px;
+
+            padding: 12px 14px;
+
+            border-radius: 14px;
+
+            background: rgba(10,19,32,.97);
+            border: 1px solid rgba(115,162,239,.18);
+
+            box-shadow:
+                0 18px 50px rgba(0,0,0,.30);
+
+            color: #dce8fa;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            transform: translateY(12px);
+            opacity: 0;
+
+            animation: toastIn .22s ease forwards;
+        }
+
+        @keyframes toastIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .toast strong {
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: #fff;
+
+            font-size: 10px;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1180px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-summary {
+                width: fit-content;
+                min-width: 245px;
+            }
+
+            .summary-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .summary-grid .panel:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                transform: translateX(-105%);
+
+                box-shadow:
+                    30px 0 70px rgba(0,0,0,.40);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .topbar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .toolbar-right {
+                width: 100%;
+            }
+
+            .small-tool {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding:
+                    17px
+                    13px
+                    32px;
+            }
+
+            .topbar {
+                min-height: 68px;
+
+                padding:
+                    10px
+                    13px;
+            }
+
+            .clock-box {
+                display: none;
+            }
+
+            .page-hero {
+                padding: 21px 18px;
+                border-radius: 22px;
+            }
+
+            .hero-title {
+                font-size: 34px;
+            }
+
+            .hero-summary {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid .panel:first-child {
+                grid-column: auto;
+            }
+
+            .toolbar-right {
+                flex-direction: column;
+            }
+
+            .small-tool {
+                width: 100%;
+            }
+
+            .program-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .site-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .class-badge {
+                display: none;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-button {
+                width: 100%;
+            }
+
+            .toast-container {
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+            }
+
+            .toast {
+                min-width: 0;
+                max-width: none;
+            }
+        }
+
+        /* =========================================================
+           YAZDIR / PDF
+           ========================================================= */
+
+        @media print {
+
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+
+            html,
+            body {
+                width: 100%;
+                min-height: 0;
+
+                color: #111 !important;
+                background: #fff !important;
+
+                overflow: visible !important;
+
+                font-family:
+                    Arial,
+                    Helvetica,
+                    sans-serif;
+            }
+
+            .background-grid,
+            .ambient,
+            .sidebar,
+            .topbar,
+            .sidebar-overlay,
+            .toolbar-section,
+            .hero-actions,
+            .site-footer,
+            .toast-container,
+            .program-current-label,
+            .summary-section {
+                display: none !important;
+            }
+
+            .main {
+                width: 100% !important;
+                margin: 0 !important;
+            }
+
+            .content {
+                width: 100% !important;
+
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .page-hero {
+                display: block !important;
+
+                padding: 12px !important;
+                margin-bottom: 10px !important;
+
+                color: #111 !important;
+
+                background: #fff !important;
+
+                border: 2px solid #111 !important;
+                border-radius: 0 !important;
+
+                box-shadow: none !important;
+            }
+
+            .page-hero::after {
+                display: none !important;
+            }
+
+            .hero-grid {
+                display: grid !important;
+                grid-template-columns: 1fr auto !important;
+                gap: 15px !important;
+            }
+
+            .eyebrow {
+                padding: 0 !important;
+
+                color: #111 !important;
+
+                background: transparent !important;
+                border: 0 !important;
+
+                font-size: 9px !important;
+            }
+
+            .eyebrow-dot {
+                display: none !important;
+            }
+
+            .hero-title {
+                margin-top: 5px !important;
+
+                color: #111 !important;
+
+                font-size: 25px !important;
+            }
+
+            .hero-title span {
+                color: #111 !important;
+
+                background: none !important;
+
+                -webkit-text-fill-color: #111 !important;
+            }
+
+            .hero-text {
+                margin-top: 5px !important;
+
+                color: #333 !important;
+
+                font-size: 8px !important;
+                line-height: 1.4 !important;
+            }
+
+            .hero-summary {
+                min-width: 140px !important;
+
+                padding: 9px !important;
+
+                color: #111 !important;
+
+                background: #fff !important;
+
+                border: 1px solid #aaa !important;
+                border-radius: 0 !important;
+            }
+
+            .summary-top {
+                display: block !important;
+            }
+
+            .summary-label,
+            .summary-detail,
+            .summary-row-label {
+                color: #555 !important;
+            }
+
+            .summary-value,
+            .summary-row-value {
+                color: #111 !important;
+            }
+
+            .summary-value {
+                margin-top: 3px !important;
+
+                font-size: 18px !important;
+            }
+
+            .summary-detail {
+                font-size: 7px !important;
+            }
+
+            .summary-divider {
+                margin: 7px 0 !important;
+
+                background: #ddd !important;
+            }
+
+            .summary-row {
+                font-size: 7px !important;
+            }
+
+            .summary-live {
+                display: none !important;
+            }
+
+            .program-section {
+                margin-top: 0 !important;
+            }
+
+            .program-panel {
+                border: 2px solid #111 !important;
+                border-radius: 0 !important;
+
+                background: #fff !important;
+
+                box-shadow: none !important;
+            }
+
+            .program-panel::before {
+                display: none !important;
+            }
+
+            .program-header {
+                padding: 8px 10px !important;
+
+                border-bottom: 1px solid #111 !important;
+            }
+
+            .program-title {
+                color: #111 !important;
+
+                font-size: 12px !important;
+            }
+
+            .program-subtitle {
+                color: #555 !important;
+
+                font-size: 7px !important;
+            }
+
+            .schedule-wrap {
+                overflow: visible !important;
+            }
+
+            .schedule-table {
+                min-width: 0 !important;
+                width: 100% !important;
+
+                table-layout: fixed !important;
+
+                border-collapse: collapse !important;
+            }
+
+            .schedule-table th {
+                padding: 6px 4px !important;
+
+                color: #111 !important;
+
+                background: #f1f1f1 !important;
+
+                border: 1px solid #999 !important;
+
+                font-size: 7px !important;
+            }
+
+            .schedule-table td {
+                padding: 4px !important;
+
+                color: #111 !important;
+
+                background: #fff !important;
+
+                border: 1px solid #999 !important;
+            }
+
+            .schedule-table th:first-child {
+                width: 70px !important;
+            }
+
+            .day-head-name {
+                color: #111 !important;
+
+                font-size: 7px !important;
+            }
+
+            .day-head-label {
+                color: #555 !important;
+
+                font-size: 6px !important;
+            }
+
+            .day-head.today::before {
+                display: none !important;
+            }
+
+            .lesson-card,
+            .lesson-card.today-column,
+            .lesson-card.current,
+            .lesson-card.past,
+            .lesson-card.break {
+                min-height: 55px !important;
+
+                padding: 6px !important;
+
+                color: #111 !important;
+
+                background: #fff !important;
+
+                border: 0 !important;
+
+                border-radius: 0 !important;
+
+                opacity: 1 !important;
+
+                box-shadow: none !important;
+
+                transform: none !important;
+            }
+
+            .lesson-card.current::before {
+                display: none !important;
+            }
+
+            .lesson-index {
+                color: #555 !important;
+
+                font-size: 6px !important;
+            }
+
+            .lesson-status {
+                display: none !important;
+            }
+
+            .lesson-name {
+                margin-top: 3px !important;
+
+                color: #111 !important;
+
+                font-size: 8px !important;
+            }
+
+            .lesson-code {
+                margin-top: 2px !important;
+
+                color: #444 !important;
+
+                font-size: 6px !important;
+            }
+
+            .lesson-teacher {
+                margin-top: 4px !important;
+
+                color: #555 !important;
+
+                font-size: 6px !important;
+            }
+
+            .break-text {
+                color: #555 !important;
+
+                font-size: 6px !important;
+            }
+
+            .time-cell {
+                background: #f7f7f7 !important;
+            }
+
+            .period-number {
+                color: #555 !important;
+
+                font-size: 6px !important;
+            }
+
+            .period-time {
+                margin-top: 2px !important;
+
+                color: #111 !important;
+
+                font-size: 7px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background-grid"></div>
+    <div class="ambient one"></div>
+    <div class="ambient two"></div>
+    <div class="ambient three"></div>
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        aria-hidden="true"
+    ></div>
+
+    <div class="app">
+
+        <!-- =====================================================
+             SIDEBAR
+             ====================================================== -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <a href="index.html" class="brand">
+
+                <div class="brand-logo" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+
+                        <defs>
+                            <linearGradient
+                                id="brandGradient"
+                                x1="10"
+                                y1="8"
+                                x2="54"
+                                y2="57"
+                                gradientUnits="userSpaceOnUse"
+                            >
+                                <stop stop-color="#FFFFFF"/>
+                                <stop offset="0.52" stop-color="#70B0FF"/>
+                                <stop offset="1" stop-color="#54EAFF"/>
+                            </linearGradient>
+                        </defs>
+
+                        <circle
+                            cx="32"
+                            cy="32"
+                            r="23"
+                            stroke="url(#brandGradient)"
+                            stroke-width="1.5"
+                            opacity=".42"
+                        />
+
+                        <path
+                            d="M18 30C21 20.5 26.4 16 32 16C37.6 16 43 20.5 46 30"
+                            stroke="url(#brandGradient)"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                        />
+
+                        <rect
+                            x="17"
+                            y="27"
+                            width="30"
+                            height="20"
+                            rx="8"
+                            fill="#0A1B30"
+                            stroke="url(#brandGradient)"
+                            stroke-width="2"
+                        />
+
+                        <circle
+                            cx="27"
+                            cy="36"
+                            r="3"
+                            fill="#6FEAFF"
+                        />
+
+                        <circle
+                            cx="37"
+                            cy="36"
+                            r="3"
+                            fill="#72A8FF"
+                        />
+
+                        <path
+                            d="M27 42H37"
+                            stroke="#B9EFFF"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        />
+
+                        <path
+                            d="M32 9V14"
+                            stroke="#70C5FF"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        />
+
+                        <circle
+                            cx="32"
+                            cy="7"
+                            r="2"
+                            fill="#5EEAFF"
+                        />
+
+                    </svg>
+
+                </div>
+
+                <div class="brand-copy">
+
+                    <div class="brand-title">
+                        10/D Dijital Sınıf
+                    </div>
+
+                    <div class="brand-subtitle">
+                        ZYNX Education System
+                    </div>
+
+                </div>
+
+            </a>
+
+            <div class="sidebar-section">
+
+                <div class="sidebar-section-title">
+                    Genel
+                </div>
+
+                <nav class="nav">
+
+                    <a
+                        href="index.html"
+                        class="nav-link"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M4 10.5L12 4L20 10.5V20H4V10.5Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linejoin="round"
+                                />
+                                <path
+                                    d="M9 20V14H15V20"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
+                            </svg>
+                        </span>
+
+                        Ana Sayfa
+                    </a>
+
+                    <a
+                        href="program.html"
+                        class="nav-link active"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <rect
+                                    x="4"
+                                    y="5"
+                                    width="16"
+                                    height="15"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
+
+                                <path
+                                    d="M8 3V7M16 3V7M4 10H20"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+
+                                <path
+                                    d="M8 14H10M14 14H16M8 17H10"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </span>
+
+                        Ders Programı
+                    </a>
+
+                    <a
+                        href="odevler.html"
+                        class="nav-link"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M6 4.5H18C19.1 4.5 20 5.4 20 6.5V19.5H4V6.5C4 5.4 4.9 4.5 6 4.5Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+
+                                <path
+                                    d="M8 9H16M8 12.5H16M8 16H13"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </span>
+
+                        Ödevler
+                    </a>
+
+                    <a
+                        href="sinavlar.html"
+                        class="nav-link"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M7 3.5H17C18.1 3.5 19 4.4 19 5.5V20.5H5V5.5C5 4.4 5.9 3.5 7 3.5Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
+
+                                <path
+                                    d="M8 8H16M8 12H16M8 16H12"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </span>
+
+                        Sınavlar
+                    </a>
+
+                    <a
+                        href="takvim.html"
+                        class="nav-link"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <rect
+                                    x="4"
+                                    y="5"
+                                    width="16"
+                                    height="15"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                />
+
+                                <path
+                                    d="M8 3V7M16 3V7M4 10H20"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </span>
+
+                        Takvim
+                    </a>
+
+                </nav>
+
+            </div>
+
+            <div class="sidebar-section">
+
+                <div class="sidebar-section-title">
+                    Eğitim
+                </div>
+
+                <nav class="nav">
+
+                    <a
+                        href="dersler.html"
+                        class="nav-link"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M4 6.5C4 5.4 4.9 4.5 6 4.5H11V19.5H6C4.9 19.5 4 18.6 4 17.5V6.5Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+
+                                <path
+                                    d="M20 6.5C20 5.4 19.1 4.5 18 4.5H13V19.5H18C19.1 19.5 20 18.6 20 17.5V6.5Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+                            </svg>
+                        </span>
+
+                        Dersler
+                    </a>
+
+                    <a
+                        href="zynx.html"
+                        class="nav-link"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M8.2 10.2C8.8 7.6 10.2 6.3 12 6.3C13.8 6.3 15.2 7.6 15.8 10.2"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                />
+
+                                <rect
+                                    x="6.5"
+                                    y="9"
+                                    width="11"
+                                    height="8"
+                                    rx="3"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                />
+
+                                <circle
+                                    cx="10"
+                                    cy="12.8"
+                                    r="1"
+                                    fill="currentColor"
+                                />
+
+                                <circle
+                                    cx="14"
+                                    cy="12.8"
+                                    r="1"
+                                    fill="currentColor"
+                                />
+
+                                <path
+                                    d="M10 15H14"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+                        </span>
+
+                        ZYNX AI
+                    </a>
+
+                    <a
+                        href="duyurular.html"
+                        class="nav-link"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M5 12V8.5C5 7.7 5.7 7 6.5 7H17L20 4V20L17 17H6.5C5.7 17 5 16.3 5 15.5V12Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </span>
+
+                        Duyurular
+                    </a>
+
+                </nav>
+
+            </div>
+
+            <div class="sidebar-section">
+
+                <div class="sidebar-section-title">
+                    Sistem
+                </div>
+
+                <nav class="nav">
+
+                    <a
+                        href="hakkimizda.html"
+                        class="nav-link"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="8.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+
+                                <path
+                                    d="M12 10V16"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                />
+
+                                <circle
+                                    cx="12"
+                                    cy="7.5"
+                                    r="1"
+                                    fill="currentColor"
+                                />
+                            </svg>
+                        </span>
+
+                        Hakkımızda
+                    </a>
+
+                </nav>
+
+            </div>
+
+            <div class="sidebar-footer">
+
+                <div class="footer-card">
+
+                    <div class="footer-top">
+
+                        <span class="footer-status"></span>
+
+                        <span class="footer-title">
+                            Program sistemi aktif
+                        </span>
+
+                    </div>
+
+                    <div class="footer-text">
+                        10/D haftalık ders programı,
+                        öğretmen bilgileri ve ders
+                        saatleri merkezi olarak görüntüleniyor.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+        <!-- =====================================================
+             MAIN
+             ====================================================== -->
+
+        <main class="main">
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <button
+                        class="mobile-menu"
+                        id="mobileMenu"
+                        type="button"
+                        aria-label="Menüyü aç"
+                        aria-expanded="false"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <path
+                                d="M4 7H20M4 12H20M4 17H20"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </button>
+
+                    <div>
+
+                        <div class="page-title">
+                            Haftalık Ders Programı
+                        </div>
+
+                        <div class="page-subtitle">
+                            10/D · 40 Ders Saati
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="topbar-right">
+
+                    <div class="class-badge">
+                        10 / D
+                    </div>
+
+                    <div class="live-badge">
+                        <span class="live-dot"></span>
+                        CANLI
+                    </div>
+
+                    <div class="clock-box">
+
+                        <div
+                            class="clock"
+                            id="topClock"
+                        >
+                            --:--:--
+                        </div>
+
+                        <div
+                            class="date"
+                            id="topDate"
+                        >
+                            --
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <div class="content">
+
+                <!-- =================================================
+                     HERO
+                     ================================================== -->
+
+                <section class="page-hero">
+
+                    <div class="hero-grid">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                <span class="eyebrow-dot"></span>
+                                HAFTALIK DERS PLANI
+                            </div>
+
+                            <h1 class="hero-title">
+                                10/D
+                                <span>Ders Programı</span>
+                            </h1>
+
+                            <p class="hero-text">
+                                Şehit Abdullah Tayyip Olçok Anadolu
+                                Lisesi 10/D sınıfının haftalık ders
+                                programını gün ve ders saatlerine göre
+                                görüntüle. Sistem, bilgisayarının veya
+                                telefonunun saatine göre mevcut dersi
+                                otomatik olarak belirler.
+                            </p>
+
+                            <div class="hero-actions">
+
+                                <button
+                                    class="hero-button primary"
+                                    id="pdfButton"
+                                    type="button"
+                                >
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M7 3.5H17C18.1 3.5 19 4.4 19 5.5V20.5H5V5.5C5 4.4 5.9 3.5 7 3.5Z"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                        />
+
+                                        <path
+                                            d="M8 8H16M8 12H16M8 16H12"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linecap="round"
+                                        />
+
+                                        <path
+                                            d="M12 16V20M9.5 18L12 20.5L14.5 18"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+
+                                    PDF Olarak İndir
+                                </button>
+
+                                <button
+                                    class="hero-button secondary"
+                                    id="todayButton"
+                                    type="button"
+                                >
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <rect
+                                            x="4"
+                                            y="5"
+                                            width="16"
+                                            height="15"
+                                            rx="2"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                        />
+
+                                        <path
+                                            d="M8 3V7M16 3V7M4 10H20"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linecap="round"
+                                        />
+                                    </svg>
+
+                                    Bugünü Göster
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="hero-summary">
+
+                            <div class="summary-top">
+
+                                <div class="summary-label">
+                                    Sınıf Bilgisi
+                                </div>
+
+                                <div class="summary-live">
+                                    AKTİF
+                                </div>
+
+                            </div>
+
+                            <div class="summary-value">
+                                10 / D
+                            </div>
+
+                            <div class="summary-detail">
+                                Haftalık eğitim planı
+                            </div>
+
+                            <div class="summary-divider"></div>
+
+                            <div class="summary-row">
+                                <span class="summary-row-label">
+                                    Toplam ders
+                                </span>
+
+                                <strong
+                                    class="summary-row-value"
+                                    id="totalLessons"
+                                >
+                                    40
+                                </strong>
+                            </div>
+
+                            <div class="summary-row">
+                                <span class="summary-row-label">
+                                    Sınıf öğretmeni
+                                </span>
+
+                                <strong class="summary-row-value">
+                                    İsmail DELİ
+                                </strong>
+                            </div>
+
+                            <div class="summary-row">
+                                <span class="summary-row-label">
+                                    Ders başlangıcı
+                                </span>
+
+                                <strong class="summary-row-value">
+                                    08:30
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =================================================
+                     TABS + TOOLS
+                     ================================================== -->
+
+                <section class="toolbar-section">
+
+                    <div class="toolbar">
+
+                        <div
+                            class="day-tabs"
+                            id="dayTabs"
+                        >
+
+                            <button
+                                class="day-tab active"
+                                type="button"
+                                data-day="1"
+                            >
+                                Pazartesi
+                            </button>
+
+                            <button
+                                class="day-tab"
+                                type="button"
+                                data-day="2"
+                            >
+                                Salı
+                            </button>
+
+                            <button
+                                class="day-tab"
+                                type="button"
+                                data-day="3"
+                            >
+                                Çarşamba
+                            </button>
+
+                            <button
+                                class="day-tab"
+                                type="button"
+                                data-day="4"
+                            >
+                                Perşembe
+                            </button>
+
+                            <button
+                                class="day-tab"
+                                type="button"
+                                data-day="5"
+                            >
+                                Cuma
+                            </button>
+
+                        </div>
+
+                        <div class="toolbar-right">
+
+                            <button
+                                class="small-tool"
+                                id="allWeekButton"
+                                type="button"
+                            >
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <rect
+                                        x="4"
+                                        y="5"
+                                        width="16"
+                                        height="15"
+                                        rx="2"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                    />
+
+                                    <path
+                                        d="M8 3V7M16 3V7M4 10H20"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+
+                                Haftalık Görünüm
+                            </button>
+
+                            <button
+                                class="small-tool primary"
+                                id="printButton"
+                                type="button"
+                            >
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M7 8V4H17V8"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                    />
+
+                                    <path
+                                        d="M6 18H5C4.45 18 4 17.55 4 17V11C4 9.9 4.9 9 6 9H18C19.1 9 20 9.9 20 11V17C20 17.55 19.55 18 19 18H18"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                    />
+
+                                    <rect
+                                        x="7"
+                                        y="15"
+                                        width="10"
+                                        height="5"
+                                        rx="1"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                    />
+                                </svg>
+
+                                Yazdır
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =================================================
+                     PROGRAM
+                     ================================================== -->
+
+                <section class="program-section">
+
+                    <div class="program-panel">
+
+                        <div class="program-header">
+
+                            <div class="program-heading-left">
+
+                                <div class="program-title">
+                                    10/D Haftalık Program
+                                </div>
+
+                                <div class="program-subtitle">
+                                    08:30 – 16:00 · Pazartesi – Cuma
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="program-current-label"
+                                id="currentStatus"
+                            >
+                                <span class="program-current-dot"></span>
+                                Sistem kontrol ediliyor
+                            </div>
+
+                        </div>
+
+                        <div class="schedule-wrap">
+
+                            <table
+                                class="schedule-table"
+                                id="scheduleTable"
+                            >
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Ders Saati
+                                        </th>
+
+                                        <th>
+                                            <div
+                                                class="day-head"
+                                                data-day-head="1"
+                                            >
+                                                <span class="day-head-name">
+                                                    Pazartesi
+                                                </span>
+
+                                                <span class="day-head-label">
+                                                    8 Ders
+                                                </span>
+                                            </div>
+                                        </th>
+
+                                        <th>
+                                            <div
+                                                class="day-head"
+                                                data-day-head="2"
+                                            >
+                                                <span class="day-head-name">
+                                                    Salı
+                                                </span>
+
+                                                <span class="day-head-label">
+                                                    8 Ders
+                                                </span>
+                                            </div>
+                                        </th>
+
+                                        <th>
+                                            <div
+                                                class="day-head"
+                                                data-day-head="3"
+                                            >
+                                                <span class="day-head-name">
+                                                    Çarşamba
+                                                </span>
+
+                                                <span class="day-head-label">
+                                                    8 Ders
+                                                </span>
+                                            </div>
+                                        </th>
+
+                                        <th>
+                                            <div
+                                                class="day-head"
+                                                data-day-head="4"
+                                            >
+                                                <span class="day-head-name">
+                                                    Perşembe
+                                                </span>
+
+                                                <span class="day-head-label">
+                                                    8 Ders
+                                                </span>
+                                            </div>
+                                        </th>
+
+                                        <th>
+                                            <div
+                                                class="day-head"
+                                                data-day-head="5"
+                                            >
+                                                <span class="day-head-name">
+                                                    Cuma
+                                                </span>
+
+                                                <span class="day-head-label">
+                                                    8 Ders
+                                                </span>
+                                            </div>
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="scheduleBody">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =================================================
+                     CANLI ÖZET
+                     ================================================== -->
+
+                <section class="summary-section">
+
+                    <div class="summary-grid">
+
+                        <article class="panel">
+
+                            <div class="panel-heading">
+
+                                <div>
+                                    <div class="panel-title">
+                                        Şu Anki Durum
+                                    </div>
+
+                                    <div class="panel-description">
+                                        Gerçek zamanlı ders durumu
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="today-current">
+
+                                <div class="today-small">
+                                    Canlı Program
+                                </div>
+
+                                <div
+                                    class="today-name"
+                                    id="currentLessonName"
+                                >
+                                    Ders bekleniyor
+                                </div>
+
+                                <div class="today-info">
+
+                                    <div
+                                        class="tiny-chip"
+                                        id="currentLessonTime"
+                                    >
+                                        --
+                                    </div>
+
+                                    <div
+                                        class="tiny-chip"
+                                        id="currentTeacher"
+                                    >
+                                        --
+                                    </div>
+
+                                    <div
+                                        class="tiny-chip"
+                                        id="currentRemaining"
+                                    >
+                                        --
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                        <article class="panel">
+
+                            <div class="panel-heading">
+
+                                <div>
+                                    <div class="panel-title">
+                                        Bugünün Dersleri
+                                    </div>
+
+                                    <div class="panel-description">
+                                        Günlük toplam
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="info-stat">
+
+                                <div
+                                    class="info-stat-value"
+                                    id="todayLessonCount"
+                                >
+                                    8
+                                </div>
+
+                                <div class="info-stat-label">
+                                    planlanan ders
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                        <article class="panel">
+
+                            <div class="panel-heading">
+
+                                <div>
+                                    <div class="panel-title">
+                                        Program İlerlemesi
+                                    </div>
+
+                                    <div class="panel-description">
+                                        Bugünkü ders süreci
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="info-stat">
+
+                                <div
+                                    class="info-stat-value"
+                                    id="dayProgressText"
+                                >
+                                    %0
+                                </div>
+
+                                <div class="info-stat-label">
+                                    okul günü ilerlemesi
+                                </div>
+
+                            </div>
+
+                            <div class="progress-line">
+
+                                <div
+                                    class="progress-fill"
+                                    id="dayProgress"
+                                ></div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+                <footer class="site-footer">
+
+                    <div>
+                        <span class="footer-brand">
+                            10/D Dijital Sınıf
+                        </span>
+
+                        <span>
+                            · ZYNX Education System
+                        </span>
+                    </div>
+
+                    <div class="footer-mail">
+                        Ttlife Studios · trlifeinfo@gmail.com
+                    </div>
+
+                </footer>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+        aria-live="polite"
+        aria-atomic="true"
+    ></div>
+
+    <script>
+        "use strict";
+
+        /* =========================================================
+           10/D DERS PROGRAMI VERİLERİ
+           ========================================================= */
+
+        const schedule = {
+            1: [
+                {
+                    no: 1,
+                    start: "08:30",
+                    end: "09:10",
+                    code: "COĞ.",
+                    name: "Coğrafya",
+                    teacher: "E.ŞHN"
+                },
+                {
+                    no: 2,
+                    start: "09:20",
+                    end: "10:00",
+                    code: "COĞ.",
+                    name: "Coğrafya",
+                    teacher: "E.ŞHN"
+                },
+                {
+                    no: 3,
+                    start: "10:10",
+                    end: "10:50",
+                    code: "FELS.",
+                    name: "Felsefe",
+                    teacher: "Ş.YNG"
+                },
+                {
+                    no: 4,
+                    start: "11:00",
+                    end: "11:40",
+                    code: "FELS.",
+                    name: "Felsefe",
+                    teacher: "Ş.YNG"
+                },
+                {
+                    no: 5,
+                    start: "11:50",
+                    end: "12:30",
+                    code: "SPEYH2",
+                    name: "SPEYH2",
+                    teacher: "C.UNL"
+                },
+                {
+                    no: 6,
+                    start: "13:40",
+                    end: "14:20",
+                    code: "SPEYH2",
+                    name: "SPEYH2",
+                    teacher: "C.UNL"
+                },
+                {
+                    no: 7,
+                    start: "14:30",
+                    end: "15:10",
+                    code: "GÖRMÜZ",
+                    name: "GÖRMÜZ",
+                    teacher: "E.ŞNR"
+                },
+                {
+                    no: 8,
+                    start: "15:20",
+                    end: "16:00",
+                    code: "GÖRMÜZ",
+                    name: "GÖRMÜZ",
+                    teacher: "E.ŞNR"
+                }
+            ],
+
+            2: [
+                {
+                    no: 1,
+                    start: "08:30",
+                    end: "09:10",
+                    code: "MAT.",
+                    name: "Matematik",
+                    teacher: "S.ŞHN"
+                },
+                {
+                    no: 2,
+                    start: "09:20",
+                    end: "10:00",
+                    code: "MAT.",
+                    name: "Matematik",
+                    teacher: "S.ŞHN"
+                },
+                {
+                    no: 3,
+                    start: "10:10",
+                    end: "10:50",
+                    code: "SSPOR2",
+                    name: "SSPOR2",
+                    teacher: "T.UĞZ"
+                },
+                {
+                    no: 4,
+                    start: "11:00",
+                    end: "11:40",
+                    code: "SSPOR2",
+                    name: "SSPOR2",
+                    teacher: "T.UĞZ"
+                },
+                {
+                    no: 5,
+                    start: "11:50",
+                    end: "12:30",
+                    code: "DİNK",
+                    name: "Din Kültürü",
+                    teacher: "İ.DLİ"
+                },
+                {
+                    no: 6,
+                    start: "13:40",
+                    end: "14:20",
+                    code: "DİNK",
+                    name: "Din Kültürü",
+                    teacher: "İ.DLİ"
+                },
+                {
+                    no: 7,
+                    start: "14:30",
+                    end: "15:10",
+                    code: "BYDİL",
+                    name: "BYDİL",
+                    teacher: "G.ŞNT"
+                },
+                {
+                    no: 8,
+                    start: "15:20",
+                    end: "16:00",
+                    code: "BYDİL",
+                    name: "BYDİL",
+                    teacher: "G.ŞNT"
+                }
+            ],
+
+            3: [
+                {
+                    no: 1,
+                    start: "08:30",
+                    end: "09:10",
+                    code: "BEDEN",
+                    name: "Beden Eğitimi",
+                    teacher: "M.TRG"
+                },
+                {
+                    no: 2,
+                    start: "09:20",
+                    end: "10:00",
+                    code: "BEDEN",
+                    name: "Beden Eğitimi",
+                    teacher: "M.TRG"
+                },
+                {
+                    no: 3,
+                    start: "10:10",
+                    end: "10:50",
+                    code: "TARH.",
+                    name: "Tarih",
+                    teacher: "S.ŞNG"
+                },
+                {
+                    no: 4,
+                    start: "11:00",
+                    end: "11:40",
+                    code: "TARH.",
+                    name: "Tarih",
+                    teacher: "S.ŞNG"
+                },
+                {
+                    no: 5,
+                    start: "11:50",
+                    end: "12:30",
+                    code: "BİYO",
+                    name: "Biyoloji",
+                    teacher: "T.PLT"
+                },
+                {
+                    no: 6,
+                    start: "13:40",
+                    end: "14:20",
+                    code: "BİYO",
+                    name: "Biyoloji",
+                    teacher: "T.PLT"
+                },
+                {
+                    no: 7,
+                    start: "14:30",
+                    end: "15:10",
+                    code: "EDB",
+                    name: "Türk Dili ve Edebiyatı",
+                    teacher: "U.ŞHN"
+                },
+                {
+                    no: 8,
+                    start: "15:20",
+                    end: "16:00",
+                    code: "EDB",
+                    name: "Türk Dili ve Edebiyatı",
+                    teacher: "U.ŞHN"
+                }
+            ],
+
+            4: [
+                {
+                    no: 1,
+                    start: "08:30",
+                    end: "09:10",
+                    code: "KİMY",
+                    name: "Kimya",
+                    teacher: "H.YĞT"
+                },
+                {
+                    no: 2,
+                    start: "09:20",
+                    end: "10:00",
+                    code: "KİMY",
+                    name: "Kimya",
+                    teacher: "H.YĞT"
+                },
+                {
+                    no: 3,
+                    start: "10:10",
+                    end: "10:50",
+                    code: "REH.",
+                    name: "Rehberlik",
+                    teacher: "İ.DLİ"
+                },
+                {
+                    no: 4,
+                    start: "11:00",
+                    end: "11:40",
+                    code: "EDB",
+                    name: "Türk Dili ve Edebiyatı",
+                    teacher: "U.ŞHN"
+                },
+                {
+                    no: 5,
+                    start: "11:50",
+                    end: "12:30",
+                    code: "MAT.",
+                    name: "Matematik",
+                    teacher: "S.ŞHN"
+                },
+                {
+                    no: 6,
+                    start: "13:40",
+                    end: "14:20",
+                    code: "MAT.",
+                    name: "Matematik",
+                    teacher: "S.ŞHN"
+                },
+                {
+                    no: 7,
+                    start: "14:30",
+                    end: "15:10",
+                    code: "SALMBİ",
+                    name: "SALMBİ",
+                    teacher: "S.DZG"
+                },
+                {
+                    no: 8,
+                    start: "15:20",
+                    end: "16:00",
+                    code: "SALMBİ",
+                    name: "SALMBİ",
+                    teacher: "S.DZG"
+                }
+            ],
+
+            5: [
+                {
+                    no: 1,
+                    start: "08:30",
+                    end: "09:10",
+                    code: "BYDİL",
+                    name: "BYDİL",
+                    teacher: "G.ŞNT"
+                },
+                {
+                    no: 2,
+                    start: "09:20",
+                    end: "10:00",
+                    code: "BYDİL",
+                    name: "BYDİL",
+                    teacher: "G.ŞNT"
+                },
+                {
+                    no: 3,
+                    start: "10:10",
+                    end: "10:50",
+                    code: "MAT.",
+                    name: "Matematik",
+                    teacher: "S.ŞHN"
+                },
+                {
+                    no: 4,
+                    start: "11:00",
+                    end: "11:40",
+                    code: "MAT.",
+                    name: "Matematik",
+                    teacher: "S.ŞHN"
+                },
+                {
+                    no: 5,
+                    start: "11:50",
+                    end: "12:30",
+                    code: "EDB",
+                    name: "Türk Dili ve Edebiyatı",
+                    teacher: "U.ŞHN"
+                },
+                {
+                    no: 6,
+                    start: "13:40",
+                    end: "14:20",
+                    code: "EDB",
+                    name: "Türk Dili ve Edebiyatı",
+                    teacher: "U.ŞHN"
+                },
+                {
+                    no: 7,
+                    start: "14:30",
+                    end: "15:10",
+                    code: "FİZK",
+                    name: "Fizik",
+                    teacher: "M.TTN"
+                },
+                {
+                    no: 8,
+                    start: "15:20",
+                    end: "16:00",
+                    code: "FİZK",
+                    name: "Fizik",
+                    teacher: "M.TTN"
+                }
+            ]
+        };
+
+        const dayNames = {
+            1: "Pazartesi",
+            2: "Salı",
+            3: "Çarşamba",
+            4: "Perşembe",
+            5: "Cuma"
+        };
+
+        const timeSlots = [
+            {
+                no: 1,
+                start: "08:30",
+                end: "09:10"
+            },
+            {
+                no: 2,
+                start: "09:20",
+                end: "10:00"
+            },
+            {
+                no: 3,
+                start: "10:10",
+                end: "10:50"
+            },
+            {
+                no: 4,
+                start: "11:00",
+                end: "11:40"
+            },
+            {
+                no: 5,
+                start: "11:50",
+                end: "12:30"
+            },
+            {
+                no: 6,
+                start: "13:40",
+                end: "14:20"
+            },
+            {
+                no: 7,
+                start: "14:30",
+                end: "15:10"
+            },
+            {
+                no: 8,
+                start: "15:20",
+                end: "16:00"
+            }
+        ];
+
+        const elements = {
+            topClock:
+                document.getElementById("topClock"),
+
+            topDate:
+                document.getElementById("topDate"),
+
+            scheduleBody:
+                document.getElementById("scheduleBody"),
+
+            currentStatus:
+                document.getElementById("currentStatus"),
+
+            currentLessonName:
+                document.getElementById("currentLessonName"),
+
+            currentLessonTime:
+                document.getElementById("currentLessonTime"),
+
+            currentTeacher:
+                document.getElementById("currentTeacher"),
+
+            currentRemaining:
+                document.getElementById("currentRemaining"),
+
+            todayLessonCount:
+                document.getElementById("todayLessonCount"),
+
+            dayProgressText:
+                document.getElementById("dayProgressText"),
+
+            dayProgress:
+                document.getElementById("dayProgress"),
+
+            pdfButton:
+                document.getElementById("pdfButton"),
+
+            todayButton:
+                document.getElementById("todayButton"),
+
+            allWeekButton:
+                document.getElementById("allWeekButton"),
+
+            printButton:
+                document.getElementById("printButton"),
+
+            mobileMenu:
+                document.getElementById("mobileMenu"),
+
+            sidebar:
+                document.getElementById("sidebar"),
+
+            sidebarOverlay:
+                document.getElementById("sidebarOverlay"),
+
+            toastContainer:
+                document.getElementById("toastContainer")
+        };
+
+        let selectedDay = null;
+        let weekView = true;
+
+        /* =========================================================
+           YARDIMCI
+           ========================================================= */
+
+        function pad(value) {
+            return String(value).padStart(2, "0");
+        }
+
+        function timeToMinutes(time) {
+            const parts = time
+                .split(":")
+                .map(Number);
+
+            return parts[0] * 60 + parts[1];
+        }
+
+        function getCurrentMinutes() {
+            const now = new Date();
+
+            return (
+                now.getHours() * 60 +
+                now.getMinutes() +
+                now.getSeconds() / 60
+            );
+        }
+
+        function formatRemaining(minutes) {
+            const safe =
+                Math.max(0, Math.ceil(minutes));
+
+            if (safe <= 0) {
+                return "Süre doldu";
+            }
+
+            if (safe < 60) {
+                return `${safe} dk kaldı`;
+            }
+
+            const hours =
+                Math.floor(safe / 60);
+
+            const mins =
+                safe % 60;
+
+            if (!mins) {
+                return `${hours} sa kaldı`;
+            }
+
+            return `${hours} sa ${mins} dk`;
+        }
+
+        function showToast(title, message) {
+            const toast =
+                document.createElement("div");
+
+            toast.className = "toast";
+
+            toast.innerHTML = `
+                <strong>${title}</strong>
+                <span>${message}</span>
+            `;
+
+            elements.toastContainer.appendChild(toast);
+
+            window.setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transform =
+                    "translateY(10px)";
+
+                window.setTimeout(() => {
+                    toast.remove();
+                }, 220);
+
+            }, 3200);
+        }
+
+        /* =========================================================
+           SAAT
+           ========================================================= */
+
+        function updateClock() {
+            const now = new Date();
+
+            const time =
+                `${pad(now.getHours())}:` +
+                `${pad(now.getMinutes())}:` +
+                `${pad(now.getSeconds())}`;
+
+            const date =
+                `${now.getDate()}.` +
+                `${pad(now.getMonth() + 1)}.` +
+                `${now.getFullYear()}`;
+
+            elements.topClock.textContent =
+                time;
+
+            elements.topDate.textContent =
+                `${dayNames[now.getDay()] || "Hafta Sonu"} · ${date}`;
+        }
+
+        /* =========================================================
+           BUGÜNÜ BELİRLE
+           ========================================================= */
+
+        function getTodaySchoolDay() {
+            const day = new Date().getDay();
+
+            if (day >= 1 && day <= 5) {
+                return day;
+            }
+
+            return null;
+        }
+
+        /* =========================================================
+           GÜNLÜK VURGULAR
+           ========================================================= */
+
+        function updateTodayHeaders() {
+            const today =
+                getTodaySchoolDay();
+
+            document
+                .querySelectorAll(".day-head")
+                .forEach(head => {
+
+                    const day =
+                        Number(
+                            head.dataset.dayHead
+                        );
+
+                    head.classList.toggle(
+                        "today",
+                        day === today
+                    );
+                });
+
+            document
+                .querySelectorAll(".day-tab")
+                .forEach(tab => {
+
+                    const day =
+                        Number(tab.dataset.day);
+
+                    tab.classList.toggle(
+                        "today",
+                        day === today
+                    );
+                });
+        }
+
+        /* =========================================================
+           PROGRAM TABLOSU
+           ========================================================= */
+
+        function renderScheduleTable() {
+
+            elements.scheduleBody.innerHTML = "";
+
+            timeSlots.forEach(slot => {
+
+                const row =
+                    document.createElement("tr");
+
+                /* SAAT */
+                const timeCell =
+                    document.createElement("td");
+
+                timeCell.className =
+                    "time-cell";
+
+                timeCell.innerHTML = `
+                    <div class="period-number">
+                        ${slot.no}. DERS
+                    </div>
+
+                    <div class="period-time">
+                        ${slot.start}
+                    </div>
+
+                    <div
+                        style="
+                            margin-top:3px;
+                            text-align:center;
+                            color:#60718a;
+                            font-size:7px;
+                            font-weight:750;
+                        "
+                    >
+                        ${slot.end}
+                    </div>
+                `;
+
+                row.appendChild(timeCell);
+
+                /* GÜNLER */
+                [1, 2, 3, 4, 5].forEach(day => {
+
+                    const td =
+                        document.createElement("td");
+
+                    const lesson =
+                        schedule[day][slot.no - 1];
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className =
+                        "lesson-card";
+
+                    if (day === getTodaySchoolDay()) {
+                        card.classList.add(
+                            "today-column"
+                        );
+                    }
+
+                    const now =
+                        new Date();
+
+                    if (
+                        day === now.getDay()
+                    ) {
+
+                        const currentMinutes =
+                            getCurrentMinutes();
+
+                        const start =
+                            timeToMinutes(
+                                lesson.start
+                            );
+
+                        const end =
+                            timeToMinutes(
+                                lesson.end
+                            );
+
+                        if (
+                            currentMinutes >= start &&
+                            currentMinutes < end
+                        ) {
+                            card.classList.add(
+                                "current"
+                            );
+                        }
+
+                        if (
+                            currentMinutes >= end
+                        ) {
+                            card.classList.add(
+                                "past"
+                            );
+                        }
+                    }
+
+                    card.innerHTML = `
+                        <div class="lesson-top">
+
+                            <div class="lesson-index">
+                                ${lesson.no}. DERS
+                            </div>
+
+                            <div
+                                class="lesson-status"
+                                style="display:none;"
+                            >
+                                ŞU AN
+                            </div>
+
+                        </div>
+
+                        <div class="lesson-name">
+                            ${lesson.name}
+                        </div>
+
+                        <div class="lesson-code">
+                            ${lesson.code}
+                        </div>
+
+                        <div class="lesson-teacher">
+                            ${lesson.teacher}
+                        </div>
+                    `;
+
+                    if (
+                        card.classList.contains(
+                            "current"
+                        )
+                    ) {
+
+                        const status =
+                            card.querySelector(
+                                ".lesson-status"
+                            );
+
+                        status.style.display =
+                            "inline-block";
+                    }
+
+                    td.appendChild(card);
+                    row.appendChild(td);
+                });
+
+                elements.scheduleBody.appendChild(row);
+            });
+        }
+
+        /* =========================================================
+           CANLI DURUM
+           ========================================================= */
+
+        function updateLiveStatus() {
+
+            const now =
+                new Date();
+
+            const schoolDay =
+                getTodaySchoolDay();
+
+            const currentDay =
+                now.getDay();
+
+            if (!schoolDay) {
+
+                elements.currentStatus.innerHTML = `
+                    <span class="program-current-dot"></span>
+                    Hafta sonu
+                `;
+
+                elements.currentLessonName.textContent =
+                    "Bugün ders yok";
+
+                elements.currentLessonTime.textContent =
+                    "Hafta sonu";
+
+                elements.currentTeacher.textContent =
+                    "Dinlenme zamanı";
+
+                elements.currentRemaining.textContent =
+                    "--";
+
+                elements.todayLessonCount.textContent =
+                    "0";
+
+                elements.dayProgressText.textContent =
+                    "%0";
+
+                elements.dayProgress.style.width =
+                    "0%";
+
+                return;
+            }
+
+            const todayLessons =
+                schedule[schoolDay];
+
+            elements.todayLessonCount.textContent =
+                todayLessons.length;
+
+            const currentMinutes =
+                getCurrentMinutes();
+
+            const currentLesson =
+                todayLessons.find(lesson => {
+
+                    return (
+                        currentMinutes >=
+                        timeToMinutes(lesson.start) &&
+                        currentMinutes <
+                        timeToMinutes(lesson.end)
+                    );
+                });
+
+            if (currentDay !== schoolDay) {
+                return;
+            }
+
+            const firstStart =
+                timeToMinutes("08:30");
+
+            const lastEnd =
+                timeToMinutes("16:00");
+
+            let progress = 0;
+
+            if (currentMinutes <= firstStart) {
+                progress = 0;
+            } else if (currentMinutes >= lastEnd) {
+                progress = 100;
+            } else {
+                progress =
+                    ((currentMinutes - firstStart) /
+                    (lastEnd - firstStart)) * 100;
+            }
+
+            progress =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        progress
+                    )
+                );
+
+            elements.dayProgress.style.width =
+                `${progress}%`;
+
+            elements.dayProgressText.textContent =
+                `%${Math.round(progress)}`;
+
+            if (currentLesson) {
+
+                const remaining =
+                    timeToMinutes(
+                        currentLesson.end
+                    ) -
+                    currentMinutes;
+
+                elements.currentStatus.innerHTML = `
+                    <span class="program-current-dot"></span>
+                    ${currentLesson.no}. ders aktif
+                `;
+
+                elements.currentLessonName.textContent =
+                    currentLesson.name;
+
+                elements.currentLessonTime.textContent =
+                    `${currentLesson.start} – ${currentLesson.end}`;
+
+                elements.currentTeacher.textContent =
+                    currentLesson.teacher;
+
+                elements.currentRemaining.textContent =
+                    formatRemaining(
+                        remaining
+                    );
+
+                return;
+            }
+
+            const next =
+                todayLessons.find(lesson => {
+
+                    return (
+                        timeToMinutes(
+                            lesson.start
+                        ) > currentMinutes
+                    );
+                });
+
+            if (next) {
+
+                const untilNext =
+                    timeToMinutes(next.start) -
+                    currentMinutes;
+
+                elements.currentStatus.innerHTML = `
+                    <span class="program-current-dot"></span>
+                    Teneffüs · ${next.no}. ders sırada
+                `;
+
+                elements.currentLessonName.textContent =
+                    next.name;
+
+                elements.currentLessonTime.textContent =
+                    `${next.start} – ${next.end}`;
+
+                elements.currentTeacher.textContent =
+                    next.teacher;
+
+                elements.currentRemaining.textContent =
+                    `${formatRemaining(untilNext)} sonra`;
+
+                return;
+            }
+
+            elements.currentStatus.innerHTML = `
+                <span class="program-current-dot"></span>
+                Okul günü tamamlandı
+            `;
+
+            elements.currentLessonName.textContent =
+                "Dersler tamamlandı";
+
+            elements.currentLessonTime.textContent =
+                "08:30 – 16:00";
+
+            elements.currentTeacher.textContent =
+                "Bugünkü program sona erdi";
+
+            elements.currentRemaining.textContent =
+                "Yarın görüşürüz";
+        }
+
+        /* =========================================================
+           GÜN TABLARI
+           ========================================================= */
+
+        function selectDay(day) {
+
+            selectedDay =
+                Number(day);
+
+            weekView = false;
+
+            document
+                .querySelectorAll(".day-tab")
+                .forEach(tab => {
+
+                    tab.classList.toggle(
+                        "active",
+                        Number(tab.dataset.day) ===
+                        selectedDay
+                    );
+                });
+
+            /*
+             * Mobil ve dar ekranda seçilen günün
+             * sütununa otomatik kaydırma.
+             */
+            scrollToSelectedDay();
+        }
+
+        function selectToday() {
+
+            const today =
+                getTodaySchoolDay();
+
+            if (!today) {
+
+                showToast(
+                    "Bugün okul yok",
+                    "Bugün hafta sonu olduğu için ders programı bulunmuyor."
+                );
+
+                return;
+            }
+
+            selectedDay =
+                today;
+
+            weekView = false;
+
+            document
+                .querySelectorAll(".day-tab")
+                .forEach(tab => {
+
+                    tab.classList.toggle(
+                        "active",
+                        Number(tab.dataset.day) ===
+                        selectedDay
+                    );
+                });
+
+            scrollToSelectedDay();
+        }
+
+        function showAllWeek() {
+
+            weekView = true;
+            selectedDay = null;
+
+            document
+                .querySelectorAll(".day-tab")
+                .forEach(tab => {
+                    tab.classList.remove(
+                        "active"
+                    );
+                });
+
+            renderScheduleTable();
+
+            const today =
+                getTodaySchoolDay();
+
+            if (today) {
+
+                showToast(
+                    "Haftalık görünüm",
+                    `${dayNames[today]} programı da canlı olarak vurgulanıyor.`
+                );
+            }
+        }
+
+        function scrollToSelectedDay() {
+
+            const table =
+                document.getElementById(
+                    "scheduleTable"
+                );
+
+            if (!table || !selectedDay) {
+                return;
+            }
+
+            const columns =
+                table.querySelectorAll(
+                    "thead th"
+                );
+
+            if (
+                !columns[selectedDay] ||
+                window.innerWidth > 900
+            ) {
+                return;
+            }
+
+            columns[selectedDay].scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+                inline: "center"
+            });
+        }
+
+        document
+            .querySelectorAll(".day-tab")
+            .forEach(tab => {
+
+                tab.addEventListener(
+                    "click",
+                    () => {
+                        selectDay(
+                            tab.dataset.day
+                        );
+                    }
+                );
+            });
+
+        elements.todayButton.addEventListener(
+            "click",
+            selectToday
+        );
+
+        elements.allWeekButton.addEventListener(
+            "click",
+            showAllWeek
+        );
+
+        /* =========================================================
+           PDF / YAZDIR
+           ========================================================= */
+
+        function openPrintDialog() {
+
+            showToast(
+                "PDF hazırlama",
+                "Yazdırma ekranında hedef olarak “PDF olarak kaydet” seçeneğini kullanabilirsin."
+            );
+
+            window.setTimeout(() => {
+                window.print();
+            }, 250);
+        }
+
+        elements.pdfButton.addEventListener(
+            "click",
+            openPrintDialog
+        );
+
+        elements.printButton.addEventListener(
+            "click",
+            openPrintDialog
+        );
+
+        /* =========================================================
+           MOBİL MENÜ
+           ========================================================= */
+
+        function openSidebar() {
+
+            elements.sidebar.classList.add(
+                "open"
+            );
+
+            elements.sidebarOverlay.classList.add(
+                "show"
+            );
+
+            elements.mobileMenu.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+            document.body.classList.add(
+                "no-scroll"
+            );
+        }
+
+        function closeSidebar() {
+
+            elements.sidebar.classList.remove(
+                "open"
+            );
+
+            elements.sidebarOverlay.classList.remove(
+                "show"
+            );
+
+            elements.mobileMenu.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            document.body.classList.remove(
+                "no-scroll"
+            );
+        }
+
+        elements.mobileMenu.addEventListener(
+            "click",
+            () => {
+
+                const opened =
+                    elements.sidebar.classList.contains(
+                        "open"
+                    );
+
+                if (opened) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            }
+        );
+
+        elements.sidebarOverlay.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+        document
+            .querySelectorAll(".nav-link")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    closeSidebar
+                );
+            });
+
+        /* =========================================================
+           BAŞLAT
+           ========================================================= */
+
+        function initialize() {
+
+            updateClock();
+
+            updateTodayHeaders();
+
+            renderScheduleTable();
+
+            updateLiveStatus();
+
+            /*
+             * Her saniye canlı saat ve ders durumunu güncelle.
+             */
+            window.setInterval(() => {
+
+                updateClock();
+
+                renderScheduleTable();
+
+                updateLiveStatus();
+
+            }, 1000);
+        }
+
+        if (
+            document.readyState ===
+            "loading"
+        ) {
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                initialize
+            );
+
+        } else {
+
+            initialize();
+        }
+    </script>
+
+</body>
+</html>

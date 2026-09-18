@@ -1,0 +1,4167 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#030712"
+    >
+
+    <meta
+        name="description"
+        content="10/D Dijital Sınıf resmi duyurular ve bilgilendirme merkezi."
+    >
+
+    <title>Duyurular | 10/D Dijital Sınıf</title>
+
+    <style>
+
+        /* =========================================================
+           10/D DİJİTAL SINIF
+           DUYURULAR MERKEZİ
+           ========================================================= */
+
+        :root {
+            --bg: #030712;
+            --bg-2: #06101c;
+            --bg-3: #0a1626;
+
+            --panel: rgba(9, 18, 32, .88);
+            --panel-strong: rgba(11, 22, 39, .97);
+
+            --border: rgba(132, 169, 230, .12);
+            --border-soft: rgba(255, 255, 255, .055);
+            --border-hover: rgba(79, 140, 255, .27);
+
+            --text: #f4f7ff;
+            --text-soft: #b0bfd2;
+            --text-muted: #6d7f98;
+
+            --blue: #4f8cff;
+            --blue-light: #79b0ff;
+            --cyan: #57e9ff;
+
+            --green: #42e69d;
+            --yellow: #ffd15b;
+            --red: #ff718c;
+            --purple: #a181ff;
+
+            --sidebar-width: 272px;
+
+            --radius-xl: 30px;
+            --radius-lg: 23px;
+            --radius-md: 17px;
+            --radius-sm: 12px;
+
+            --shadow:
+                0 25px 80px rgba(0,0,0,.32),
+                inset 0 1px 0 rgba(255,255,255,.02);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 8% 3%,
+                    rgba(79,140,255,.12),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 93% 11%,
+                    rgba(87,233,255,.055),
+                    transparent 22%
+                ),
+                linear-gradient(
+                    145deg,
+                    #02050b 0%,
+                    #06101c 55%,
+                    #030812 100%
+                );
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+        }
+
+        ::selection {
+            color: #fff;
+            background: rgba(79,140,255,.32);
+        }
+
+        /* =========================================================
+           BACKGROUND
+           ========================================================= */
+
+        .background-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+
+            opacity: .18;
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,.022) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.022) 1px,
+                    transparent 1px
+                );
+
+            background-size: 58px 58px;
+        }
+
+        .ambient {
+            position: fixed;
+
+            width: 540px;
+            height: 540px;
+
+            border-radius: 50%;
+
+            filter: blur(105px);
+            pointer-events: none;
+
+            opacity: .07;
+            z-index: -9;
+
+            animation:
+                ambientFloat
+                12s
+                ease-in-out
+                infinite;
+        }
+
+        .ambient.one {
+            left: -240px;
+            top: -250px;
+            background: #397fff;
+        }
+
+        .ambient.two {
+            right: -280px;
+            top: 26%;
+            background: #3ce4ff;
+
+            animation-delay: -4s;
+        }
+
+        .ambient.three {
+            left: 28%;
+            bottom: -380px;
+            background: #744eff;
+
+            animation-delay: -8s;
+        }
+
+        @keyframes ambientFloat {
+            0%, 100% {
+                transform:
+                    translate3d(0,0,0)
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    translate3d(0,-18px,0)
+                    scale(1.04);
+            }
+        }
+
+        /* =========================================================
+           SIDEBAR
+           ========================================================= */
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+
+            width: var(--sidebar-width);
+            height: 100vh;
+
+            padding: 21px 14px;
+
+            display: flex;
+            flex-direction: column;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(6,14,25,.985),
+                    rgba(3,9,16,.975)
+                );
+
+            border-right:
+                1px solid
+                rgba(125,165,227,.11);
+
+            backdrop-filter: blur(26px);
+            -webkit-backdrop-filter: blur(26px);
+
+            z-index: 1300;
+
+            overflow-y: auto;
+
+            transition:
+                transform .24s
+                cubic-bezier(.2,.8,.2,1);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,.07);
+            border-radius: 99px;
+        }
+
+        /* =========================================================
+           BRAND
+           ========================================================= */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding:
+                5px
+                8px
+                22px;
+        }
+
+        .brand-logo {
+            position: relative;
+
+            width: 48px;
+            height: 48px;
+            flex: 0 0 48px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 16px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 22%,
+                    rgba(107,175,255,.22),
+                    transparent 60%
+                ),
+                linear-gradient(
+                    145deg,
+                    #0a1b30,
+                    #071426
+                );
+
+            border:
+                1px solid
+                rgba(105,165,255,.22);
+
+            box-shadow:
+                0 0 35px
+                rgba(56,128,255,.12),
+                inset 0 1px 0
+                rgba(255,255,255,.06);
+
+            overflow: hidden;
+        }
+
+        .brand-logo svg {
+            width: 31px;
+            height: 31px;
+        }
+
+        .brand-copy {
+            min-width: 0;
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: -.025em;
+        }
+
+        .brand-subtitle {
+            margin-top: 4px;
+
+            color: #66778f;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           NAV
+           ========================================================= */
+
+        .sidebar-section {
+            margin-top: 8px;
+        }
+
+        .sidebar-section-title {
+            padding:
+                0
+                11px
+                8px;
+
+            color: #536278;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .14em;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav-link {
+            position: relative;
+
+            min-height: 46px;
+
+            padding:
+                10px
+                11px;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            color: #98a8bc;
+
+            border:
+                1px solid
+                transparent;
+
+            border-radius: 14px;
+
+            font-size: 12px;
+            font-weight: 750;
+
+            transition:
+                color .18s,
+                background .18s,
+                border-color .18s,
+                transform .18s;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border-color:
+                rgba(255,255,255,.04);
+
+            transform:
+                translateX(2px);
+        }
+
+        .nav-link.active {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79,140,255,.18),
+                    rgba(87,233,255,.045)
+                );
+
+            border-color:
+                rgba(79,140,255,.20);
+        }
+
+        .nav-link.active::before {
+            content: "";
+
+            position: absolute;
+
+            left: -1px;
+            top: 10px;
+
+            width: 3px;
+            height: 26px;
+
+            border-radius:
+                0
+                6px
+                6px
+                0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--cyan),
+                    var(--blue)
+                );
+
+            box-shadow:
+                0 0 15px
+                rgba(87,233,255,.55);
+        }
+
+        .nav-icon {
+            width: 21px;
+            height: 21px;
+            flex: 0 0 21px;
+
+            display: grid;
+            place-items: center;
+        }
+
+        .nav-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* =========================================================
+           SIDEBAR FOOTER
+           ========================================================= */
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding:
+                16px
+                7px
+                3px;
+        }
+
+        .sidebar-status {
+            padding: 14px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79,140,255,.075),
+                    rgba(255,255,255,.022)
+                );
+
+            border:
+                1px solid
+                rgba(79,140,255,.12);
+        }
+
+        .sidebar-status-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 12px
+                rgba(66,230,157,.65);
+        }
+
+        .sidebar-status-title {
+            font-size: 11px;
+            font-weight: 850;
+        }
+
+        .sidebar-status-text {
+            margin-top: 7px;
+
+            color: #63758d;
+
+            font-size: 9px;
+            line-height: 1.55;
+        }
+
+        /* =========================================================
+           MAIN
+           ========================================================= */
+
+        .main {
+            width: calc(100% - var(--sidebar-width));
+
+            margin-left: var(--sidebar-width);
+
+            min-width: 0;
+        }
+
+        /* =========================================================
+           TOPBAR
+           ========================================================= */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            min-height: 77px;
+
+            padding:
+                14px
+                28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 18px;
+
+            background:
+                rgba(3,9,17,.70);
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.045);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mobile-menu {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.075);
+
+            border-radius: 13px;
+
+            cursor: pointer;
+        }
+
+        .mobile-menu svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .page-name {
+            font-size: 15px;
+            font-weight: 900;
+
+            letter-spacing: -.025em;
+        }
+
+        .page-subtitle {
+            margin-top: 4px;
+
+            color: #596c85;
+
+            font-size: 9px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-badge {
+            min-height: 37px;
+
+            padding:
+                0
+                11px;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            border-radius: 11px;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            white-space: nowrap;
+        }
+
+        .class-badge {
+            color: #c9dcff;
+
+            background:
+                rgba(79,140,255,.065);
+
+            border:
+                1px solid
+                rgba(79,140,255,.14);
+        }
+
+        .active-badge {
+            color: #b5f1d3;
+
+            background:
+                rgba(66,230,157,.045);
+
+            border:
+                1px solid
+                rgba(66,230,157,.10);
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 11px
+                rgba(66,230,157,.72);
+        }
+
+        .clock-box {
+            min-width: 105px;
+
+            text-align: right;
+        }
+
+        .clock {
+            font-size: 12px;
+            font-weight: 900;
+
+            letter-spacing: .05em;
+        }
+
+        .date {
+            margin-top: 3px;
+
+            color: #596c85;
+
+            font-size: 8px;
+        }
+
+        /* =========================================================
+           CONTENT
+           ========================================================= */
+
+        .content {
+            width: min(1530px,100%);
+
+            margin:
+                0
+                auto;
+
+            padding:
+                29px
+                28px
+                48px;
+        }
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            padding:
+                29px
+                30px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0,1.45fr)
+                minmax(280px,.75fr);
+
+            gap: 24px;
+
+            border-radius: var(--radius-xl);
+
+            background:
+                radial-gradient(
+                    circle at 76% 20%,
+                    rgba(79,140,255,.15),
+                    transparent 23%
+                ),
+                radial-gradient(
+                    circle at 94% 78%,
+                    rgba(87,233,255,.06),
+                    transparent 24%
+                ),
+                linear-gradient(
+                    135deg,
+                    rgba(13,26,45,.97),
+                    rgba(6,13,23,.94)
+                );
+
+            border:
+                1px solid
+                rgba(79,140,255,.20);
+
+            box-shadow: var(--shadow);
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: -150px;
+            bottom: -170px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(79,140,255,.08);
+
+            filter: blur(35px);
+
+            pointer-events: none;
+        }
+
+        .hero-main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            width: fit-content;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding:
+                7px
+                10px;
+
+            color: #a9d2ff;
+
+            background:
+                rgba(79,140,255,.065);
+
+            border:
+                1px solid
+                rgba(79,140,255,.14);
+
+            border-radius: 999px;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .11em;
+        }
+
+        .eyebrow-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 12px
+                rgba(87,233,255,.70);
+        }
+
+        .hero-title {
+            margin-top: 17px;
+
+            font-size:
+                clamp(
+                    34px,
+                    4.3vw,
+                    56px
+                );
+
+            line-height: .96;
+
+            letter-spacing: -.055em;
+
+            font-weight: 950;
+        }
+
+        .hero-title span {
+            display: block;
+
+            margin-top: 5px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #a4c9ff 48%,
+                    #60eaff
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            max-width: 780px;
+
+            margin-top: 16px;
+
+            color: #9aacc1;
+
+            font-size: 11px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            margin-top: 21px;
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .hero-button {
+            min-height: 41px;
+
+            padding:
+                0
+                14px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            border-radius: 11px;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition:
+                transform .18s,
+                background .18s,
+                border-color .18s;
+        }
+
+        .hero-button:hover {
+            transform:
+                translateY(-2px);
+        }
+
+        .hero-button.primary {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f8cff,
+                    #396edb
+                );
+
+            border:
+                1px solid
+                rgba(139,186,255,.22);
+
+            box-shadow:
+                0 12px 29px
+                rgba(49,105,224,.20);
+        }
+
+        .hero-button.secondary {
+            color: #c9d9ed;
+
+            background:
+                rgba(255,255,255,.032);
+
+            border:
+                1px solid
+                rgba(255,255,255,.075);
+        }
+
+        .hero-button svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* =========================================================
+           HERO INFO
+           ========================================================= */
+
+        .hero-info {
+            position: relative;
+            z-index: 1;
+
+            padding: 18px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.042),
+                    rgba(255,255,255,.016)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+        .hero-info-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .hero-info-label {
+            color: #7287a2;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .11em;
+        }
+
+        .hero-info-status {
+            padding:
+                5px
+                7px;
+
+            color: #aff0ce;
+
+            background:
+                rgba(66,230,157,.045);
+
+            border:
+                1px solid
+                rgba(66,230,157,.08);
+
+            border-radius: 7px;
+
+            font-size: 6px;
+            font-weight: 900;
+        }
+
+        .hero-stat-number {
+            margin-top: 13px;
+
+            font-size: 38px;
+            font-weight: 950;
+
+            letter-spacing: -.06em;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #fff,
+                    #79adff,
+                    #5eeaff
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-stat-description {
+            margin-top: 2px;
+
+            color: #637790;
+
+            font-size: 8px;
+        }
+
+        .hero-info-divider {
+            width: 100%;
+            height: 1px;
+
+            margin:
+                15px
+                0;
+
+            background:
+                rgba(255,255,255,.05);
+        }
+
+        .hero-stat-row {
+            display: flex;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            font-size: 8px;
+        }
+
+        .hero-stat-row + .hero-stat-row {
+            margin-top: 9px;
+        }
+
+        .hero-stat-row span {
+            color: #657990;
+        }
+
+        .hero-stat-row strong {
+            color: #dbe8f9;
+            font-weight: 900;
+            text-align: right;
+        }
+
+        /* =========================================================
+           SECTION
+           ========================================================= */
+
+        .section {
+            margin-top: 22px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 12px;
+
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 900;
+
+            letter-spacing: -.025em;
+        }
+
+        .section-description {
+            margin-top: 4px;
+
+            color: #62758e;
+
+            font-size: 8px;
+        }
+
+        .section-count {
+            color: #79aef3;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            white-space: nowrap;
+        }
+
+        /* =========================================================
+           TOOLBAR
+           ========================================================= */
+
+        .toolbar {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0,1fr)
+                180px
+                auto;
+
+            gap: 8px;
+
+            padding: 9px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(10,19,33,.70);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+        }
+
+        .search-wrap {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+
+            left: 12px;
+            top: 50%;
+
+            width: 16px;
+            height: 16px;
+
+            color: #647790;
+
+            transform:
+                translateY(-50%);
+        }
+
+        .search-input {
+            width: 100%;
+            height: 41px;
+
+            padding:
+                0
+                12px
+                0
+                38px;
+
+            color: #edf5ff;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            border-radius: 11px;
+
+            outline: none;
+
+            font-size: 9px;
+        }
+
+        .search-input::placeholder {
+            color: #63748a;
+        }
+
+        .search-input:focus {
+            border-color:
+                rgba(79,140,255,.28);
+
+            background:
+                rgba(255,255,255,.035);
+        }
+
+        .filter-select,
+        .refresh-button {
+            min-height: 41px;
+        }
+
+        .filter-select {
+            width: 100%;
+
+            padding:
+                0
+                10px;
+
+            color: #bacbe0;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            border-radius: 11px;
+
+            outline: none;
+
+            font-size: 8px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .filter-select option {
+            color: #111;
+            background: #fff;
+        }
+
+        .refresh-button {
+            padding:
+                0
+                13px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            color: #c2d4e9;
+
+            background:
+                rgba(255,255,255,.028);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            border-radius: 11px;
+
+            font-size: 8px;
+            font-weight: 850;
+
+            cursor: pointer;
+        }
+
+        .refresh-button:hover {
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.05);
+        }
+
+        .refresh-button svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        /* =========================================================
+           ACTIVE ANNOUNCEMENT
+           ========================================================= */
+
+        .announcement {
+            position: relative;
+            overflow: hidden;
+
+            border-radius: var(--radius-xl);
+
+            background:
+                radial-gradient(
+                    circle at 84% 11%,
+                    rgba(79,140,255,.13),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 10% 100%,
+                    rgba(87,233,255,.045),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(11,24,42,.97),
+                    rgba(5,12,22,.97)
+                );
+
+            border:
+                1px solid
+                rgba(79,140,255,.17);
+
+            box-shadow: var(--shadow);
+        }
+
+        .announcement::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--blue),
+                    var(--cyan),
+                    var(--purple)
+                );
+
+            box-shadow:
+                0 0 22px
+                rgba(84,231,255,.24);
+        }
+
+        .announcement-body {
+            position: relative;
+            z-index: 1;
+
+            padding: 22px;
+        }
+
+        .announcement-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 18px;
+        }
+
+        .announcement-source {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .source-icon {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            color: #87b7ff;
+
+            background:
+                rgba(79,140,255,.065);
+
+            border:
+                1px solid
+                rgba(79,140,255,.11);
+
+            border-radius: 11px;
+        }
+
+        .source-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .source-text-title {
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .source-text-detail {
+            margin-top: 3px;
+
+            color: #61758f;
+
+            font-size: 7px;
+        }
+
+        .announcement-labels {
+            display: flex;
+            align-items: center;
+
+            flex-wrap: wrap;
+            justify-content: flex-end;
+
+            gap: 6px;
+        }
+
+        .announcement-label {
+            padding:
+                6px
+                8px;
+
+            border-radius: 8px;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .07em;
+        }
+
+        .label-active {
+            color: #aaf0cc;
+
+            background:
+                rgba(66,230,157,.05);
+
+            border:
+                1px solid
+                rgba(66,230,157,.09);
+        }
+
+        .label-official {
+            color: #abd0ff;
+
+            background:
+                rgba(79,140,255,.055);
+
+            border:
+                1px solid
+                rgba(79,140,255,.10);
+        }
+
+        .announcement-title {
+            max-width: 930px;
+
+            margin-top: 19px;
+
+            font-size:
+                clamp(
+                    23px,
+                    3vw,
+                    35px
+                );
+
+            line-height: 1.04;
+
+            letter-spacing: -.045em;
+
+            font-weight: 950;
+        }
+
+        .announcement-lead {
+            max-width: 900px;
+
+            margin-top: 12px;
+
+            color: #a4b4c9;
+
+            font-size: 10px;
+            line-height: 1.75;
+        }
+
+        /* =========================================================
+           NOTICE DETAILS
+           ========================================================= */
+
+        .notice-grid {
+            margin-top: 19px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,minmax(0,1fr));
+
+            gap: 8px;
+        }
+
+        .notice-stat {
+            padding:
+                13px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.05);
+        }
+
+        .notice-stat-label {
+            color: #637690;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .notice-stat-value {
+            margin-top: 6px;
+
+            color: #e1ecfb;
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        /* =========================================================
+           DETAIL COPY
+           ========================================================= */
+
+        .announcement-content {
+            margin-top: 18px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.055);
+        }
+
+        .announcement-section-title {
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .announcement-copy {
+            margin-top: 9px;
+
+            color: #a4b4c9;
+
+            font-size: 9px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           EXAM DATE CARDS
+           ========================================================= */
+
+        .exam-cards {
+            margin-top: 14px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,minmax(0,1fr));
+
+            gap: 9px;
+        }
+
+        .exam-card {
+            position: relative;
+            overflow: hidden;
+
+            padding:
+                15px;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79,140,255,.055),
+                    rgba(255,255,255,.015)
+                );
+
+            border:
+                1px solid
+                rgba(79,140,255,.10);
+        }
+
+        .exam-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            right: -45px;
+            top: -55px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(79,140,255,.06);
+
+            filter: blur(12px);
+        }
+
+        .exam-card-top {
+            position: relative;
+            z-index: 1;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 8px;
+        }
+
+        .exam-subject {
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .exam-grade {
+            padding:
+                5px
+                7px;
+
+            color: #91b8ef;
+
+            background:
+                rgba(79,140,255,.05);
+
+            border:
+                1px solid
+                rgba(79,140,255,.08);
+
+            border-radius: 7px;
+
+            font-size: 6px;
+            font-weight: 900;
+        }
+
+        .exam-date {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 11px;
+
+            font-size: 20px;
+            font-weight: 950;
+
+            letter-spacing: -.04em;
+        }
+
+        .exam-day {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 3px;
+
+            color: #6e829c;
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .exam-type {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 10px;
+
+            color: #9db3ce;
+
+            font-size: 7px;
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           IMPORTANT NOTE
+           ========================================================= */
+
+        .correction-box {
+            margin-top: 13px;
+
+            padding:
+                12px
+                13px;
+
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+
+            color: #b9c9dd;
+
+            background:
+                rgba(255,209,91,.035);
+
+            border:
+                1px solid
+                rgba(255,209,91,.09);
+
+            border-radius: 13px;
+
+            font-size: 8px;
+            line-height: 1.7;
+        }
+
+        .correction-icon {
+            width: 28px;
+            height: 28px;
+            flex: 0 0 28px;
+
+            display: grid;
+            place-items: center;
+
+            color: #ffd871;
+
+            background:
+                rgba(255,209,91,.05);
+
+            border:
+                1px solid
+                rgba(255,209,91,.08);
+
+            border-radius: 8px;
+        }
+
+        .correction-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* =========================================================
+           SOURCE BUTTONS
+           ========================================================= */
+
+        .source-actions {
+            margin-top: 18px;
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .source-button {
+            min-height: 37px;
+
+            padding:
+                0
+                11px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            color: #c6daf2;
+
+            background:
+                rgba(255,255,255,.028);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            border-radius: 10px;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            transition:
+                background .18s,
+                border-color .18s,
+                transform .18s;
+        }
+
+        .source-button:hover {
+            transform:
+                translateY(-1px);
+
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.05);
+
+            border-color:
+                rgba(255,255,255,.11);
+        }
+
+        .source-button.primary {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79,140,255,.88),
+                    rgba(57,108,220,.92)
+                );
+
+            border-color:
+                rgba(132,180,255,.20);
+        }
+
+        .source-button svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        /* =========================================================
+           FOOTER INFO
+           ========================================================= */
+
+        .notice-footer {
+            padding:
+                13px
+                22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 12px;
+
+            background:
+                rgba(0,0,0,.14);
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.045);
+
+            color: #60738d;
+
+            font-size: 7px;
+        }
+
+        .notice-footer strong {
+            color: #91a6c0;
+        }
+
+        /* =========================================================
+           EMPTY STATE
+           ========================================================= */
+
+        .empty-search {
+            display: none;
+
+            min-height: 250px;
+
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            padding: 25px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,.015);
+
+            border:
+                1px dashed
+                rgba(255,255,255,.085);
+        }
+
+        .empty-search.show {
+            display: flex;
+        }
+
+        .empty-icon {
+            width: 47px;
+            height: 47px;
+
+            display: grid;
+            place-items: center;
+
+            color: #82b4ff;
+
+            background:
+                rgba(79,140,255,.065);
+
+            border:
+                1px solid
+                rgba(79,140,255,.10);
+
+            border-radius: 14px;
+        }
+
+        .empty-icon svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        .empty-title {
+            margin-top: 11px;
+
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .empty-description {
+            max-width: 360px;
+
+            margin-top: 5px;
+
+            color: #647790;
+
+            font-size: 8px;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           OTHER INFO
+           ========================================================= */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,minmax(0,1fr));
+
+            gap: 9px;
+        }
+
+        .info-card {
+            padding:
+                15px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.034),
+                    rgba(255,255,255,.013)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+        .info-card-icon {
+            width: 33px;
+            height: 33px;
+
+            display: grid;
+            place-items: center;
+
+            color: #83b5ff;
+
+            background:
+                rgba(79,140,255,.06);
+
+            border:
+                1px solid
+                rgba(79,140,255,.09);
+
+            border-radius: 10px;
+        }
+
+        .info-card-icon svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .info-card-title {
+            margin-top: 10px;
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .info-card-text {
+            margin-top: 4px;
+
+            color: #667a94;
+
+            font-size: 8px;
+            line-height: 1.55;
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        .site-footer {
+            margin-top: 26px;
+
+            padding:
+                19px
+                3px
+                6px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.05);
+
+            color: #5e7088;
+
+            font-size: 8px;
+        }
+
+        .footer-brand {
+            color: #93a7c0;
+            font-weight: 900;
+        }
+
+        .footer-mail {
+            color: #7086a3;
+        }
+
+        /* =========================================================
+           MOBILE SIDEBAR OVERLAY
+           ========================================================= */
+
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+
+            z-index: 1200;
+
+            display: none;
+
+            background:
+                rgba(0,0,0,.52);
+
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+
+        /* =========================================================
+           REVEAL
+           ========================================================= */
+
+        .reveal {
+            opacity: 0;
+
+            transform:
+                translateY(14px);
+
+            animation:
+                revealIn
+                .60s
+                cubic-bezier(.2,.8,.2,1)
+                forwards;
+        }
+
+        .delay-1 {
+            animation-delay: .08s;
+        }
+
+        .delay-2 {
+            animation-delay: .16s;
+        }
+
+        @keyframes revealIn {
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1180px) {
+
+            .hero {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .info-grid {
+                grid-template-columns:
+                    repeat(3,minmax(0,1fr));
+            }
+        }
+
+        @media (max-width: 950px) {
+
+            .sidebar {
+                transform:
+                    translateX(-105%);
+
+                box-shadow:
+                    30px 0 80px
+                    rgba(0,0,0,.43);
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .topbar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .toolbar {
+                grid-template-columns:
+                    1fr 160px;
+            }
+
+            .refresh-button {
+                grid-column:
+                    1 / -1;
+            }
+        }
+
+        @media (max-width: 720px) {
+
+            .content {
+                padding:
+                    17px
+                    13px
+                    35px;
+            }
+
+            .topbar {
+                min-height: 68px;
+
+                padding:
+                    10px
+                    13px;
+            }
+
+            .clock-box {
+                display: none;
+            }
+
+            .hero {
+                padding:
+                    22px
+                    18px;
+
+                border-radius: 23px;
+            }
+
+            .hero-title {
+                font-size: 37px;
+            }
+
+            .toolbar {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .refresh-button {
+                grid-column: auto;
+                width: 100%;
+            }
+
+            .announcement-head {
+                flex-direction: column;
+            }
+
+            .announcement-labels {
+                justify-content: flex-start;
+            }
+
+            .notice-grid,
+            .exam-cards,
+            .info-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .notice-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .site-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .class-badge {
+                display: none;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-button {
+                width: 100%;
+            }
+
+            .announcement-body {
+                padding:
+                    18px;
+            }
+
+            .announcement-title {
+                font-size: 24px;
+            }
+
+            .source-actions {
+                flex-direction: column;
+            }
+
+            .source-button {
+                width: 100%;
+            }
+
+            .exam-cards {
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+
+                scroll-behavior:
+                    auto !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="background-grid"></div>
+
+    <div class="ambient one"></div>
+    <div class="ambient two"></div>
+    <div class="ambient three"></div>
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+    <!-- =========================================================
+         SIDEBAR
+         ========================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <div class="brand-logo">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                >
+
+                    <defs>
+
+                        <linearGradient
+                            id="brandGradient"
+                            x1="10"
+                            y1="8"
+                            x2="54"
+                            y2="57"
+                        >
+                            <stop
+                                stop-color="#FFFFFF"
+                            />
+
+                            <stop
+                                offset=".52"
+                                stop-color="#70B0FF"
+                            />
+
+                            <stop
+                                offset="1"
+                                stop-color="#54EAFF"
+                            />
+                        </linearGradient>
+
+                    </defs>
+
+                    <circle
+                        cx="32"
+                        cy="32"
+                        r="23"
+                        stroke="url(#brandGradient)"
+                        stroke-width="1.5"
+                        opacity=".42"
+                    />
+
+                    <path
+                        d="M18 30C21 20.5 26.4 16 32 16C37.6 16 43 20.5 46 30"
+                        stroke="url(#brandGradient)"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                    />
+
+                    <rect
+                        x="17"
+                        y="27"
+                        width="30"
+                        height="20"
+                        rx="8"
+                        fill="#0A1B30"
+                        stroke="url(#brandGradient)"
+                        stroke-width="2"
+                    />
+
+                    <circle
+                        cx="27"
+                        cy="36"
+                        r="3"
+                        fill="#6FEAFF"
+                    />
+
+                    <circle
+                        cx="37"
+                        cy="36"
+                        r="3"
+                        fill="#72A8FF"
+                    />
+
+                    <path
+                        d="M27 42H37"
+                        stroke="#B9EFFF"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d="M32 9V14"
+                        stroke="#70C5FF"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                    <circle
+                        cx="32"
+                        cy="7"
+                        r="2"
+                        fill="#5EEAFF"
+                    />
+
+                </svg>
+
+            </div>
+
+            <div class="brand-copy">
+
+                <div class="brand-title">
+                    10/D Dijital Sınıf
+                </div>
+
+                <div class="brand-subtitle">
+                    ZYNX Education System
+                </div>
+
+            </div>
+
+        </a>
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-section-title">
+                Genel
+            </div>
+
+            <nav class="nav">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+                    <span class="nav-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <path
+                                d="M4 10.5L12 4L20 10.5V20H4V10.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linejoin="round"
+                            />
+
+                            <path
+                                d="M9 20V14H15V20"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+                        </svg>
+                    </span>
+
+                    Ana Sayfa
+                </a>
+
+                <a
+                    href="program.html"
+                    class="nav-link"
+                >
+                    <span class="nav-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <rect
+                                x="4"
+                                y="5"
+                                width="16"
+                                height="15"
+                                rx="2"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <path
+                                d="M8 3V7M16 3V7M4 10H20"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </span>
+
+                    Ders Programı
+                </a>
+
+                <a
+                    href="odevler.html"
+                    class="nav-link"
+                >
+                    <span class="nav-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <path
+                                d="M6 4.5H18C19.1 4.5 20 5.4 20 6.5V19.5H4V6.5C4 5.4 4.9 4.5 6 4.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M8 9H16M8 12.5H16M8 16H13"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </span>
+
+                    Ödevler
+                </a>
+
+                <a
+                    href="sinavlar.html"
+                    class="nav-link"
+                >
+                    <span class="nav-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <path
+                                d="M7 3.5H17C18.1 3.5 19 4.4 19 5.5V20.5H5V5.5C5 4.4 5.9 3.5 7 3.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <path
+                                d="M8 8H16M8 12H16M8 16H12"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </span>
+
+                    Sınavlar
+                </a>
+
+                <a
+                    href="takvim.html"
+                    class="nav-link"
+                >
+                    <span class="nav-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <rect
+                                x="4"
+                                y="5"
+                                width="16"
+                                height="15"
+                                rx="2"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            />
+
+                            <path
+                                d="M8 3V7M16 3V7M4 10H20"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </span>
+
+                    Takvim
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-section-title">
+                Eğitim
+            </div>
+
+            <nav class="nav">
+
+                <a
+                    href="dersler.html"
+                    class="nav-link"
+                >
+                    <span class="nav-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <path
+                                d="M4 6.5C4 5.4 4.9 4.5 6 4.5H11V19.5H6C4.9 19.5 4 18.6 4 17.5V6.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M20 6.5C20 5.4 19.1 4.5 18 4.5H13V19.5H18C19.1 19.5 20 18.6 20 17.5V6.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+                        </svg>
+                    </span>
+
+                    Dersler
+                </a>
+
+                <a
+                    href="zynx.html"
+                    class="nav-link"
+                >
+                    <span class="nav-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <rect
+                                x="6.5"
+                                y="9"
+                                width="11"
+                                height="8"
+                                rx="3"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                            />
+
+                            <circle
+                                cx="10"
+                                cy="12.8"
+                                r="1"
+                                fill="currentColor"
+                            />
+
+                            <circle
+                                cx="14"
+                                cy="12.8"
+                                r="1"
+                                fill="currentColor"
+                            />
+
+                            <path
+                                d="M10 15H14"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </span>
+
+                    ZYNX AI
+                </a>
+
+                <a
+                    href="duyurular.html"
+                    class="nav-link active"
+                >
+                    <span class="nav-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <path
+                                d="M5 12V8.5C5 7.7 5.7 7 6.5 7H17L20 4V20L17 17H6.5C5.7 17 5 16.3 5 15.5V12Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </span>
+
+                    Duyurular
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-section-title">
+                Sistem
+            </div>
+
+            <nav class="nav">
+
+                <a
+                    href="hakkimizda.html"
+                    class="nav-link"
+                >
+                    <span class="nav-icon">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="8.5"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M12 10V16"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+
+                            <circle
+                                cx="12"
+                                cy="7.5"
+                                r="1"
+                                fill="currentColor"
+                            />
+                        </svg>
+                    </span>
+
+                    Hakkımızda
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <div class="sidebar-status-head">
+
+                    <span class="status-dot"></span>
+
+                    <span class="sidebar-status-title">
+                        Resmî duyuru merkezi
+                    </span>
+
+                </div>
+
+                <div class="sidebar-status-text">
+                    MEB ve sınıf bilgilendirmeleri
+                    bu bölüm üzerinden düzenli olarak
+                    takip edilebilir.
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- =========================================================
+         MAIN
+         ========================================================== -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    type="button"
+                    aria-label="Menüyü aç"
+                    aria-expanded="false"
+                >
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                    >
+                        <path
+                            d="M4 7H20M4 12H20M4 17H20"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </button>
+
+                <div>
+
+                    <div class="page-name">
+                        Duyurular
+                    </div>
+
+                    <div class="page-subtitle">
+                        10/D · Resmî Bilgilendirme Merkezi
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="top-badge class-badge">
+                    10 / D
+                </div>
+
+                <div class="top-badge active-badge">
+                    <span class="live-dot"></span>
+                    AKTİF
+                </div>
+
+                <div class="clock-box">
+
+                    <div
+                        class="clock"
+                        id="clock"
+                    >
+                        --:--:--
+                    </div>
+
+                    <div
+                        class="date"
+                        id="date"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <div class="content">
+
+            <!-- =================================================
+                 HERO
+                 ================================================== -->
+
+            <section class="hero reveal">
+
+                <div class="hero-main">
+
+                    <div class="eyebrow">
+
+                        <span class="eyebrow-dot"></span>
+
+                        RESMÎ DUYURU MERKEZİ
+
+                    </div>
+
+                    <h1 class="hero-title">
+                        Önemli bilgiler.
+                        <span>Tek merkezde.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        10/D öğrencileri için yayımlanan önemli
+                        eğitim, sınav ve sistem duyurularını
+                        tek bir merkezden takip et. Bu sayfadaki
+                        MEB kaynaklı bilgiler, ilgili kurumların
+                        resmî duyurularındaki güncel bilgilere
+                        göre düzenlenmiştir.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <button
+                            class="hero-button primary"
+                            id="refreshButton"
+                            type="button"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M20 12C20 16.42 16.42 20 12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C14.76 4 17.2 5.39 18.63 7.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                />
+
+                                <path
+                                    d="M18 4V8H14"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+
+                            Duyuruları Yenile
+
+                        </button>
+
+                        <a
+                            href="https://www.meb.gov.tr/ulke-geneli-ortak-yazili-sinav-takvimi-belli-oldu/haber/41874/tr"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hero-button secondary"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M14 4H20V10"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+
+                                <path
+                                    d="M20 4L11 13"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                />
+
+                                <path
+                                    d="M18 13V19C18 19.55 17.55 20 17 20H5C4.45 20 4 19.55 4 19V7C4 6.45 4.45 6 5 6H11"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                />
+                            </svg>
+
+                            MEB Kaynağını Aç
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="hero-info">
+
+                    <div class="hero-info-top">
+
+                        <div class="hero-info-label">
+                            Aktif Duyuru
+                        </div>
+
+                        <div class="hero-info-status">
+                            DOĞRULANMIŞ KAYNAK
+                        </div>
+
+                    </div>
+
+                    <div class="hero-stat-number">
+                        01
+                    </div>
+
+                    <div class="hero-stat-description">
+                        aktif resmî duyuru
+                    </div>
+
+                    <div class="hero-info-divider"></div>
+
+                    <div class="hero-stat-row">
+
+                        <span>
+                            Kaynak
+                        </span>
+
+                        <strong>
+                            MEB
+                        </strong>
+
+                    </div>
+
+                    <div class="hero-stat-row">
+
+                        <span>
+                            Alan
+                        </span>
+
+                        <strong>
+                            Ortak Yazılılar
+                        </strong>
+
+                    </div>
+
+                    <div class="hero-stat-row">
+
+                        <span>
+                            Eğitim yılı
+                        </span>
+
+                        <strong>
+                            2026-2027
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 TOOLBAR
+                 ================================================== -->
+
+            <section class="section reveal delay-1">
+
+                <div class="toolbar">
+
+                    <div class="search-wrap">
+
+                        <svg
+                            class="search-icon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="6.5"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M16 16L20 20"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+
+                        <input
+                            id="searchInput"
+                            class="search-input"
+                            type="search"
+                            autocomplete="off"
+                            placeholder="Duyuru ara..."
+                        >
+
+                    </div>
+
+                    <select
+                        id="categoryFilter"
+                        class="filter-select"
+                    >
+
+                        <option value="all">
+                            Tüm Kategoriler
+                        </option>
+
+                        <option value="exam">
+                            Sınav
+                        </option>
+
+                        <option value="academic">
+                            Akademik
+                        </option>
+
+                        <option value="official">
+                            Resmî
+                        </option>
+
+                    </select>
+
+                    <button
+                        class="refresh-button"
+                        id="clearButton"
+                        type="button"
+                    >
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <path
+                                d="M6 6L18 18M18 6L6 18"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+
+                        Temizle
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 ACTIVE ANNOUNCEMENT
+                 ================================================== -->
+
+            <section
+                class="section reveal delay-2"
+                id="announcementArea"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <div class="section-title">
+                            Aktif Duyuru
+                        </div>
+
+                        <div class="section-description">
+                            10/D için önemli resmî bilgilendirme
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="section-count"
+                        id="resultCount"
+                    >
+                        1 duyuru
+                    </div>
+
+                </div>
+
+                <article
+                    class="announcement"
+                    id="announcementCard"
+                    data-category="exam official academic"
+                    data-search="
+                        MEB Milli Eğitim Bakanlığı
+                        2026 2027 eğitim öğretim yılı
+                        1 dönem 1 ortak yazılı
+                        Türk Dili ve Edebiyatı
+                        Matematik
+                        açık uçlu kısa cevaplı
+                        konu soru dağılım
+                        sınav takvimi
+                    "
+                >
+
+                    <div class="announcement-body">
+
+                        <div class="announcement-head">
+
+                            <div class="announcement-source">
+
+                                <div class="source-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M12 3L20 7.5V16.5L12 21L4 16.5V7.5L12 3Z"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linejoin="round"
+                                        />
+
+                                        <path
+                                            d="M8 10L12 12.5L16 10"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linejoin="round"
+                                        />
+
+                                        <path
+                                            d="M12 12.5V18"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linecap="round"
+                                        />
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="source-text-title">
+                                        Millî Eğitim Bakanlığı
+                                    </div>
+
+                                    <div class="source-text-detail">
+                                        Ölçme, Değerlendirme ve Sınav Hizmetleri
+                                        Genel Müdürlüğü
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="announcement-labels">
+
+                                <div class="announcement-label label-active">
+                                    Aktif
+                                </div>
+
+                                <div class="announcement-label label-official">
+                                    Resmî kaynak
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <h2 class="announcement-title">
+                            2026-2027 Eğitim Öğretim Yılı
+                            Ülke Geneli Ortak Yazılı Sınav Takvimi
+                        </h2>
+
+                        <p class="announcement-lead">
+                            Millî Eğitim Bakanlığı, 2026-2027 eğitim
+                            öğretim yılında uygulanacak ülke geneli
+                            ortak yazılı sınavların hangi sınıf ve
+                            derslerde yapılacağını ve sınav dönemlerini
+                            resmî olarak açıkladı.
+                        </p>
+
+                        <div class="notice-grid">
+
+                            <div class="notice-stat">
+
+                                <div class="notice-stat-label">
+                                    Eğitim yılı
+                                </div>
+
+                                <div class="notice-stat-value">
+                                    2026-2027
+                                </div>
+
+                            </div>
+
+                            <div class="notice-stat">
+
+                                <div class="notice-stat-label">
+                                    Toplam ortak sınav
+                                </div>
+
+                                <div class="notice-stat-value">
+                                    8 sınav
+                                </div>
+
+                            </div>
+
+                            <div class="notice-stat">
+
+                                <div class="notice-stat-label">
+                                    Soru türü
+                                </div>
+
+                                <div class="notice-stat-value">
+                                    Açık uçlu
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="announcement-content">
+
+                            <div class="announcement-section-title">
+                                10. sınıf öğrencileri için önemli tarihler
+                            </div>
+
+                            <p class="announcement-copy">
+                                MEB'in ülke geneli ortak yazılı takvimine
+                                göre 10. sınıf öğrencileri açısından
+                                2026-2027 eğitim öğretim yılının ilk
+                                döneminde ülke geneli ortak sınav
+                                olarak Türk Dili ve Edebiyatı; ikinci
+                                dönemde ise Matematik dersi yer almaktadır.
+                            </p>
+
+                            <div class="exam-cards">
+
+                                <!-- TDE -->
+
+                                <div class="exam-card">
+
+                                    <div class="exam-card-top">
+
+                                        <div class="exam-subject">
+                                            Türk Dili ve Edebiyatı
+                                        </div>
+
+                                        <div class="exam-grade">
+                                            10. SINIF
+                                        </div>
+
+                                    </div>
+
+                                    <div class="exam-date">
+                                        12 Kasım 2026
+                                    </div>
+
+                                    <div class="exam-day">
+                                        Perşembe
+                                    </div>
+
+                                    <div class="exam-type">
+                                        1. Dönem · 1. Ülke Geneli Ortak Yazılı
+                                    </div>
+
+                                </div>
+
+                                <!-- MATH -->
+
+                                <div class="exam-card">
+
+                                    <div class="exam-card-top">
+
+                                        <div class="exam-subject">
+                                            Matematik
+                                        </div>
+
+                                        <div class="exam-grade">
+                                            10. SINIF
+                                        </div>
+
+                                    </div>
+
+                                    <div class="exam-date">
+                                        6 Ocak 2027
+                                    </div>
+
+                                    <div class="exam-day">
+                                        Çarşamba
+                                    </div>
+
+                                    <div class="exam-type">
+                                        1. Dönem · 2. Ülke Geneli Ortak Yazılı
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="announcement-section-title"
+                                 style="margin-top:19px;">
+
+                                Sınav uygulama bilgileri
+
+                            </div>
+
+                            <p class="announcement-copy">
+                                MEB, ülke geneli ortak yazılı sınavlarda
+                                öğrencilerin cevaplarını kendilerinin
+                                oluşturacağı açık uçlu soruların
+                                kullanılacağını bildirdi. Ayrıca ölçme
+                                ve değerlendirmede uygulama birliğini
+                                güçlendirmek amacıyla konu-soru dağılım
+                                tabloları yayımlandı.
+                            </p>
+
+                            <div class="correction-box">
+
+                                <div class="correction-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+
+                                        <path
+                                            d="M12 3L21 19H3L12 3Z"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linejoin="round"
+                                        />
+
+                                        <path
+                                            d="M12 9V13"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linecap="round"
+                                        />
+
+                                        <circle
+                                            cx="12"
+                                            cy="16"
+                                            r="1"
+                                            fill="currentColor"
+                                        />
+
+                                    </svg>
+
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Önemli takvim düzeltmesi:
+                                    </strong>
+                                    28 Ekim 2026 ve 29 Ekim 2026
+                                    tarihleri MEB'in güncel ülke geneli
+                                    ortak yazılı takviminde 10. sınıf
+                                    Türk Dili ve Edebiyatı ve Matematik
+                                    sınavları olarak yer almıyor.
+                                    Güncel MEB takvimine göre yukarıdaki
+                                    tarihler esas alınmalıdır.
+                                </div>
+
+                            </div>
+
+                            <div class="announcement-section-title"
+                                 style="margin-top:19px;">
+
+                                Diğer dersler
+
+                            </div>
+
+                            <p class="announcement-copy">
+                                Türk Dili ve Edebiyatı ve Matematik dışındaki
+                                derslerin okul bünyesindeki yazılıları,
+                                okulun ve ilgili ders öğretmenlerinin
+                                kendi sınav takvimine göre yürütülebilir.
+                                Bu nedenle okul içi sınav tarihleri ile
+                                ülke geneli ortak yazılı tarihleri birbirinden
+                                ayrı değerlendirilmelidir.
+                            </p>
+
+                            <div class="announcement-section-title"
+                                 style="margin-top:19px;">
+
+                                Konu-soru dağılım tabloları
+
+                            </div>
+
+                            <p class="announcement-copy">
+                                MEB Ölçme, Değerlendirme ve Sınav Hizmetleri
+                                Genel Müdürlüğü tarafından 2026-2027
+                                eğitim öğretim yılı 1. dönem konu-soru
+                                dağılım tabloları yayımlanmıştır.
+                                Ortaöğretim kapsamında Türk Dili ve
+                                Edebiyatı, Matematik, Fizik, Kimya,
+                                Biyoloji, Tarih, Coğrafya, Felsefe,
+                                Din Kültürü ve Ahlak Bilgisi ve İngilizce
+                                gibi dersler için tablolar erişime açılmıştır.
+                            </p>
+
+                        </div>
+
+                        <div class="source-actions">
+
+                            <a
+                                class="source-button primary"
+                                href="https://www.meb.gov.tr/ulke-geneli-ortak-yazili-sinav-takvimi-belli-oldu/haber/41874/tr"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M14 4H20V10"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+
+                                    <path
+                                        d="M20 4L11 13"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                        stroke-linecap="round"
+                                    />
+
+                                    <path
+                                        d="M18 13V19C18 19.55 17.55 20 17 20H5C4.45 20 4 19.55 4 19V7C4 6.45 4.45 6 5 6H11"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+
+                                MEB Resmî Duyurusu
+
+                            </a>
+
+                            <a
+                                class="source-button"
+                                href="https://odsgm.meb.gov.tr/www/1donem-konu-soru-dagilim-tablolari-2026-2027/icerik/1724"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <rect
+                                        x="5"
+                                        y="3.5"
+                                        width="14"
+                                        height="17"
+                                        rx="2"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                    />
+
+                                    <path
+                                        d="M8 8H16M8 12H16M8 16H13"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+
+                                Konu-Soru Tabloları
+
+                            </a>
+
+                            <a
+                                class="source-button"
+                                href="https://corum.meb.gov.tr/www/2026-2027-egitim-ogretim-yili-ulke-geneli-ortak-yazili-sinav-takvimi-aciklandi/icerik/4161/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M12 21C16.42 21 20 17.42 20 13C20 8.58 16.42 5 12 5C7.58 5 4 8.58 4 13C4 17.42 7.58 21 12 21Z"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                    />
+
+                                    <path
+                                        d="M12 8V13L15 15"
+                                        stroke="currentColor"
+                                        stroke-width="1.7"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+
+                                Çorum MEM Takvimi
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="notice-footer">
+
+                        <div>
+                            Kaynak:
+                            <strong>
+                                Millî Eğitim Bakanlığı
+                            </strong>
+                        </div>
+
+                        <div>
+                            Son kontrol:
+                            <strong>
+                                18 Eylül 2026
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <!-- SEARCH EMPTY -->
+
+                <div
+                    class="empty-search"
+                    id="emptySearch"
+                >
+
+                    <div class="empty-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="6.5"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M16 16L20 20"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+
+                    </div>
+
+                    <div class="empty-title">
+                        Duyuru bulunamadı
+                    </div>
+
+                    <div class="empty-description">
+                        Arama veya kategori seçiminle
+                        eşleşen bir duyuru bulunamadı.
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 INFORMATION
+                 ================================================== -->
+
+            <section class="section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <div class="section-title">
+                            Duyuru Merkezi Hakkında
+                        </div>
+
+                        <div class="section-description">
+                            Bilgilerin nasıl takip edileceği
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="info-grid">
+
+                    <article class="info-card">
+
+                        <div class="info-card-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <path
+                                    d="M12 3L20 7.5V16.5L12 21L4 16.5V7.5L12 3Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linejoin="round"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div class="info-card-title">
+                            Resmî kaynak
+                        </div>
+
+                        <div class="info-card-text">
+                            MEB tarafından yayımlanan bilgiler
+                            mümkün olduğunca doğrudan resmî
+                            kaynak bağlantısıyla gösterilir.
+                        </div>
+
+                    </article>
+
+                    <article class="info-card">
+
+                        <div class="info-card-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="8.5"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                />
+
+                                <path
+                                    d="M12 7V12L15 14"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div class="info-card-title">
+                            Tarih kontrolü
+                        </div>
+
+                        <div class="info-card-text">
+                            Ortak sınav tarihleri okul içi yazılı
+                            tarihleriyle karıştırılmadan ayrı
+                            şekilde takip edilmelidir.
+                        </div>
+
+                    </article>
+
+                    <article class="info-card">
+
+                        <div class="info-card-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <path
+                                    d="M5 12L9.5 16.5L19 7"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div class="info-card-title">
+                            Konu-soru dağılımı
+                        </div>
+
+                        <div class="info-card-text">
+                            MEB'in yayımladığı konu-soru dağılım
+                            tablolarına doğrudan resmî bağlantı
+                            üzerinden ulaşılabilir.
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================== -->
+
+            <footer class="site-footer">
+
+                <div>
+
+                    <span class="footer-brand">
+                        10/D Dijital Sınıf
+                    </span>
+
+                    <span>
+                        · ZYNX Education System
+                    </span>
+
+                </div>
+
+                <div class="footer-mail">
+                    Ttlife Studios · trlifeinfo@gmail.com
+                </div>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+    <!-- =========================================================
+         SCRIPT
+         ========================================================== -->
+
+    <script>
+
+        "use strict";
+
+        /* =========================================================
+           CLOCK
+           ========================================================= */
+
+        const dayNames = [
+            "Pazar",
+            "Pazartesi",
+            "Salı",
+            "Çarşamba",
+            "Perşembe",
+            "Cuma",
+            "Cumartesi"
+        ];
+
+        const monthNames = [
+            "Ocak",
+            "Şubat",
+            "Mart",
+            "Nisan",
+            "Mayıs",
+            "Haziran",
+            "Temmuz",
+            "Ağustos",
+            "Eylül",
+            "Ekim",
+            "Kasım",
+            "Aralık"
+        ];
+
+        const clock =
+            document.getElementById(
+                "clock"
+            );
+
+        const date =
+            document.getElementById(
+                "date"
+            );
+
+        function pad(number) {
+            return String(number)
+                .padStart(2,"0");
+        }
+
+        function updateClock() {
+
+            const now =
+                new Date();
+
+            clock.textContent =
+                `${pad(now.getHours())}:` +
+                `${pad(now.getMinutes())}:` +
+                `${pad(now.getSeconds())}`;
+
+            date.textContent =
+                `${dayNames[now.getDay()]} · ` +
+                `${now.getDate()} ` +
+                `${monthNames[now.getMonth()]} ` +
+                `${now.getFullYear()}`;
+        }
+
+        /* =========================================================
+           SEARCH
+           ========================================================= */
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+        const categoryFilter =
+            document.getElementById(
+                "categoryFilter"
+            );
+
+        const announcementCard =
+            document.getElementById(
+                "announcementCard"
+            );
+
+        const emptySearch =
+            document.getElementById(
+                "emptySearch"
+            );
+
+        const resultCount =
+            document.getElementById(
+                "resultCount"
+            );
+
+        const clearButton =
+            document.getElementById(
+                "clearButton"
+            );
+
+        function normalizeText(text) {
+
+            return String(text || "")
+                .toLocaleLowerCase("tr-TR")
+                .normalize("NFD")
+                .replace(
+                    /[\u0300-\u036f]/g,
+                    ""
+                );
+        }
+
+        function filterAnnouncement() {
+
+            const search =
+                normalizeText(
+                    searchInput.value
+                );
+
+            const category =
+                categoryFilter.value;
+
+            const data =
+                normalizeText(
+                    announcementCard.dataset.search
+                );
+
+            const categories =
+                normalizeText(
+                    announcementCard.dataset.category
+                );
+
+            const matchesSearch =
+                !search ||
+                data.includes(search);
+
+            const matchesCategory =
+                category === "all" ||
+                categories.includes(category);
+
+            const visible =
+                matchesSearch &&
+                matchesCategory;
+
+            announcementCard.style.display =
+                visible
+                    ? "block"
+                    : "none";
+
+            emptySearch.classList.toggle(
+                "show",
+                !visible
+            );
+
+            resultCount.textContent =
+                visible
+                    ? "1 duyuru"
+                    : "0 duyuru";
+        }
+
+        searchInput.addEventListener(
+            "input",
+            filterAnnouncement
+        );
+
+        categoryFilter.addEventListener(
+            "change",
+            filterAnnouncement
+        );
+
+        clearButton.addEventListener(
+            "click",
+            () => {
+
+                searchInput.value =
+                    "";
+
+                categoryFilter.value =
+                    "all";
+
+                filterAnnouncement();
+
+                searchInput.focus();
+            }
+        );
+
+        /* =========================================================
+           REFRESH
+           ========================================================= */
+
+        const refreshButton =
+            document.getElementById(
+                "refreshButton"
+            );
+
+        refreshButton.addEventListener(
+            "click",
+            () => {
+
+                const original =
+                    refreshButton.innerHTML;
+
+                refreshButton.disabled =
+                    true;
+
+                refreshButton.innerHTML = `
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        style="
+                            animation:
+                            spin .7s linear infinite;
+                        "
+                    >
+                        <path
+                            d="M20 12C20 16.42 16.42 20 12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+
+                    Güncelleniyor...
+                `;
+
+                setTimeout(
+                    () => {
+
+                        refreshButton.disabled =
+                            false;
+
+                        refreshButton.innerHTML =
+                            original;
+
+                        updateClock();
+                        filterAnnouncement();
+
+                    },
+                    550
+                );
+            }
+        );
+
+        /* =========================================================
+           MOBILE SIDEBAR
+           ========================================================= */
+
+        const mobileMenu =
+            document.getElementById(
+                "mobileMenu"
+            );
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+        const sidebarOverlay =
+            document.getElementById(
+                "sidebarOverlay"
+            );
+
+        function openSidebar() {
+
+            sidebar.classList.add(
+                "open"
+            );
+
+            sidebarOverlay.classList.add(
+                "show"
+            );
+
+            mobileMenu.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+            document.body.classList.add(
+                "no-scroll"
+            );
+        }
+
+        function closeSidebar() {
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+            sidebarOverlay.classList.remove(
+                "show"
+            );
+
+            mobileMenu.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            document.body.classList.remove(
+                "no-scroll"
+            );
+        }
+
+        mobileMenu.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    sidebar.classList.contains(
+                        "open"
+                    )
+                ) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+
+            }
+        );
+
+        sidebarOverlay.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+        document
+            .querySelectorAll(".nav-link")
+            .forEach(
+                link => {
+
+                    link.addEventListener(
+                        "click",
+                        closeSidebar
+                    );
+
+                }
+            );
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+                    closeSidebar();
+                }
+
+            }
+        );
+
+        /* =========================================================
+           SPIN ANIMATION
+           ========================================================= */
+
+        const spinStyle =
+            document.createElement("style");
+
+        spinStyle.textContent = `
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        `;
+
+        document.head.appendChild(
+            spinStyle
+        );
+
+        /* =========================================================
+           INITIALIZE
+           ========================================================= */
+
+        function initialize() {
+
+            updateClock();
+            filterAnnouncement();
+
+            setInterval(
+                updateClock,
+                1000
+            );
+        }
+
+        if (
+            document.readyState ===
+            "loading"
+        ) {
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                initialize
+            );
+
+        } else {
+
+            initialize();
+        }
+
+    </script>
+
+</body>
+</html>

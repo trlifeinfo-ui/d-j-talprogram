@@ -1,0 +1,7504 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#05080f"
+    >
+
+    <meta
+        name="description"
+        content="ZYNX AI - 10/D Dijital Sınıf yapay zeka çalışma merkezi."
+    >
+
+    <title>ZYNX AI | 10/D Dijital Sınıf</title>
+
+    <style>
+
+        /* =========================================================
+           ZYNX AI
+           PROFESSIONAL AI WORKSPACE
+           ========================================================= */
+
+        :root {
+
+            --bg:
+                #03060b;
+
+            --bg-2:
+                #050a12;
+
+            --bg-3:
+                #08101b;
+
+            --surface:
+                rgba(10, 18, 29, .86);
+
+            --surface-2:
+                rgba(14, 24, 39, .96);
+
+            --surface-3:
+                rgba(255,255,255,.035);
+
+            --surface-4:
+                rgba(255,255,255,.055);
+
+            --border:
+                rgba(255,255,255,.065);
+
+            --border-strong:
+                rgba(107,166,255,.20);
+
+            --text:
+                #f6f8fc;
+
+            --text-soft:
+                #b4c1d2;
+
+            --text-muted:
+                #68798e;
+
+            --blue:
+                #5b8cff;
+
+            --blue-2:
+                #7ab3ff;
+
+            --cyan:
+                #58e8ff;
+
+            --purple:
+                #9d7aff;
+
+            --green:
+                #49dea0;
+
+            --yellow:
+                #ffd36c;
+
+            --red:
+                #ff718c;
+
+            --shadow:
+                0 28px 100px rgba(0,0,0,.42);
+
+            --radius-xl:
+                30px;
+
+            --radius-lg:
+                22px;
+
+            --radius-md:
+                16px;
+
+            --radius-sm:
+                11px;
+
+            --sidebar:
+                285px;
+
+            --ease:
+                cubic-bezier(.2,.75,.2,1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 15% -5%,
+                    rgba(84,137,255,.12),
+                    transparent 29%
+                ),
+                radial-gradient(
+                    circle at 90% 5%,
+                    rgba(84,229,255,.055),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(121,91,255,.045),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    145deg,
+                    #020408 0%,
+                    #050b13 52%,
+                    #02060c 100%
+                );
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        body.locked {
+            overflow: hidden;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ::selection {
+            background: rgba(91,140,255,.25);
+            color: #fff;
+        }
+
+        /* =========================================================
+           BACKGROUND
+           ========================================================= */
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+
+            z-index: -20;
+
+            opacity: .14;
+
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,.02) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.02) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                56px 56px;
+        }
+
+        .glow {
+            position: fixed;
+
+            width: 480px;
+            height: 480px;
+
+            border-radius: 50%;
+
+            filter: blur(110px);
+
+            opacity: .07;
+
+            z-index: -19;
+
+            pointer-events: none;
+
+            animation:
+                glowFloat
+                12s
+                ease-in-out
+                infinite;
+        }
+
+        .glow.one {
+            top: -250px;
+            left: -240px;
+            background: #4b8fff;
+        }
+
+        .glow.two {
+            right: -250px;
+            top: 28%;
+            background: #47eaff;
+            animation-delay: -4s;
+        }
+
+        .glow.three {
+            left: 38%;
+            bottom: -370px;
+            background: #7e56ff;
+            animation-delay: -8s;
+        }
+
+        @keyframes glowFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    translateY(-18px)
+                    scale(1.04);
+            }
+        }
+
+        /* =========================================================
+           APP
+           ========================================================= */
+
+        .app {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* =========================================================
+           SIDEBAR
+           ========================================================= */
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+
+            width: var(--sidebar);
+            height: 100vh;
+
+            z-index: 1200;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 17px 14px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(5,11,20,.985),
+                    rgba(2,7,13,.985)
+                );
+
+            border-right:
+                1px solid
+                rgba(255,255,255,.055);
+
+            backdrop-filter:
+                blur(26px);
+
+            -webkit-backdrop-filter:
+                blur(26px);
+
+            transition:
+                transform .25s var(--ease);
+
+            overflow-y: auto;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background:
+                rgba(255,255,255,.07);
+            border-radius: 20px;
+        }
+
+        /* =========================================================
+           BRAND
+           ========================================================= */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding:
+                7px 7px 18px;
+        }
+
+        .brand-image {
+            width: 51px;
+            height: 51px;
+
+            flex: 0 0 51px;
+
+            overflow: hidden;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 17px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(79,141,255,.16),
+                    rgba(255,255,255,.018)
+                );
+
+            border:
+                1px solid
+                rgba(99,164,255,.18);
+
+            box-shadow:
+                0 0 38px
+                rgba(72,132,255,.10);
+        }
+
+        .brand-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 950;
+
+            letter-spacing: -.035em;
+        }
+
+        .brand-subtitle {
+            margin-top: 4px;
+
+            color: #65768c;
+
+            font-size: 9px;
+            font-weight: 750;
+        }
+
+        /* =========================================================
+           PROFILE
+           ========================================================= */
+
+        .profile-card {
+            padding: 13px;
+
+            margin-bottom: 9px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79,140,255,.07),
+                    rgba(255,255,255,.018)
+                );
+
+            border:
+                1px solid
+                rgba(79,140,255,.10);
+        }
+
+        .profile-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-avatar {
+            width: 37px;
+            height: 37px;
+
+            display: grid;
+            place-items: center;
+
+            flex: 0 0 37px;
+
+            border-radius: 12px;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #4d85ff,
+                    #6be7ff
+                );
+
+            font-size: 12px;
+            font-weight: 950;
+
+            box-shadow:
+                0 10px 25px
+                rgba(73,136,255,.16);
+        }
+
+        .profile-name {
+            min-width: 0;
+
+            overflow: hidden;
+
+            color: #eaf1fb;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .profile-role {
+            margin-top: 3px;
+
+            color: #65788f;
+
+            font-size: 7px;
+        }
+
+        .profile-edit {
+            margin-left: auto;
+
+            width: 28px;
+            height: 28px;
+
+            display: grid;
+            place-items: center;
+
+            color: #7e91aa;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+
+            border-radius: 8px;
+
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           NEW CHAT
+           ========================================================= */
+
+        .new-chat {
+            width: 100%;
+            min-height: 43px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            margin-bottom: 16px;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5088ff,
+                    #386ed9
+                );
+
+            border:
+                1px solid
+                rgba(145,191,255,.18);
+
+            border-radius: 12px;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 12px 32px
+                rgba(55,105,218,.17);
+
+            transition:
+                transform .18s,
+                box-shadow .18s;
+        }
+
+        .new-chat:hover {
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 17px 35px
+                rgba(55,105,218,.22);
+        }
+
+        .new-chat svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* =========================================================
+           SIDEBAR TITLES
+           ========================================================= */
+
+        .sidebar-title {
+            padding:
+                0
+                10px
+                8px;
+
+            color: #4f6179;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .12em;
+        }
+
+        /* =========================================================
+           MODE NAV
+           ========================================================= */
+
+        .mode-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mode-item {
+            position: relative;
+
+            width: 100%;
+            min-height: 43px;
+
+            padding:
+                8px
+                10px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #8d9eb3;
+
+            background: transparent;
+
+            border:
+                1px solid
+                transparent;
+
+            border-radius: 12px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition:
+                .18s var(--ease);
+        }
+
+        .mode-item:hover {
+            color: #edf3fb;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border-color:
+                rgba(255,255,255,.04);
+        }
+
+        .mode-item.active {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79,140,255,.135),
+                    rgba(87,232,255,.025)
+                );
+
+            border-color:
+                rgba(79,140,255,.14);
+        }
+
+        .mode-item.active::before {
+            content: "";
+
+            position: absolute;
+
+            left: -1px;
+            top: 9px;
+            bottom: 9px;
+
+            width: 3px;
+
+            border-radius:
+                0
+                4px
+                4px
+                0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #56ecff,
+                    #518dff
+                );
+
+            box-shadow:
+                0 0 14px
+                rgba(80,208,255,.35);
+        }
+
+        .mode-icon {
+            width: 30px;
+            height: 30px;
+
+            display: grid;
+            place-items: center;
+
+            flex: 0 0 30px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,.025);
+
+            color: #83a6d5;
+        }
+
+        .mode-item.active .mode-icon {
+            color: #78b4ff;
+
+            background:
+                rgba(79,140,255,.085);
+        }
+
+        .mode-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .mode-content {
+            min-width: 0;
+        }
+
+        .mode-name {
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .mode-description {
+            margin-top: 3px;
+
+            color: #56687f;
+
+            font-size: 6px;
+        }
+
+        .mode-item.active .mode-description {
+            color: #7891ae;
+        }
+
+        /* =========================================================
+           HISTORY
+           ========================================================= */
+
+        .history-section {
+            margin-top: 17px;
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+
+            max-height: 185px;
+            overflow-y: auto;
+        }
+
+        .history-list::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .history-list::-webkit-scrollbar-thumb {
+            background:
+                rgba(255,255,255,.06);
+        }
+
+        .history-item {
+            width: 100%;
+
+            min-height: 34px;
+
+            padding:
+                7px
+                9px;
+
+            overflow: hidden;
+
+            color: #6f8095;
+
+            background: transparent;
+
+            border:
+                1px solid
+                transparent;
+
+            border-radius: 9px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition:
+                .18s;
+        }
+
+        .history-item:hover {
+            color: #cad7e7;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border-color:
+                rgba(255,255,255,.04);
+        }
+
+        .history-title {
+            overflow: hidden;
+
+            font-size: 7px;
+            font-weight: 800;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .history-time {
+            margin-top: 3px;
+
+            color: #46576c;
+
+            font-size: 6px;
+        }
+
+        .history-empty {
+            padding:
+                12px 8px;
+
+            color: #4c5d72;
+
+            font-size: 7px;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           SIDEBAR FOOTER
+           ========================================================= */
+
+        .sidebar-footer {
+            margin-top: auto;
+
+            padding-top: 15px;
+        }
+
+        .status-card {
+            padding:
+                12px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.018);
+
+            border:
+                1px solid
+                rgba(255,255,255,.045);
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                var(--green);
+
+            box-shadow:
+                0 0 12px
+                rgba(73,222,160,.65);
+        }
+
+        .status-text {
+            color: #8ea1b7;
+
+            font-size: 7px;
+            font-weight: 900;
+        }
+
+        .status-description {
+            margin-top: 6px;
+
+            color: #4d6076;
+
+            font-size: 6px;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           MAIN
+           ========================================================= */
+
+        .main {
+            width:
+                calc(
+                    100% - var(--sidebar)
+                );
+
+            margin-left:
+                var(--sidebar);
+
+            min-width: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================================================
+           TOPBAR
+           ========================================================= */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+
+            z-index: 950;
+
+            min-height: 72px;
+
+            padding:
+                11px 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            background:
+                rgba(3,7,13,.74);
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.045);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .mobile-menu {
+            display: none;
+
+            width: 40px;
+            height: 40px;
+
+            place-items: center;
+
+            color: #c6d3e3;
+
+            background:
+                rgba(255,255,255,.03);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            border-radius: 11px;
+
+            cursor: pointer;
+        }
+
+        .mobile-menu svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .topbar-title {
+            font-size: 12px;
+            font-weight: 950;
+
+            letter-spacing: -.015em;
+        }
+
+        .topbar-subtitle {
+            margin-top: 3px;
+
+            color: #55677d;
+
+            font-size: 7px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .top-chip {
+            min-height: 34px;
+
+            padding:
+                0 9px;
+
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            border-radius: 9px;
+
+            font-size: 7px;
+            font-weight: 900;
+        }
+
+        .top-chip.ai {
+            color: #c6ddff;
+
+            background:
+                rgba(79,140,255,.06);
+
+            border:
+                1px solid
+                rgba(79,140,255,.12);
+        }
+
+        .top-chip.online {
+            color: #aeecca;
+
+            background:
+                rgba(73,222,160,.04);
+
+            border:
+                1px solid
+                rgba(73,222,160,.08);
+        }
+
+        .top-online-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background:
+                var(--green);
+
+            box-shadow:
+                0 0 11px
+                rgba(73,222,160,.65);
+        }
+
+        /* =========================================================
+           CONTENT
+           ========================================================= */
+
+        .content {
+            width: min(1160px,100%);
+
+            margin:
+                0 auto;
+
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+
+            padding:
+                34px 24px
+                45px;
+        }
+
+        /* =========================================================
+           WELCOME
+           ========================================================= */
+
+        .welcome {
+            max-width: 900px;
+
+            margin:
+                3px auto 0;
+
+            text-align: center;
+        }
+
+        .welcome-badge {
+            width: fit-content;
+
+            margin:
+                0 auto;
+
+            padding:
+                6px 9px;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #91bbff;
+
+            background:
+                rgba(79,140,255,.05);
+
+            border:
+                1px solid
+                rgba(79,140,255,.10);
+
+            border-radius: 999px;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .11em;
+        }
+
+        .welcome-badge-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background:
+                var(--cyan);
+
+            box-shadow:
+                0 0 12px
+                rgba(87,233,255,.7);
+        }
+
+        .welcome h1 {
+            margin-top: 18px;
+
+            font-size:
+                clamp(
+                    36px,
+                    6vw,
+                    66px
+                );
+
+            line-height: .96;
+
+            letter-spacing:
+                -.065em;
+
+            font-weight:
+                950;
+        }
+
+        .welcome h1 .name {
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff 0%,
+                    #9cc5ff 48%,
+                    #64e6ff 100%
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+        .welcome-description {
+            max-width: 740px;
+
+            margin:
+                16px auto 0;
+
+            color: #8192a8;
+
+            font-size: 10px;
+            line-height: 1.75;
+        }
+
+        /* =========================================================
+           PROMPT SUGGESTIONS
+           ========================================================= */
+
+        .suggestions {
+            margin-top: 25px;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            gap: 7px;
+        }
+
+        .suggestion {
+            min-height: 35px;
+
+            padding:
+                0 11px;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #9eafc3;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+
+            border-radius: 10px;
+
+            font-size: 7px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                transform .18s,
+                background .18s,
+                border-color .18s,
+                color .18s;
+        }
+
+        .suggestion:hover {
+            color: #edf5ff;
+
+            background:
+                rgba(255,255,255,.04);
+
+            border-color:
+                rgba(104,158,242,.17);
+
+            transform:
+                translateY(-2px);
+        }
+
+        .suggestion svg {
+            width: 12px;
+            height: 12px;
+
+            color: #78aaff;
+        }
+
+        /* =========================================================
+           CHAT AREA
+           ========================================================= */
+
+        .chat-shell {
+            width: min(930px,100%);
+
+            margin:
+                24px auto 0;
+
+            display: flex;
+            flex-direction: column;
+
+            flex: 1;
+        }
+
+        .messages {
+            display: flex;
+            flex-direction: column;
+
+            gap: 13px;
+
+            min-height: 80px;
+        }
+
+        /* =========================================================
+           MESSAGE
+           ========================================================= */
+
+        .message {
+            display: flex;
+            gap: 9px;
+
+            animation:
+                messageIn
+                .28s
+                var(--ease);
+        }
+
+        @keyframes messageIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(7px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-avatar {
+            width: 31px;
+            height: 31px;
+
+            flex: 0 0 31px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #5188ff,
+                    #65e8ff
+                );
+
+            font-size: 8px;
+            font-weight: 950;
+        }
+
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .message.ai .message-avatar {
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(83,146,255,.16),
+                    rgba(255,255,255,.02)
+                );
+
+            border:
+                1px solid
+                rgba(92,154,255,.13);
+        }
+
+        .message-content {
+            max-width: 760px;
+            min-width: 0;
+        }
+
+        .message.user .message-content {
+            max-width: min(75%,760px);
+        }
+
+        .message-name {
+            margin:
+                0 0 5px 2px;
+
+            color: #64788f;
+
+            font-size: 7px;
+            font-weight: 900;
+        }
+
+        .message.user .message-name {
+            text-align: right;
+        }
+
+        .bubble {
+            padding:
+                12px 14px;
+
+            color: #dce7f3;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+
+            border-radius:
+                15px
+                15px
+                15px
+                5px;
+
+            font-size: 9px;
+
+            line-height: 1.75;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+        }
+
+        .message.user .bubble {
+            color: #edf5ff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(79,140,255,.14),
+                    rgba(70,109,200,.10)
+                );
+
+            border-color:
+                rgba(79,140,255,.15);
+
+            border-radius:
+                15px
+                15px
+                5px
+                15px;
+        }
+
+        .message-actions {
+            display: flex;
+            align-items: center;
+
+            gap: 4px;
+
+            margin-top: 5px;
+        }
+
+        .message.user .message-actions {
+            justify-content: flex-end;
+        }
+
+        .message-action {
+            width: 25px;
+            height: 25px;
+
+            display: grid;
+            place-items: center;
+
+            color: #5f728a;
+
+            background:
+                transparent;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            transition:
+                color .18s,
+                background .18s;
+        }
+
+        .message-action:hover {
+            color: #d2deec;
+
+            background:
+                rgba(255,255,255,.04);
+        }
+
+        .message-action svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* =========================================================
+           MARKDOWN-LIKE OUTPUT
+           ========================================================= */
+
+        .bubble strong {
+            color: #fff;
+            font-weight: 900;
+        }
+
+        .bubble .inline-code {
+            padding:
+                2px 5px;
+
+            color: #a9d1ff;
+
+            background:
+                rgba(79,140,255,.075);
+
+            border:
+                1px solid
+                rgba(79,140,255,.10);
+
+            border-radius: 5px;
+        }
+
+        .bubble .output-title {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #f1f7ff;
+
+            font-size: 10px;
+            font-weight: 950;
+        }
+
+        .bubble .solution-step {
+            display: block;
+
+            padding:
+                6px 0;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.035);
+        }
+
+        .bubble .solution-step:last-child {
+            border-bottom: 0;
+        }
+
+        /* =========================================================
+           IMAGE PREVIEW IN MESSAGE
+           ========================================================= */
+
+        .message-image {
+            max-width: 330px;
+            max-height: 310px;
+
+            margin-bottom: 8px;
+
+            overflow: hidden;
+
+            border-radius: 12px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+        .message-image img {
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            max-height: 310px;
+
+            object-fit: contain;
+        }
+
+        /* =========================================================
+           TYPING
+           ========================================================= */
+
+        .typing {
+            display: none;
+
+            align-items: flex-start;
+            gap: 9px;
+        }
+
+        .typing.show {
+            display: flex;
+        }
+
+        .typing-bubble {
+            padding:
+                11px 13px;
+
+            border-radius:
+                14px
+                14px
+                14px
+                5px;
+
+            background:
+                rgba(255,255,255,.023);
+
+            border:
+                1px solid
+                rgba(255,255,255,.05);
+        }
+
+        .typing-dots {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background:
+                #6e94c4;
+
+            animation:
+                typing
+                1.1s
+                infinite;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: .15s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: .30s;
+        }
+
+        @keyframes typing {
+
+            0%,
+            60%,
+            100% {
+                opacity: .25;
+                transform:
+                    translateY(0);
+            }
+
+            30% {
+                opacity: 1;
+                transform:
+                    translateY(-3px);
+            }
+        }
+
+        /* =========================================================
+           IMAGE ATTACHMENT PREVIEW
+           ========================================================= */
+
+        .attachment-preview {
+            display: none;
+
+            width: min(930px,100%);
+
+            margin:
+                14px auto 0;
+
+            padding:
+                9px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.02);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+        }
+
+        .attachment-preview.show {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .attachment-thumb {
+            width: 52px;
+            height: 52px;
+
+            overflow: hidden;
+
+            flex: 0 0 52px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+        .attachment-thumb img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+        .attachment-info {
+            min-width: 0;
+        }
+
+        .attachment-name {
+            overflow: hidden;
+
+            color: #dce8f6;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .attachment-size {
+            margin-top: 3px;
+
+            color: #61748b;
+
+            font-size: 6px;
+        }
+
+        .remove-attachment {
+            margin-left: auto;
+
+            width: 28px;
+            height: 28px;
+
+            display: grid;
+            place-items: center;
+
+            color: #788ba2;
+
+            background:
+                rgba(255,255,255,.03);
+
+            border-radius: 8px;
+
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           COMPOSER
+           ========================================================= */
+
+        .composer-wrap {
+            position: sticky;
+            bottom: 0;
+
+            margin-top: 18px;
+
+            padding-top: 12px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    transparent,
+                    rgba(3,7,13,.96) 23%
+                );
+
+            z-index: 30;
+        }
+
+        .composer {
+            position: relative;
+
+            width: min(930px,100%);
+
+            margin:
+                0 auto;
+
+            padding:
+                9px;
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(10,18,30,.94);
+
+            border:
+                1px solid
+                rgba(108,160,239,.15);
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,.27),
+                inset 0 1px 0
+                rgba(255,255,255,.025);
+        }
+
+        .composer-top {
+            display: flex;
+            align-items: center;
+
+            gap: 6px;
+
+            padding:
+                2px 2px 7px;
+        }
+
+        .composer-mode {
+            min-height: 27px;
+
+            padding:
+                0 8px;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            color: #80a9de;
+
+            background:
+                rgba(79,140,255,.045);
+
+            border:
+                1px solid
+                rgba(79,140,255,.08);
+
+            border-radius: 8px;
+
+            font-size: 6px;
+            font-weight: 900;
+        }
+
+        .composer-mode-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background:
+                var(--cyan);
+        }
+
+        .composer-input-area {
+            display: flex;
+            align-items: flex-end;
+            gap: 7px;
+        }
+
+        .composer-input {
+            min-width: 0;
+            flex: 1;
+
+            min-height: 48px;
+            max-height: 170px;
+
+            resize: none;
+
+            overflow-y: auto;
+
+            padding:
+                11px 12px;
+
+            color: #edf5ff;
+
+            background:
+                rgba(255,255,255,.018);
+
+            border:
+                1px solid
+                transparent;
+
+            border-radius: 13px;
+
+            outline: none;
+
+            font-size: 9px;
+            line-height: 1.55;
+
+            transition:
+                border-color .18s,
+                background .18s;
+        }
+
+        .composer-input::placeholder {
+            color: #4e6076;
+        }
+
+        .composer-input:focus {
+            background:
+                rgba(255,255,255,.025);
+
+            border-color:
+                rgba(80,145,245,.12);
+        }
+
+        .composer-button {
+            width: 43px;
+            height: 43px;
+
+            flex: 0 0 43px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            transition:
+                transform .18s,
+                background .18s,
+                opacity .18s;
+        }
+
+        .composer-button:hover {
+            transform:
+                translateY(-1px);
+        }
+
+        .composer-button.attach {
+            color: #94a8bf;
+
+            background:
+                rgba(255,255,255,.03);
+
+            border:
+                1px solid
+                rgba(255,255,255,.05);
+        }
+
+        .composer-button.send {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #568eff,
+                    #4b78e3
+                );
+
+            box-shadow:
+                0 10px 23px
+                rgba(70,125,232,.19);
+        }
+
+        .composer-button.send:disabled {
+            opacity: .35;
+
+            cursor:
+                not-allowed;
+
+            transform:
+                none;
+        }
+
+        .composer-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .composer-bottom {
+            padding:
+                7px 4px 1px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 8px;
+        }
+
+        .composer-hint {
+            color: #4e6075;
+
+            font-size: 6px;
+        }
+
+        .composer-shortcut {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            color: #52657b;
+
+            font-size: 6px;
+        }
+
+        .key {
+            min-width: 19px;
+
+            padding:
+                3px 5px;
+
+            text-align: center;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.045);
+
+            border-radius: 5px;
+
+            font-size: 5px;
+            font-weight: 900;
+        }
+
+        /* =========================================================
+           OVERLAY PANEL
+           ========================================================= */
+
+        .workspace-overlay {
+            position: fixed;
+            inset: 0;
+
+            z-index: 2500;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 18px;
+
+            background:
+                rgba(0,0,0,.71);
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+        }
+
+        .workspace-overlay.show {
+            display: flex;
+        }
+
+        .workspace-panel {
+            position: relative;
+
+            width: min(760px,100%);
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 23px;
+
+            border-radius: 23px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(13,25,42,.985),
+                    rgba(4,10,18,.985)
+                );
+
+            border:
+                1px solid
+                rgba(105,165,255,.16);
+
+            box-shadow:
+                0 38px 110px
+                rgba(0,0,0,.57);
+
+            animation:
+                panelIn
+                .22s
+                var(--ease);
+        }
+
+        @keyframes panelIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(10px)
+                    scale(.985);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        .panel-close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+
+            width: 35px;
+            height: 35px;
+
+            display: grid;
+            place-items: center;
+
+            color: #8496ad;
+
+            background:
+                rgba(255,255,255,.03);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            border-radius: 9px;
+
+            cursor: pointer;
+        }
+
+        .panel-header {
+            padding-right: 46px;
+        }
+
+        .panel-kicker {
+            color: #70a4ff;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: .1em;
+        }
+
+        .panel-title {
+            margin-top: 7px;
+
+            font-size: 25px;
+            font-weight: 950;
+
+            letter-spacing: -.045em;
+        }
+
+        .panel-description {
+            margin-top: 7px;
+
+            color: #74879f;
+
+            font-size: 8px;
+            line-height: 1.65;
+        }
+
+        /* =========================================================
+           FORM
+           ========================================================= */
+
+        .form-grid {
+            margin-top: 18px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,minmax(0,1fr));
+
+            gap: 9px;
+        }
+
+        .form-field {
+            min-width: 0;
+        }
+
+        .form-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #8397af;
+
+            font-size: 7px;
+            font-weight: 900;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+
+            color: #edf4fc;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.065);
+
+            border-radius: 10px;
+
+            outline: none;
+
+            transition:
+                border-color .18s,
+                background .18s;
+        }
+
+        .form-input,
+        .form-select {
+            height: 41px;
+            padding:
+                0 10px;
+        }
+
+        .form-textarea {
+            min-height: 91px;
+
+            padding:
+                10px;
+
+            resize: vertical;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            background:
+                rgba(255,255,255,.035);
+
+            border-color:
+                rgba(79,140,255,.21);
+        }
+
+        .form-select option {
+            color: #07111e;
+        }
+
+        .subject-grid {
+            margin-top: 8px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,minmax(0,1fr));
+
+            gap: 6px;
+        }
+
+        .subject-check {
+            position: relative;
+        }
+
+        .subject-check input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .subject-check label {
+            min-height: 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding:
+                0 7px;
+
+            color: #71839a;
+
+            background:
+                rgba(255,255,255,.018);
+
+            border:
+                1px solid
+                rgba(255,255,255,.05);
+
+            border-radius: 8px;
+
+            font-size: 6px;
+            font-weight: 850;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            transition:
+                .18s;
+        }
+
+        .subject-check input:checked + label {
+            color: #dcecff;
+
+            background:
+                rgba(79,140,255,.085);
+
+            border-color:
+                rgba(79,140,255,.22);
+        }
+
+        /* =========================================================
+           PANEL ACTIONS
+           ========================================================= */
+
+        .panel-actions {
+            margin-top: 17px;
+
+            display: flex;
+            justify-content: flex-end;
+
+            gap: 7px;
+        }
+
+        .panel-button {
+            min-height: 39px;
+
+            padding:
+                0 13px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            border-radius: 10px;
+
+            font-size: 7px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .panel-button.secondary {
+            color: #91a3b9;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+        .panel-button.primary {
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #548cff,
+                    #416ed7
+                );
+
+            border:
+                1px solid
+                rgba(138,184,255,.16);
+        }
+
+        .panel-button svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        /* =========================================================
+           IMAGE ANALYZER
+           ========================================================= */
+
+        .drop-zone {
+            margin-top: 18px;
+
+            min-height: 180px;
+
+            display: grid;
+            place-items: center;
+
+            padding: 22px;
+
+            border-radius: 16px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(79,140,255,.07),
+                    transparent 55%
+                ),
+                rgba(255,255,255,.018);
+
+            border:
+                1px dashed
+                rgba(103,159,238,.19);
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition:
+                .18s;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.dragover {
+            background:
+                rgba(79,140,255,.045);
+
+            border-color:
+                rgba(103,159,238,.32);
+        }
+
+        .drop-icon {
+            width: 56px;
+            height: 56px;
+
+            display: grid;
+            place-items: center;
+
+            margin: 0 auto;
+
+            border-radius: 16px;
+
+            color: #73aaff;
+
+            background:
+                rgba(79,140,255,.065);
+
+            border:
+                1px solid
+                rgba(79,140,255,.11);
+        }
+
+        .drop-icon svg {
+            width: 23px;
+            height: 23px;
+        }
+
+        .drop-title {
+            margin-top: 10px;
+
+            color: #d8e6f6;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .drop-description {
+            margin-top: 5px;
+
+            color: #657990;
+
+            font-size: 7px;
+        }
+
+        .drop-file {
+            margin-top: 10px;
+
+            color: #79aaff;
+
+            font-size: 7px;
+            font-weight: 900;
+        }
+
+        /* =========================================================
+           PDF PREVIEW
+           ========================================================= */
+
+        .pdf-preview {
+            margin-top: 18px;
+
+            padding: 15px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.018);
+
+            border:
+                1px solid
+                rgba(255,255,255,.05);
+        }
+
+        .pdf-page {
+            width: min(100%,640px);
+
+            margin: 0 auto;
+
+            min-height: 550px;
+
+            padding: 38px;
+
+            color: #111827;
+
+            background: #fff;
+
+            border-radius: 7px;
+
+            box-shadow:
+                0 18px 55px
+                rgba(0,0,0,.35);
+        }
+
+        .pdf-page-title {
+            font-size: 27px;
+            font-weight: 950;
+        }
+
+        .pdf-page-subtitle {
+            margin-top: 5px;
+
+            color: #5f6b7a;
+
+            font-size: 12px;
+        }
+
+        .pdf-rule {
+            height: 2px;
+
+            margin:
+                19px 0;
+
+            background:
+                #dbe4ef;
+        }
+
+        .pdf-section-title {
+            margin-top: 16px;
+
+            font-size: 15px;
+            font-weight: 900;
+        }
+
+        .pdf-lines {
+            margin-top: 9px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .pdf-line {
+            min-height: 26px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding:
+                0 8px;
+
+            background: #f5f8fb;
+
+            border-radius: 4px;
+
+            font-size: 10px;
+        }
+
+        .pdf-footer {
+            margin-top: 35px;
+
+            padding-top: 10px;
+
+            border-top:
+                1px solid
+                #e0e7ef;
+
+            color: #778396;
+
+            font-size: 8px;
+        }
+
+        /* =========================================================
+           PRINT
+           ========================================================= */
+
+        .print-only {
+            display: none;
+        }
+
+        @media print {
+
+            body * {
+                visibility: hidden !important;
+            }
+
+            .print-only,
+            .print-only * {
+                visibility: visible !important;
+            }
+
+            .print-only {
+                position: absolute;
+
+                left: 0;
+                top: 0;
+
+                width: 100%;
+
+                display: block;
+            }
+
+            .print-document {
+                padding: 35px;
+                color: #111;
+                background: #fff;
+                font-family:
+                    Arial,
+                    sans-serif;
+            }
+
+            .print-document h1 {
+                font-size: 26px;
+            }
+
+            .print-document .meta {
+                margin-top: 6px;
+
+                color: #555;
+
+                font-size: 11px;
+            }
+
+            .print-document table {
+                width: 100%;
+
+                margin-top: 24px;
+
+                border-collapse: collapse;
+            }
+
+            .print-document th,
+            .print-document td {
+                padding: 9px;
+
+                border:
+                    1px solid
+                    #d8dde5;
+
+                text-align: left;
+
+                font-size: 10px;
+            }
+
+            .print-document th {
+                background:
+                    #eef3f8;
+            }
+        }
+
+        /* =========================================================
+           WELCOME SCREEN
+           ========================================================= */
+
+        .welcome-modal {
+            position: fixed;
+            inset: 0;
+
+            z-index: 5000;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 18px;
+
+            background:
+                rgba(1,3,7,.86);
+
+            backdrop-filter:
+                blur(17px);
+
+            -webkit-backdrop-filter:
+                blur(17px);
+        }
+
+        .welcome-modal.show {
+            display: flex;
+        }
+
+        .welcome-card {
+            position: relative;
+
+            width: min(480px,100%);
+
+            padding:
+                29px;
+
+            overflow: hidden;
+
+            border-radius: 26px;
+
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(82,145,255,.13),
+                    transparent 38%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(13,26,43,.985),
+                    rgba(4,9,16,.985)
+                );
+
+            border:
+                1px solid
+                rgba(90,150,243,.17);
+
+            box-shadow:
+                0 40px 130px
+                rgba(0,0,0,.65);
+
+            animation:
+                welcomeIn
+                .3s
+                var(--ease);
+        }
+
+        @keyframes welcomeIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(13px)
+                    scale(.98);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        .welcome-logo {
+            width: 70px;
+            height: 70px;
+
+            margin:
+                0 auto;
+
+            overflow: hidden;
+
+            border-radius: 21px;
+
+            border:
+                1px solid
+                rgba(103,166,255,.19);
+
+            box-shadow:
+                0 0 48px
+                rgba(69,129,255,.12);
+        }
+
+        .welcome-logo img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .welcome-card h2 {
+            margin-top: 18px;
+
+            text-align: center;
+
+            font-size: 28px;
+            font-weight: 950;
+
+            letter-spacing: -.045em;
+        }
+
+        .welcome-card h2 span {
+            color: #75b0ff;
+        }
+
+        .welcome-card p {
+            margin-top: 8px;
+
+            color: #778ba3;
+
+            text-align: center;
+
+            font-size: 8px;
+            line-height: 1.7;
+        }
+
+        .welcome-fields {
+            margin-top: 19px;
+
+            display: grid;
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 8px;
+        }
+
+        .welcome-input {
+            width: 100%;
+            height: 44px;
+
+            padding:
+                0 11px;
+
+            color: #f2f6fc;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            border-radius: 11px;
+
+            outline: none;
+
+            font-size: 9px;
+        }
+
+        .welcome-input:focus {
+            border-color:
+                rgba(79,140,255,.22);
+        }
+
+        .welcome-submit {
+            width: 100%;
+
+            min-height: 44px;
+
+            margin-top: 9px;
+
+            border-radius: 11px;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #568fff,
+                    #3d6ed7
+                );
+
+            cursor: pointer;
+
+            font-size: 8px;
+            font-weight: 900;
+
+            box-shadow:
+                0 13px 30px
+                rgba(63,117,221,.19);
+        }
+
+        .welcome-note {
+            margin-top: 10px !important;
+
+            color: #4f6178 !important;
+
+            font-size: 6px !important;
+        }
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        @media (max-width: 980px) {
+
+            .sidebar {
+                transform:
+                    translateX(-105%);
+
+                box-shadow:
+                    28px 0 80px
+                    rgba(0,0,0,.45);
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: grid;
+            }
+
+            .topbar {
+                padding:
+                    10px 15px;
+            }
+
+            .content {
+                padding:
+                    27px 15px
+                    38px;
+            }
+        }
+
+        @media (max-width: 670px) {
+
+            .top-chip.ai {
+                display: none;
+            }
+
+            .topbar-subtitle {
+                display: none;
+            }
+
+            .welcome h1 {
+                font-size: 43px;
+            }
+
+            .suggestions {
+                justify-content: flex-start;
+            }
+
+            .suggestion {
+                flex: 1 1 calc(50% - 7px);
+            }
+
+            .message.user .message-content {
+                max-width: 86%;
+            }
+
+            .composer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .form-field.full {
+                grid-column: auto;
+            }
+
+            .subject-grid {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .welcome-fields {
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+        @media (max-width: 440px) {
+
+            .content {
+                padding:
+                    20px 11px
+                    30px;
+            }
+
+            .welcome h1 {
+                font-size: 37px;
+            }
+
+            .welcome-description {
+                font-size: 8px;
+            }
+
+            .suggestion {
+                flex: 1 1 100%;
+            }
+
+            .composer {
+                border-radius: 16px;
+            }
+
+            .composer-input {
+                font-size: 8px;
+            }
+
+            .pdf-page {
+                padding: 23px;
+            }
+        }
+
+        /* =========================================================
+           REDUCED MOTION
+           ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+
+                scroll-behavior:
+                    auto !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-grid"></div>
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+
+    <div class="app">
+
+        <!-- =====================================================
+             SIDEBAR
+             ====================================================== -->
+
+        <aside
+            class="sidebar"
+            id="sidebar"
+        >
+
+            <a
+                href="index.html"
+                class="brand"
+            >
+
+                <div class="brand-image">
+
+                    <img
+                        src="assets/zynx-ai.png"
+                        alt="ZYNX AI"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.innerHTML='Z';
+                        "
+                    >
+
+                </div>
+
+                <div>
+
+                    <div class="brand-title">
+                        ZYNX AI
+                    </div>
+
+                    <div class="brand-subtitle">
+                        10/D Intelligent Assistant
+                    </div>
+
+                </div>
+
+            </a>
+
+            <!-- PROFILE -->
+
+            <div class="profile-card">
+
+                <div class="profile-row">
+
+                    <div
+                        class="profile-avatar"
+                        id="profileAvatar"
+                    >
+                        Z
+                    </div>
+
+                    <div style="min-width:0">
+
+                        <div
+                            class="profile-name"
+                            id="profileName"
+                        >
+                            ZYNX Kullanıcısı
+                        </div>
+
+                        <div class="profile-role">
+                            10/D Öğrencisi
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="profile-edit"
+                        id="editProfile"
+                        type="button"
+                        aria-label="Profili düzenle"
+                    >
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <path
+                                d="M12 20H20"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+
+                            <path
+                                d="M16.5 3.5C17.3 2.7 18.7 2.7 19.5 3.5C20.3 4.3 20.3 5.7 19.5 6.5L8 18L4 19L5 15L16.5 3.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linejoin="round"
+                            />
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- NEW CHAT -->
+
+            <button
+                class="new-chat"
+                id="newChat"
+                type="button"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                >
+
+                    <path
+                        d="M12 5V19M5 12H19"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+                Yeni Sohbet
+
+            </button>
+
+            <!-- MODES -->
+
+            <div class="sidebar-title">
+                AI Çalışma Alanları
+            </div>
+
+            <div
+                class="mode-list"
+                id="modeList"
+            >
+
+                <button
+                    class="mode-item active"
+                    data-mode="chat"
+                    type="button"
+                >
+
+                    <span class="mode-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <path
+                                d="M5 5.5C5 4.7 5.7 4 6.5 4H17.5C18.3 4 19 4.7 19 5.5V14.5C19 15.3 18.3 16 17.5 16H11L7 20V16H6.5C5.7 16 5 15.3 5 14.5V5.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linejoin="round"
+                            />
+
+                            <path
+                                d="M9 8H15M9 11.5H13"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="mode-content">
+
+                        <span class="mode-name">
+                            ZYNX Sohbet
+                        </span>
+
+                        <span class="mode-description">
+                            Sor, konuş, öğren
+                        </span>
+
+                    </span>
+
+                </button>
+
+                <button
+                    class="mode-item"
+                    data-mode="solve"
+                    type="button"
+                >
+
+                    <span class="mode-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <rect
+                                x="5"
+                                y="3.5"
+                                width="14"
+                                height="17"
+                                rx="2"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M8 8H16M8 12H10M12 12H14M16 12H16.1M8 16H10M12 16H14"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="mode-content">
+
+                        <span class="mode-name">
+                            Soru Çöz
+                        </span>
+
+                        <span class="mode-description">
+                            Adım adım çözüm
+                        </span>
+
+                    </span>
+
+                </button>
+
+                <button
+                    class="mode-item"
+                    data-mode="vision"
+                    type="button"
+                >
+
+                    <span class="mode-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <rect
+                                x="4"
+                                y="5"
+                                width="16"
+                                height="14"
+                                rx="2"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <circle
+                                cx="9"
+                                cy="10"
+                                r="1.5"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                            />
+
+                            <path
+                                d="M5.5 17L10 13L13 15L15 12L18.5 17"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linejoin="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="mode-content">
+
+                        <span class="mode-name">
+                            Görsel Analiz
+                        </span>
+
+                        <span class="mode-description">
+                            Görsel yükle ve incelet
+                        </span>
+
+                    </span>
+
+                </button>
+
+                <button
+                    class="mode-item"
+                    data-mode="planner"
+                    type="button"
+                >
+
+                    <span class="mode-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <rect
+                                x="4"
+                                y="5"
+                                width="16"
+                                height="15"
+                                rx="2"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M8 3V7M16 3V7M4 10H20"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+
+                            <path
+                                d="M8 14H10M12 14H14M16 14H16.1"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="mode-content">
+
+                        <span class="mode-name">
+                            Program Oluştur
+                        </span>
+
+                        <span class="mode-description">
+                            Sana özel çalışma planı
+                        </span>
+
+                    </span>
+
+                </button>
+
+                <button
+                    class="mode-item"
+                    data-mode="pdf"
+                    type="button"
+                >
+
+                    <span class="mode-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <path
+                                d="M6 4H14L19 9V20H6V4Z"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linejoin="round"
+                            />
+
+                            <path
+                                d="M14 4V9H19"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                            />
+
+                            <path
+                                d="M9 13H16M9 16H14"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    <span class="mode-content">
+
+                        <span class="mode-name">
+                            PDF Hazırla
+                        </span>
+
+                        <span class="mode-description">
+                            Çalışmanı PDF'e dönüştür
+                        </span>
+
+                    </span>
+
+                </button>
+
+            </div>
+
+            <!-- HISTORY -->
+
+            <div class="history-section">
+
+                <div class="sidebar-title">
+                    Son Sohbetler
+                </div>
+
+                <div
+                    class="history-list"
+                    id="historyList"
+                >
+
+                    <div class="history-empty">
+                        Henüz kaydedilmiş sohbet yok.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FOOTER STATUS -->
+
+            <div class="sidebar-footer">
+
+                <div class="status-card">
+
+                    <div class="status-row">
+
+                        <span class="status-dot"></span>
+
+                        <span class="status-text">
+                            ZYNX çalışma alanı aktif
+                        </span>
+
+                    </div>
+
+                    <div class="status-description">
+                        Sohbet, soru çözümü, görsel analiz,
+                        program ve PDF araçları hazır.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+        <!-- =====================================================
+             MAIN
+             ====================================================== -->
+
+        <main class="main">
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <button
+                        class="mobile-menu"
+                        id="mobileMenu"
+                        type="button"
+                        aria-label="Menüyü aç"
+                    >
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <path
+                                d="M4 7H20M4 12H20M4 17H20"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </button>
+
+                    <div>
+
+                        <div class="topbar-title">
+                            ZYNX AI
+                        </div>
+
+                        <div class="topbar-subtitle">
+                            10/D Dijital Sınıf Yapay Zeka Merkezi
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="topbar-right">
+
+                    <div class="top-chip ai">
+                        ZYNX INTELLIGENCE
+                    </div>
+
+                    <div class="top-chip online">
+
+                        <span class="top-online-dot"></span>
+
+                        HAZIR
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- =================================================
+                 CONTENT
+                 ================================================== -->
+
+            <div class="content">
+
+                <!-- WELCOME -->
+
+                <section
+                    class="welcome"
+                    id="welcomeSection"
+                >
+
+                    <div class="welcome-badge">
+
+                        <span class="welcome-badge-dot"></span>
+
+                        ZYNX AI ÇALIŞMA MERKEZİ
+
+                    </div>
+
+                    <h1>
+                        Merhaba
+                        <span
+                            class="name"
+                            id="welcomeName"
+                        >
+                            ZYNX
+                        </span>
+                    </h1>
+
+                    <p class="welcome-description">
+                        Ders çalış, sorularını çöz,
+                        görselleri incelet, sana özel
+                        çalışma programı oluştur veya
+                        hazırladığın içeriği profesyonel
+                        bir PDF haline getir.
+                    </p>
+
+                    <div class="suggestions">
+
+                        <button
+                            class="suggestion"
+                            data-prompt="Merhaba ZYNX, bugün bana nasıl yardımcı olabilirsin?"
+                            type="button"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <path
+                                    d="M12 3L14 9L20 11L14 13L12 20L10 13L4 11L10 9L12 3Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linejoin="round"
+                                />
+
+                            </svg>
+
+                            ZYNX neler yapabiliyor?
+
+                        </button>
+
+                        <button
+                            class="suggestion"
+                            data-mode="solve"
+                            data-prompt="Bana matematik sorularını adım adım çözebileceğin bir çalışma alanı hazırla."
+                            type="button"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <rect
+                                    x="5"
+                                    y="3.5"
+                                    width="14"
+                                    height="17"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                />
+
+                                <path
+                                    d="M8 8H16M8 12H10M12 12H14M16 12H16.1"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                            Soru çöz
+
+                        </button>
+
+                        <button
+                            class="suggestion"
+                            data-mode="planner"
+                            type="button"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <rect
+                                    x="4"
+                                    y="5"
+                                    width="16"
+                                    height="15"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                />
+
+                                <path
+                                    d="M8 3V7M16 3V7M4 10H20"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                            Program oluştur
+
+                        </button>
+
+                        <button
+                            class="suggestion"
+                            data-mode="vision"
+                            type="button"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <rect
+                                    x="4"
+                                    y="5"
+                                    width="16"
+                                    height="14"
+                                    rx="2"
+                                    stroke="currentColor"
+                                    stroke-width="1.6"
+                                />
+
+                                <circle
+                                    cx="9"
+                                    cy="10"
+                                    r="1.4"
+                                    stroke="currentColor"
+                                    stroke-width="1.4"
+                                />
+
+                                <path
+                                    d="M5.5 17L10 13L13 15L15 12L18.5 17"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                />
+
+                            </svg>
+
+                            Görsel analiz et
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+                <!-- CHAT -->
+
+                <section class="chat-shell">
+
+                    <div
+                        class="messages"
+                        id="messages"
+                    >
+
+                    </div>
+
+                    <!-- TYPING -->
+
+                    <div
+                        class="typing"
+                        id="typing"
+                    >
+
+                        <div class="message-avatar">
+
+                            <img
+                                src="assets/zynx-ai.png"
+                                alt=""
+                                onerror="
+                                    this.style.display='none';
+                                    this.parentElement.textContent='Z';
+                                "
+                            >
+
+                        </div>
+
+                        <div class="typing-bubble">
+
+                            <div class="typing-dots">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ATTACHMENT -->
+
+                    <div
+                        class="attachment-preview"
+                        id="attachmentPreview"
+                    >
+
+                        <div class="attachment-thumb">
+
+                            <img
+                                id="attachmentImage"
+                                src=""
+                                alt="Yüklenen görsel"
+                            >
+
+                        </div>
+
+                        <div class="attachment-info">
+
+                            <div
+                                class="attachment-name"
+                                id="attachmentName"
+                            >
+                                görsel.jpg
+                            </div>
+
+                            <div
+                                class="attachment-size"
+                                id="attachmentSize"
+                            >
+                                --
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="remove-attachment"
+                            id="removeAttachment"
+                            type="button"
+                            aria-label="Görseli kaldır"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+
+                                <path
+                                    d="M7 7L17 17M17 7L7 17"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                />
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                    <!-- COMPOSER -->
+
+                    <div class="composer-wrap">
+
+                        <div class="composer">
+
+                            <div class="composer-top">
+
+                                <div class="composer-mode">
+
+                                    <span
+                                        class="composer-mode-dot"
+                                    ></span>
+
+                                    <span
+                                        id="composerModeName"
+                                    >
+                                        ZYNX SOHBET
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="composer-input-area">
+
+                                <button
+                                    class="composer-button attach"
+                                    id="attachButton"
+                                    type="button"
+                                    aria-label="Görsel yükle"
+                                    title="Görsel yükle"
+                                >
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+
+                                        <path
+                                            d="M7 12.5L12.2 7.3C13.9 5.6 16.7 5.6 18.4 7.3C20.1 9 20.1 11.8 18.4 13.5L11.1 20.8C8.9 23 5.3 23 3.1 20.8C.9 18.6.9 15 3.1 12.8L10.5 5.4"
+                                            stroke="currentColor"
+                                            stroke-width="1.7"
+                                            stroke-linecap="round"
+                                        />
+
+                                        <path
+                                            d="M8.5 16L14.8 9.7C15.6 8.9 16.9 8.9 17.7 9.7"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                        />
+
+                                    </svg>
+
+                                </button>
+
+                                <input
+                                    type="file"
+                                    id="imageInput"
+                                    accept="image/png,image/jpeg,image/webp,image/gif"
+                                    hidden
+                                >
+
+                                <textarea
+                                    id="composerInput"
+                                    class="composer-input"
+                                    rows="1"
+                                    placeholder="ZYNX'e bir şey sor..."
+                                    aria-label="ZYNX mesajı"
+                                ></textarea>
+
+                                <button
+                                    class="composer-button send"
+                                    id="sendButton"
+                                    type="button"
+                                    aria-label="Gönder"
+                                    disabled
+                                >
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+
+                                        <path
+                                            d="M21 3L10.4 13.6"
+                                            stroke="currentColor"
+                                            stroke-width="1.8"
+                                            stroke-linecap="round"
+                                        />
+
+                                        <path
+                                            d="M21 3L14.2 21L10.4 13.6L3 9.8L21 3Z"
+                                            stroke="currentColor"
+                                            stroke-width="1.8"
+                                            stroke-linejoin="round"
+                                        />
+
+                                    </svg>
+
+                                </button>
+
+                            </div>
+
+                            <div class="composer-bottom">
+
+                                <div class="composer-hint">
+                                    ZYNX yanıtlarını daha iyi
+                                    kişiselleştirmek için profilini kullanır.
+                                </div>
+
+                                <div class="composer-shortcut">
+
+                                    Gönder
+
+                                    <span class="key">
+                                        ENTER
+                                    </span>
+
+                                    <span>
+                                        ·
+                                    </span>
+
+                                    Satır
+
+                                    <span class="key">
+                                        SHIFT
+                                    </span>
+
+                                    <span class="key">
+                                        ENTER
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- =========================================================
+         SIDEBAR OVERLAY
+         ========================================================== -->
+
+    <div
+        id="sidebarOverlay"
+        style="
+            position:fixed;
+            inset:0;
+            z-index:1100;
+            display:none;
+            background:rgba(0,0,0,.55);
+            backdrop-filter:blur(5px);
+        "
+    ></div>
+
+    <!-- =========================================================
+         WELCOME PROFILE MODAL
+         ========================================================== -->
+
+    <div
+        class="welcome-modal"
+        id="welcomeModal"
+    >
+
+        <div class="welcome-card">
+
+            <div class="welcome-logo">
+
+                <img
+                    src="assets/zynx-ai.png"
+                    alt="ZYNX AI"
+                    onerror="
+                        this.style.display='none';
+                        this.parentElement.innerHTML='Z';
+                    "
+                >
+
+            </div>
+
+            <h2>
+                ZYNX <span>AI</span>
+            </h2>
+
+            <p>
+                ZYNX seni daha iyi tanıyabilsin diye
+                adını ve soyadını gir. Bu bilgiler
+                yalnızca bu tarayıcıdaki kişisel
+                çalışma alanını özelleştirmek için
+                kullanılacaktır.
+            </p>
+
+            <div class="welcome-fields">
+
+                <input
+                    class="welcome-input"
+                    id="firstNameInput"
+                    type="text"
+                    autocomplete="given-name"
+                    placeholder="Adın"
+                >
+
+                <input
+                    class="welcome-input"
+                    id="lastNameInput"
+                    type="text"
+                    autocomplete="family-name"
+                    placeholder="Soyadın"
+                >
+
+            </div>
+
+            <button
+                class="welcome-submit"
+                id="welcomeSubmit"
+                type="button"
+            >
+                ZYNX AI'ı Başlat
+            </button>
+
+            <p class="welcome-note">
+                Profil bilgilerin localStorage üzerinde
+                tutulur ve sistem tarafından okunabilir.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         WORKSPACE OVERLAY
+         ========================================================== -->
+
+    <div
+        class="workspace-overlay"
+        id="workspaceOverlay"
+    >
+
+        <div class="workspace-panel">
+
+            <button
+                class="panel-close"
+                id="panelClose"
+                type="button"
+                aria-label="Paneli kapat"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                >
+
+                    <path
+                        d="M7 7L17 17M17 7L7 17"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+            </button>
+
+            <div class="panel-header">
+
+                <div
+                    class="panel-kicker"
+                    id="panelKicker"
+                >
+                    ZYNX AI
+                </div>
+
+                <div
+                    class="panel-title"
+                    id="panelTitle"
+                >
+                    Çalışma alanı
+                </div>
+
+                <div
+                    class="panel-description"
+                    id="panelDescription"
+                >
+                    --
+                </div>
+
+            </div>
+
+            <div id="panelBody"></div>
+
+            <div class="panel-actions">
+
+                <button
+                    class="panel-button secondary"
+                    id="panelCancel"
+                    type="button"
+                >
+                    Vazgeç
+                </button>
+
+                <button
+                    class="panel-button primary"
+                    id="panelConfirm"
+                    type="button"
+                >
+                    Hazırla
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         PRINT DOCUMENT
+         ========================================================== -->
+
+    <div class="print-only">
+
+        <div
+            class="print-document"
+            id="printDocument"
+        >
+
+            <h1>
+                ZYNX AI
+            </h1>
+
+            <div class="meta">
+                10/D Dijital Sınıf
+            </div>
+
+            <div class="meta">
+                Hazırlayan:
+                <span id="printStudentName">
+                    --
+                </span>
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>
+                            Gün
+                        </th>
+
+                        <th>
+                            Ders
+                        </th>
+
+                        <th>
+                            Konu / Not
+                        </th>
+
+                        <th>
+                            Süre
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="printTableBody"
+                >
+                </tbody>
+
+            </table>
+
+            <div
+                class="pdf-footer"
+                id="printFooter"
+            >
+                ZYNX AI · 10/D Dijital Sınıf
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================== -->
+
+    <script>
+
+        "use strict";
+
+        /* =========================================================
+           ZYNX AI CONFIG
+           ========================================================= */
+
+        /*
+         * GERÇEK AI BAĞLANTISI
+         * ---------------------------------------------------------
+         * GitHub Pages üzerinde API anahtarı tutma.
+         *
+         * Bir backend yazıldığında örneğin:
+         *
+         * endpoint: "https://senin-backendin.example/api/zynx"
+         *
+         * şeklinde endpoint girilebilir.
+         *
+         * Backend'in şu gövdeyi kabul etmesi beklenir:
+         *
+         * {
+         *   message: "...",
+         *   mode: "chat",
+         *   profile: {
+         *      firstName: "...",
+         *      lastName: "..."
+         *   },
+         *   image: {
+         *      name: "...",
+         *      dataUrl: "..."
+         *   }
+         * }
+         *
+         * Beklenen cevap:
+         *
+         * {
+         *   reply: "..."
+         * }
+         *
+         * Böylece Gemini/OpenAI vb. servislerin anahtarı
+         * frontend'e konulmadan kullanılabilir.
+         */
+
+        const AI_CONFIG = {
+
+            endpoint:
+                "",
+
+            timeout:
+                45000
+
+        };
+
+        /* =========================================================
+           MODES
+           ========================================================= */
+
+        const MODE_INFO = {
+
+            chat: {
+                name:
+                    "ZYNX SOHBET",
+
+                placeholder:
+                    "ZYNX'e bir şey sor...",
+
+                description:
+                    "Konuş, soru sor, ders çalış ve öğren."
+            },
+
+            solve: {
+                name:
+                    "SORU ÇÖZ",
+
+                placeholder:
+                    "Soruyu yaz veya görselini yükle...",
+
+                description:
+                    "Soruyu adım adım çöz, nedenini açıkla."
+            },
+
+            vision: {
+                name:
+                    "GÖRSEL ANALİZ",
+
+                placeholder:
+                    "Görsel yükle veya görsel hakkında ne yapılmasını istediğini yaz...",
+
+                description:
+                    "Yüklediğin görseli inceleme altyapısı."
+            },
+
+            planner: {
+                name:
+                    "PROGRAM OLUŞTUR",
+
+                placeholder:
+                    "Nasıl bir ders programı istediğini yaz...",
+
+                description:
+                    "Ders ve çalışma planı oluştur."
+            },
+
+            pdf: {
+                name:
+                    "PDF HAZIRLA",
+
+                placeholder:
+                    "PDF'e dönüştürmek istediğin içeriği yaz...",
+
+                description:
+                    "İçeriği yazdırılabilir PDF düzenine hazırlar."
+            }
+
+        };
+
+        /* =========================================================
+           STATE
+           ========================================================= */
+
+        const state = {
+
+            mode:
+                "chat",
+
+            messages:
+                [],
+
+            history:
+                [],
+
+            profile:
+                null,
+
+            attachment:
+                null,
+
+            panelMode:
+                null,
+
+            typing:
+                false
+
+        };
+
+        /* =========================================================
+           DOM
+           ========================================================= */
+
+        const $ = id =>
+            document.getElementById(id);
+
+        const DOM = {
+
+            sidebar:
+                $("sidebar"),
+
+            sidebarOverlay:
+                $("sidebarOverlay"),
+
+            mobileMenu:
+                $("mobileMenu"),
+
+            profileName:
+                $("profileName"),
+
+            profileAvatar:
+                $("profileAvatar"),
+
+            welcomeName:
+                $("welcomeName"),
+
+            composerModeName:
+                $("composerModeName"),
+
+            composerInput:
+                $("composerInput"),
+
+            sendButton:
+                $("sendButton"),
+
+            attachButton:
+                $("attachButton"),
+
+            imageInput:
+                $("imageInput"),
+
+            attachmentPreview:
+                $("attachmentPreview"),
+
+            attachmentImage:
+                $("attachmentImage"),
+
+            attachmentName:
+                $("attachmentName"),
+
+            attachmentSize:
+                $("attachmentSize"),
+
+            removeAttachment:
+                $("removeAttachment"),
+
+            messages:
+                $("messages"),
+
+            typing:
+                $("typing"),
+
+            newChat:
+                $("newChat"),
+
+            historyList:
+                $("historyList"),
+
+            welcomeModal:
+                $("welcomeModal"),
+
+            firstNameInput:
+                $("firstNameInput"),
+
+            lastNameInput:
+                $("lastNameInput"),
+
+            welcomeSubmit:
+                $("welcomeSubmit"),
+
+            editProfile:
+                $("editProfile"),
+
+            workspaceOverlay:
+                $("workspaceOverlay"),
+
+            panelClose:
+                $("panelClose"),
+
+            panelCancel:
+                $("panelCancel"),
+
+            panelConfirm:
+                $("panelConfirm"),
+
+            panelKicker:
+                $("panelKicker"),
+
+            panelTitle:
+                $("panelTitle"),
+
+            panelDescription:
+                $("panelDescription"),
+
+            panelBody:
+                $("panelBody"),
+
+            printStudentName:
+                $("printStudentName"),
+
+            printTableBody:
+                $("printTableBody")
+
+        };
+
+        /* =========================================================
+           STORAGE
+           ========================================================= */
+
+        const STORAGE = {
+
+            profile:
+                "zynx_ai_profile_v1",
+
+            history:
+                "zynx_ai_history_v1",
+
+            messages:
+                "zynx_ai_messages_v1"
+
+        };
+
+        /* =========================================================
+           UTILITIES
+           ========================================================= */
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+        function safeParse(
+            value,
+            fallback
+        ) {
+
+            try {
+
+                return JSON.parse(
+                    value
+                );
+
+            } catch {
+
+                return fallback;
+
+            }
+
+        }
+
+        function initials(
+            firstName,
+            lastName
+        ) {
+
+            const a =
+                String(firstName || "")
+                    .trim()
+                    .charAt(0);
+
+            const b =
+                String(lastName || "")
+                    .trim()
+                    .charAt(0);
+
+            return (
+                (a + b || "Z")
+                    .toUpperCase()
+            );
+
+        }
+
+        function formatFileSize(bytes) {
+
+            if (
+                bytes < 1024
+            ) {
+
+                return (
+                    `${bytes} B`
+                );
+
+            }
+
+            if (
+                bytes < 1024 * 1024
+            ) {
+
+                return (
+                    `${(
+                        bytes / 1024
+                    ).toFixed(1)} KB`
+                );
+
+            }
+
+            return (
+                `${(
+                    bytes / (
+                        1024 * 1024
+                    )
+                ).toFixed(1)} MB`
+            );
+
+        }
+
+        function scrollToBottom() {
+
+            window.requestAnimationFrame(
+                () => {
+
+                    window.scrollTo({
+                        top:
+                            document.body.scrollHeight,
+
+                        behavior:
+                            "smooth"
+
+                    });
+
+                }
+            );
+
+        }
+
+        /* =========================================================
+           PROFILE
+           ========================================================= */
+
+        function loadProfile() {
+
+            const saved =
+                localStorage.getItem(
+                    STORAGE.profile
+                );
+
+            if (!saved) {
+
+                showWelcomeModal();
+
+                return;
+
+            }
+
+            state.profile =
+                safeParse(
+                    saved,
+                    null
+                );
+
+            if (
+                !state.profile ||
+                !state.profile.firstName ||
+                !state.profile.lastName
+            ) {
+
+                showWelcomeModal();
+
+                return;
+
+            }
+
+            applyProfile();
+
+        }
+
+        function applyProfile() {
+
+            if (
+                !state.profile
+            ) {
+
+                return;
+
+            }
+
+            const fullName =
+                `${state.profile.firstName} ${state.profile.lastName}`;
+
+            DOM.profileName.textContent =
+                fullName;
+
+            DOM.profileAvatar.textContent =
+                initials(
+                    state.profile.firstName,
+                    state.profile.lastName
+                );
+
+            DOM.welcomeName.textContent =
+                state.profile.firstName;
+
+        }
+
+        function showWelcomeModal() {
+
+            DOM.welcomeModal.classList.add(
+                "show"
+            );
+
+            document.body.classList.add(
+                "locked"
+            );
+
+            setTimeout(
+                () =>
+                    DOM.firstNameInput.focus(),
+                120
+            );
+
+        }
+
+        function hideWelcomeModal() {
+
+            DOM.welcomeModal.classList.remove(
+                "show"
+            );
+
+            document.body.classList.remove(
+                "locked"
+            );
+
+        }
+
+        function saveProfile() {
+
+            const firstName =
+                DOM.firstNameInput.value
+                    .trim();
+
+            const lastName =
+                DOM.lastNameInput.value
+                    .trim();
+
+            if (
+                !firstName ||
+                !lastName
+            ) {
+
+                DOM.firstNameInput.focus();
+
+                return;
+
+            }
+
+            state.profile = {
+
+                firstName,
+
+                lastName,
+
+                createdAt:
+                    new Date()
+                        .toISOString()
+
+            };
+
+            localStorage.setItem(
+                STORAGE.profile,
+                JSON.stringify(
+                    state.profile
+                )
+            );
+
+            applyProfile();
+
+            hideWelcomeModal();
+
+            if (
+                state.messages.length === 0
+            ) {
+
+                addAIMessage(
+                    `Merhaba ${escapeHtml(firstName)} 👋\n\nBen ZYNX AI. Sana ders çalışırken, soruları çözerken, görselleri incelerken, program hazırlarken ve içerikleri PDF düzenine getirirken yardımcı olabilirim.\n\nBugün ne yapmak istiyorsun?`,
+                    "chat"
+                );
+
+            }
+
+        }
+
+        /* =========================================================
+           EDIT PROFILE
+           ========================================================= */
+
+        DOM.editProfile.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    state.profile
+                ) {
+
+                    DOM.firstNameInput.value =
+                        state.profile.firstName;
+
+                    DOM.lastNameInput.value =
+                        state.profile.lastName;
+
+                }
+
+                showWelcomeModal();
+
+            }
+        );
+
+        DOM.welcomeSubmit.addEventListener(
+            "click",
+            saveProfile
+        );
+
+        DOM.firstNameInput.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    DOM.lastNameInput.focus();
+
+                }
+
+            }
+        );
+
+        DOM.lastNameInput.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    saveProfile();
+
+                }
+
+            }
+        );
+
+        /* =========================================================
+           MODE SWITCHING
+           ========================================================= */
+
+        function setMode(mode) {
+
+            if (
+                !MODE_INFO[mode]
+            ) {
+
+                mode = "chat";
+
+            }
+
+            state.mode =
+                mode;
+
+            document
+                .querySelectorAll(
+                    ".mode-item"
+                )
+                .forEach(
+                    item => {
+
+                        item.classList.toggle(
+                            "active",
+                            item.dataset.mode === mode
+                        );
+
+                    }
+                );
+
+            DOM.composerModeName.textContent =
+                MODE_INFO[mode].name;
+
+            DOM.composerInput.placeholder =
+                MODE_INFO[mode].placeholder;
+
+            updateModeVisuals();
+
+            if (
+                mode === "planner"
+            ) {
+
+                openPlannerPanel();
+
+            }
+
+            if (
+                mode === "pdf"
+            ) {
+
+                openPdfPanel();
+
+            }
+
+        }
+
+        function updateModeVisuals() {
+
+            if (
+                state.mode === "vision"
+            ) {
+
+                DOM.attachButton.title =
+                    "Görsel yükle";
+
+            } else {
+
+                DOM.attachButton.title =
+                    "Görsel ekle";
+
+            }
+
+        }
+
+        document
+            .querySelectorAll(
+                ".mode-item"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            setMode(
+                                button.dataset.mode
+                            );
+
+                            closeSidebar();
+
+                        }
+                    );
+
+                }
+            );
+
+        /* =========================================================
+           SUGGESTIONS
+           ========================================================= */
+
+        document
+            .querySelectorAll(
+                ".suggestion"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const mode =
+                                button.dataset.mode;
+
+                            if (mode) {
+
+                                setMode(mode);
+
+                            }
+
+                            const prompt =
+                                button.dataset.prompt;
+
+                            if (
+                                prompt
+                            ) {
+
+                                DOM.composerInput.value =
+                                    prompt;
+
+                                resizeComposer();
+
+                                updateSendButton();
+
+                                DOM.composerInput.focus();
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+        /* =========================================================
+           MESSAGE RENDERING
+           ========================================================= */
+
+        function addAIMessage(
+            text,
+            mode = state.mode
+        ) {
+
+            addMessage(
+                "ai",
+                text,
+                mode
+            );
+
+        }
+
+        function addUserMessage(
+            text,
+            mode = state.mode,
+            imageData = null,
+            imageName = null
+        ) {
+
+            addMessage(
+                "user",
+                text,
+                mode,
+                imageData,
+                imageName
+            );
+
+        }
+
+        function addMessage(
+            role,
+            text,
+            mode,
+            imageData = null,
+            imageName = null
+        ) {
+
+            const message = {
+
+                id:
+                    crypto.randomUUID
+                    ? crypto.randomUUID()
+                    : `${Date.now()}-${Math.random()}`,
+
+                role,
+
+                text,
+
+                mode,
+
+                imageData,
+
+                imageName,
+
+                createdAt:
+                    new Date()
+                        .toISOString()
+
+            };
+
+            state.messages.push(
+                message
+            );
+
+            renderMessage(
+                message
+            );
+
+            saveMessages();
+
+            if (
+                role === "user"
+            ) {
+
+                addToHistory(
+                    text
+                );
+
+            }
+
+            scrollToBottom();
+
+        }
+
+        function renderMessage(
+            message
+        ) {
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+            wrapper.className =
+                `message ${message.role}`;
+
+            const avatar =
+                document.createElement(
+                    "div"
+                );
+
+            avatar.className =
+                "message-avatar";
+
+            if (
+                message.role === "ai"
+            ) {
+
+                avatar.innerHTML = `
+                    <img
+                        src="assets/zynx-ai.png"
+                        alt=""
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.textContent='Z';
+                        "
+                    >
+                `;
+
+            } else {
+
+                avatar.textContent =
+                    state.profile
+                        ? initials(
+                            state.profile.firstName,
+                            state.profile.lastName
+                        )
+                        : "S";
+
+            }
+
+            const content =
+                document.createElement(
+                    "div"
+                );
+
+            content.className =
+                "message-content";
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+            name.className =
+                "message-name";
+
+            name.textContent =
+                message.role === "ai"
+                    ? "ZYNX AI"
+                    : (
+                        state.profile
+                            ? `${state.profile.firstName} ${state.profile.lastName}`
+                            : "Sen"
+                    );
+
+            const bubble =
+                document.createElement(
+                    "div"
+                );
+
+            bubble.className =
+                "bubble";
+
+            let html =
+                formatOutput(
+                    message.text
+                );
+
+            if (
+                message.imageData
+            ) {
+
+                html =
+                    `
+                        <div class="message-image">
+                            <img
+                                src="${message.imageData}"
+                                alt="${escapeHtml(
+                                    message.imageName || "Görsel"
+                                )}"
+                            >
+                        </div>
+                    ` + html;
+
+            }
+
+            bubble.innerHTML =
+                html;
+
+            const actions =
+                document.createElement(
+                    "div"
+                );
+
+            actions.className =
+                "message-actions";
+
+            const copyButton =
+                document.createElement(
+                    "button"
+                );
+
+            copyButton.className =
+                "message-action";
+
+            copyButton.type =
+                "button";
+
+            copyButton.title =
+                "Kopyala";
+
+            copyButton.innerHTML = `
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                >
+                    <rect
+                        x="8"
+                        y="8"
+                        width="11"
+                        height="11"
+                        rx="2"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    />
+                    <path
+                        d="M16 8V5.5C16 4.7 15.3 4 14.5 4H6.5C5.7 4 5 4.7 5 5.5V14.5C5 15.3 5.7 16 6.5 16H8"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    />
+                </svg>
+            `;
+
+            copyButton.addEventListener(
+                "click",
+                async () => {
+
+                    try {
+
+                        await navigator.clipboard.writeText(
+                            message.text
+                        );
+
+                        copyButton.style.color =
+                            "#49dea0";
+
+                        setTimeout(
+                            () => {
+                                copyButton.style.color =
+                                    "";
+                            },
+                            1000
+                        );
+
+                    } catch {
+
+                        /* Clipboard erişimi olmayan
+                           tarayıcılar için sessiz geçiş. */
+
+                    }
+
+                }
+            );
+
+            actions.appendChild(
+                copyButton
+            );
+
+            if (
+                message.role === "user"
+            ) {
+
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
+
+                deleteButton.className =
+                    "message-action";
+
+                deleteButton.type =
+                    "button";
+
+                deleteButton.title =
+                    "Mesajı sil";
+
+                deleteButton.innerHTML = `
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                    >
+                        <path
+                            d="M6 7H18M10 7V5H14V7M8 7L9 19H15L16 7"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                `;
+
+                deleteButton.addEventListener(
+                    "click",
+                    () => {
+
+                        wrapper.remove();
+
+                        state.messages =
+                            state.messages.filter(
+                                item =>
+                                    item.id !==
+                                    message.id
+                            );
+
+                        saveMessages();
+
+                    }
+                );
+
+                actions.appendChild(
+                    deleteButton
+                );
+
+            }
+
+            content.appendChild(
+                name
+            );
+
+            content.appendChild(
+                bubble
+            );
+
+            content.appendChild(
+                actions
+            );
+
+            if (
+                message.role === "ai"
+            ) {
+
+                wrapper.appendChild(
+                    avatar
+                );
+
+                wrapper.appendChild(
+                    content
+                );
+
+            } else {
+
+                wrapper.appendChild(
+                    content
+                );
+
+                wrapper.appendChild(
+                    avatar
+                );
+
+            }
+
+            DOM.messages.appendChild(
+                wrapper
+            );
+
+        }
+
+        function formatOutput(
+            text
+        ) {
+
+            let html =
+                escapeHtml(
+                    text
+                );
+
+            /*
+             * Basit profesyonel markdown benzeri
+             * görüntüleme.
+             */
+
+            html =
+                html.replace(
+                    /\*\*(.*?)\*\*/g,
+                    "<strong>$1</strong>"
+                );
+
+            html =
+                html.replace(
+                    /`([^`]+)`/g,
+                    '<span class="inline-code">$1</span>'
+                );
+
+            html =
+                html.replace(
+                    /^(#{1,3})\s+(.+)$/gm,
+                    '<span class="output-title">$2</span>'
+                );
+
+            html =
+                html.replace(
+                    /^(?:•|-)\s+(.+)$/gm,
+                    "• $1"
+                );
+
+            return html;
+        }
+
+        /* =========================================================
+           MESSAGES STORAGE
+           ========================================================= */
+
+        function saveMessages() {
+
+            localStorage.setItem(
+                STORAGE.messages,
+                JSON.stringify(
+                    state.messages.slice(-60)
+                )
+            );
+
+        }
+
+        function loadMessages() {
+
+            const saved =
+                localStorage.getItem(
+                    STORAGE.messages
+                );
+
+            if (!saved) {
+
+                return false;
+
+            }
+
+            const messages =
+                safeParse(
+                    saved,
+                    []
+                );
+
+            if (
+                !Array.isArray(
+                    messages
+                )
+            ) {
+
+                return false;
+
+            }
+
+            state.messages =
+                messages.slice(-60);
+
+            DOM.messages.innerHTML =
+                "";
+
+            state.messages.forEach(
+                renderMessage
+            );
+
+            return (
+                state.messages.length > 0
+            );
+
+        }
+
+        /* =========================================================
+           HISTORY
+           ========================================================= */
+
+        function addToHistory(
+            text
+        ) {
+
+            const clean =
+                String(text)
+                    .replace(/\s+/g," ")
+                    .trim();
+
+            if (!clean) {
+                return;
+            }
+
+            const entry = {
+
+                id:
+                    Date.now(),
+
+                title:
+                    clean.slice(0, 70),
+
+                time:
+                    new Date()
+                        .toLocaleTimeString(
+                            "tr-TR",
+                            {
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            }
+                        )
+
+            };
+
+            state.history =
+                [
+                    entry,
+                    ...state.history
+                ]
+                .slice(0, 14);
+
+            localStorage.setItem(
+                STORAGE.history,
+                JSON.stringify(
+                    state.history
+                )
+            );
+
+            renderHistory();
+
+        }
+
+        function loadHistory() {
+
+            state.history =
+                safeParse(
+                    localStorage.getItem(
+                        STORAGE.history
+                    ),
+                    []
+                );
+
+            if (
+                !Array.isArray(
+                    state.history
+                )
+            ) {
+
+                state.history =
+                    [];
+
+            }
+
+            renderHistory();
+
+        }
+
+        function renderHistory() {
+
+            DOM.historyList.innerHTML =
+                "";
+
+            if (
+                state.history.length === 0
+            ) {
+
+                DOM.historyList.innerHTML = `
+                    <div class="history-empty">
+                        Henüz kaydedilmiş
+                        sohbet yok.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+            state.history.forEach(
+                item => {
+
+                    const button =
+                        document.createElement(
+                            "button"
+                        );
+
+                    button.className =
+                        "history-item";
+
+                    button.type =
+                        "button";
+
+                    button.innerHTML = `
+                        <div class="history-title">
+                            ${escapeHtml(
+                                item.title
+                            )}
+                        </div>
+
+                        <div class="history-time">
+                            ${escapeHtml(
+                                item.time
+                            )}
+                        </div>
+                    `;
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            DOM.composerInput.value =
+                                item.title;
+
+                            resizeComposer();
+
+                            updateSendButton();
+
+                            DOM.composerInput.focus();
+
+                            closeSidebar();
+
+                        }
+                    );
+
+                    DOM.historyList.appendChild(
+                        button
+                    );
+
+                }
+            );
+
+        }
+
+        /* =========================================================
+           IMAGE UPLOAD
+           ========================================================= */
+
+        DOM.attachButton.addEventListener(
+            "click",
+            () => {
+
+                DOM.imageInput.click();
+
+            }
+        );
+
+        DOM.imageInput.addEventListener(
+            "change",
+            event => {
+
+                const file =
+                    event.target.files?.[0];
+
+                if (!file) {
+                    return;
+                }
+
+                handleImageFile(
+                    file
+                );
+
+            }
+        );
+
+        async function handleImageFile(
+            file
+        ) {
+
+            if (
+                !file.type.startsWith("image/")
+            ) {
+
+                return;
+
+            }
+
+            /*
+             * Boyut güvenliği:
+             * Frontend tarafında çok büyük görsellerin
+             * doğrudan chat içine alınmasını engelliyoruz.
+             */
+
+            if (
+                file.size >
+                8 * 1024 * 1024
+            ) {
+
+                alert(
+                    "Bu görsel 8 MB'dan büyük. Daha küçük bir görsel seç."
+                );
+
+                return;
+
+            }
+
+            const dataUrl =
+                await readFileAsDataURL(
+                    file
+                );
+
+            state.attachment = {
+
+                file,
+
+                dataUrl,
+
+                name:
+                    file.name,
+
+                size:
+                    file.size,
+
+                type:
+                    file.type
+
+            };
+
+            DOM.attachmentImage.src =
+                dataUrl;
+
+            DOM.attachmentName.textContent =
+                file.name;
+
+            DOM.attachmentSize.textContent =
+                formatFileSize(
+                    file.size
+                );
+
+            DOM.attachmentPreview.classList.add(
+                "show"
+            );
+
+            updateSendButton();
+
+        }
+
+        function readFileAsDataURL(
+            file
+        ) {
+
+            return new Promise(
+                (
+                    resolve,
+                    reject
+                ) => {
+
+                    const reader =
+                        new FileReader();
+
+                    reader.onload =
+                        () =>
+                            resolve(
+                                reader.result
+                            );
+
+                    reader.onerror =
+                        reject;
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
+            );
+
+        }
+
+        DOM.removeAttachment.addEventListener(
+            "click",
+            removeAttachment
+        );
+
+        function removeAttachment() {
+
+            state.attachment =
+                null;
+
+            DOM.imageInput.value =
+                "";
+
+            DOM.attachmentImage.src =
+                "";
+
+            DOM.attachmentPreview.classList.remove(
+                "show"
+            );
+
+            updateSendButton();
+
+        }
+
+        /* =========================================================
+           DRAG & DROP
+           ========================================================= */
+
+        const composer =
+            document.querySelector(
+                ".composer"
+            );
+
+        [
+            "dragenter",
+            "dragover"
+        ]
+        .forEach(
+            eventName => {
+
+                composer.addEventListener(
+                    eventName,
+                    event => {
+
+                        event.preventDefault();
+
+                        composer.style.borderColor =
+                            "rgba(90,165,255,.30)";
+
+                    }
+                );
+
+            }
+        );
+
+        [
+            "dragleave",
+            "drop"
+        ]
+        .forEach(
+            eventName => {
+
+                composer.addEventListener(
+                    eventName,
+                    event => {
+
+                        event.preventDefault();
+
+                        composer.style.borderColor =
+                            "";
+
+                    }
+                );
+
+            }
+        );
+
+        composer.addEventListener(
+            "drop",
+            event => {
+
+                const file =
+                    event.dataTransfer
+                        ?.files
+                        ?.[0];
+
+                if (file) {
+
+                    handleImageFile(
+                        file
+                    );
+
+                }
+
+            }
+        );
+
+        /* =========================================================
+           INPUT
+           ========================================================= */
+
+        DOM.composerInput.addEventListener(
+            "input",
+            () => {
+
+                resizeComposer();
+
+                updateSendButton();
+
+            }
+        );
+
+        DOM.composerInput.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ) {
+
+                    event.preventDefault();
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+        function resizeComposer() {
+
+            DOM.composerInput.style.height =
+                "auto";
+
+            DOM.composerInput.style.height =
+                Math.min(
+                    DOM.composerInput.scrollHeight,
+                    170
+                ) + "px";
+
+        }
+
+        function updateSendButton() {
+
+            DOM.sendButton.disabled =
+                !(
+                    DOM.composerInput.value.trim() ||
+                    state.attachment
+                );
+
+        }
+
+        DOM.sendButton.addEventListener(
+            "click",
+            sendMessage
+        );
+
+        /* =========================================================
+           SEND MESSAGE
+           ========================================================= */
+
+        async function sendMessage() {
+
+            const text =
+                DOM.composerInput.value.trim();
+
+            const image =
+                state.attachment;
+
+            if (
+                !text &&
+                !image
+            ) {
+
+                return;
+
+            }
+
+            const outgoingImage =
+                image
+                    ? image.dataUrl
+                    : null;
+
+            const outgoingImageName =
+                image
+                    ? image.name
+                    : null;
+
+            DOM.composerInput.value =
+                "";
+
+            resizeComposer();
+
+            removeAttachment();
+
+            addUserMessage(
+                text ||
+                "Bu görseli incele.",
+                state.mode,
+                outgoingImage,
+                outgoingImageName
+            );
+
+            showTyping();
+
+            try {
+
+                const reply =
+                    await processUserRequest(
+                        text,
+                        state.mode,
+                        {
+                            dataUrl:
+                                outgoingImage,
+
+                            name:
+                                outgoingImageName
+                        }
+                    );
+
+                hideTyping();
+
+                addAIMessage(
+                    reply,
+                    state.mode
+                );
+
+            } catch (error) {
+
+                hideTyping();
+
+                addAIMessage(
+                    "Şu anda isteği işlerken bir sorun oluştu. ZYNX arayüzü çalışıyor ancak gerçek AI bağlantısı için backend endpoint'inin yapılandırılması gerekiyor.",
+                    state.mode
+                );
+
+                console.error(
+                    "ZYNX AI:",
+                    error
+                );
+
+            }
+
+            updateSendButton();
+
+        }
+
+        /* =========================================================
+           AI REQUEST
+           ========================================================= */
+
+        async function processUserRequest(
+            text,
+            mode,
+            image
+        ) {
+
+            /*
+             * Gerçek backend varsa kullan.
+             */
+
+            if (
+                AI_CONFIG.endpoint
+            ) {
+
+                return await callBackendAI(
+                    text,
+                    mode,
+                    image
+                );
+
+            }
+
+            /*
+             * Backend yoksa yerel akıllı fallback.
+             */
+
+            return localAI(
+                text,
+                mode,
+                image
+            );
+
+        }
+
+        async function callBackendAI(
+            text,
+            mode,
+            image
+        ) {
+
+            const controller =
+                new AbortController();
+
+            const timer =
+                setTimeout(
+                    () =>
+                        controller.abort(),
+                    AI_CONFIG.timeout
+                );
+
+            try {
+
+                const response =
+                    await fetch(
+                        AI_CONFIG.endpoint,
+                        {
+                            method:
+                                "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            signal:
+                                controller.signal,
+
+                            body:
+                                JSON.stringify({
+
+                                    message:
+                                        text,
+
+                                    mode,
+
+                                    profile:
+                                        state.profile,
+
+                                    image:
+                                        image?.dataUrl
+                                            ? {
+                                                name:
+                                                    image.name,
+
+                                                dataUrl:
+                                                    image.dataUrl
+                                            }
+                                            : null
+
+                                })
+
+                        }
+                    );
+
+                if (
+                    !response.ok
+                ) {
+
+                    throw new Error(
+                        `Backend HTTP ${response.status}`
+                    );
+
+                }
+
+                const data =
+                    await response.json();
+
+                if (
+                    !data.reply
+                ) {
+
+                    throw new Error(
+                        "Backend 'reply' alanı döndürmedi."
+                    );
+
+                }
+
+                return String(
+                    data.reply
+                );
+
+            } finally {
+
+                clearTimeout(
+                    timer
+                );
+
+            }
+
+        }
+
+        /* =========================================================
+           LOCAL AI FALLBACK
+           ========================================================= */
+
+        async function localAI(
+            text,
+            mode,
+            image
+        ) {
+
+            await sleep(
+                550
+            );
+
+            const normalized =
+                String(text || "")
+                    .toLocaleLowerCase(
+                        "tr-TR"
+                    )
+                    .trim();
+
+            /*
+             * Görsel.
+             */
+
+            if (
+                image?.dataUrl
+            ) {
+
+                if (
+                    mode === "vision" ||
+                    mode === "solve"
+                ) {
+
+                    return (
+                        "Görseli ZYNX çalışma alanına başarıyla ekledim.\n\n" +
+                        "Gerçek görsel anlama özelliğinin çalışması için " +
+                        "AI_CONFIG.endpoint alanına güvenli bir backend bağlaman gerekiyor. " +
+                        "Arayüzde görsel aktarımı hazır durumda.\n\n" +
+                        "Backend bağlandığında görseldeki soru, metin, tablo veya " +
+                        "ders içeriği ZYNX tarafından analiz edilip açıklanabilir."
+                    );
+
+                }
+
+            }
+
+            /*
+             * Selamlaşma.
+             */
+
+            if (
+                greetingDetected(
+                    normalized
+                )
+            ) {
+
+                const name =
+                    state.profile?.firstName
+                    || "arkadaşım";
+
+                return (
+                    `Merhaba ${name}! 👋\n\n` +
+                    "Ben ZYNX AI. Buradayım ve ne yapmak " +
+                    "istediğini anlayıp uygun çalışma alanına geçebilirim.\n\n" +
+                    "Örneğin:\n" +
+                    "• Matematik sorusu çözebilirim.\n" +
+                    "• Bir görseli incelemek için görsel çalışma alanını kullanabilirsin.\n" +
+                    "• Haftalık ders / çalışma programı oluşturabilirim.\n" +
+                    "• İçeriğini yazdırılabilir PDF düzenine hazırlayabilirim.\n\n" +
+                    "Bana doğrudan ne istediğini yazman yeterli."
+                );
+
+            }
+
+            /*
+             * ZYNX yetenekleri.
+             */
+
+            if (
+                normalized.includes("neler yap") ||
+                normalized.includes("ne yapabili") ||
+                normalized.includes("özellik")
+            ) {
+
+                return (
+                    "ZYNX AI'nin çalışma alanları hazır:\n\n" +
+                    "1. ZYNX Sohbet — Dersler, konular ve günlük sorular hakkında konuşabilirsin.\n" +
+                    "2. Soru Çöz — Soruyu yazabilir veya görsel yükleyebilirsin.\n" +
+                    "3. Görsel Analiz — Görsel yükleyip analiz altyapısını kullanabilirsin.\n" +
+                    "4. Program Oluştur — Haftalık ders ve çalışma planı hazırlayabilirsin.\n" +
+                    "5. PDF Hazırla — Hazırladığın programı yazdırılabilir PDF düzenine çevirebilirsin.\n\n" +
+                    "Gerçek yapay zeka yanıtları için güvenli backend bağlantısı gerektiğini de unutma."
+                );
+
+            }
+
+            /*
+             * Matematik tespiti.
+             */
+
+            if (
+                mode === "solve" ||
+                /(\d+\s*[\+\-\*x×\/]\s*\d+)/i.test(
+                    normalized
+                )
+            ) {
+
+                const simpleResult =
+                    solveSimpleMath(
+                        normalized
+                    );
+
+                if (
+                    simpleResult
+                ) {
+
+                    return simpleResult;
+
+                }
+
+                return (
+                    "Soru çözme modundasın.\n\n" +
+                    "Soruyu buraya tam olarak yazabilir veya " +
+                    "soru görselini ekleyebilirsin.\n\n" +
+                    "ZYNX çözüm formatını şu şekilde hazırlar:\n" +
+                    "1. Verilenler\n" +
+                    "2. Kullanılan yöntem\n" +
+                    "3. Adım adım işlem\n" +
+                    "4. Sonuç\n" +
+                    "5. Kısa kontrol\n\n" +
+                    "Gerçek yapay zeka çözümünü aktif etmek için backend bağlantısı eklenmelidir."
+                );
+
+            }
+
+            /*
+             * Program.
+             */
+
+            if (
+                mode === "planner" ||
+                normalized.includes("program oluştur") ||
+                normalized.includes("çalışma program")
+            ) {
+
+                return (
+                    "Program oluşturma alanını açmak için sol menüden “Program Oluştur” seçeneğine dokunabilirsin.\n\n" +
+                    "Orada hangi derslere çalışacağını, günlük çalışma süresini ve planın süresini belirleyebilirsin.\n\n" +
+                    "Ardından ZYNX programı tablo halinde oluşturur ve PDF'e hazırlayabilir."
+                );
+
+            }
+
+            /*
+             * PDF.
+             */
+
+            if (
+                mode === "pdf" ||
+                normalized.includes("pdf")
+            ) {
+
+                return (
+                    "PDF çalışma alanını açmak için sol menüden “PDF Hazırla” seçeneğini kullan.\n\n" +
+                    "İçeriğini verdikten sonra ZYNX bunu temiz bir belge düzenine yerleştirir ve tarayıcının yazdırma sistemi üzerinden PDF olarak kaydetmeye hazırlar."
+                );
+
+            }
+
+            /*
+             * Ders algılama.
+             */
+
+            const subject =
+                detectSubject(
+                    normalized
+                );
+
+            if (
+                subject
+            ) {
+
+                return (
+                    `${subject} hakkında yardım istiyorsun.\n\n` +
+                    "Sorunu mümkün olduğunca açık şekilde yaz. " +
+                    "İstersen soru fotoğrafını da ekleyebilirsin.\n\n" +
+                    "Gerçek AI bağlantısı kurulduğunda ZYNX soruyu analiz edip seviyene uygun açıklama ve çözüm üretebilir."
+                );
+
+            }
+
+            /*
+             * Genel fallback.
+             */
+
+            return (
+                `Mesajını aldım${state.profile?.firstName ? ` ${state.profile.firstName}` : ""}.\n\n` +
+                "Şu anda frontend tarafındaki ZYNX çalışma alanı aktif. " +
+                "Gerçek yapay zeka üretimi için güvenli backend endpoint'i bağlandığında " +
+                "bu mesajın yerine AI tarafından oluşturulan gerçek yanıt gelecek.\n\n" +
+                "Şimdilik sol taraftan “Soru Çöz”, “Görsel Analiz”, “Program Oluştur” veya “PDF Hazırla” çalışma alanlarından birini açabilirsin."
+            );
+
+        }
+
+        function greetingDetected(
+            text
+        ) {
+
+            const greetings = [
+                "merhaba",
+                "selam",
+                "sa",
+                "slm",
+                "hey",
+                "hello",
+                "hi",
+                "günaydın",
+                "iyi akşamlar",
+                "iyi geceler",
+                "iyi günler"
+            ];
+
+            return greetings.some(
+                greeting =>
+                    text === greeting ||
+                    text.startsWith(
+                        greeting + " "
+                    )
+            );
+
+        }
+
+        function detectSubject(
+            text
+        ) {
+
+            const subjects = [
+
+                [
+                    "matematik",
+                    "Matematik"
+                ],
+
+                [
+                    "fizik",
+                    "Fizik"
+                ],
+
+                [
+                    "kimya",
+                    "Kimya"
+                ],
+
+                [
+                    "biyoloji",
+                    "Biyoloji"
+                ],
+
+                [
+                    "edebiyat",
+                    "Türk Dili ve Edebiyatı"
+                ],
+
+                [
+                    "tarih",
+                    "Tarih"
+                ],
+
+                [
+                    "coğrafya",
+                    "Coğrafya"
+                ],
+
+                [
+                    "felsefe",
+                    "Felsefe"
+                ],
+
+                [
+                    "din kültürü",
+                    "Din Kültürü ve Ahlak Bilgisi"
+                ],
+
+                [
+                    "ingilizce",
+                    "İngilizce"
+                ],
+
+                [
+                    "beden",
+                    "Beden Eğitimi"
+                ]
+
+            ];
+
+            const found =
+                subjects.find(
+                    ([key]) =>
+                        text.includes(
+                            key
+                        )
+                );
+
+            return found
+                ? found[1]
+                : null;
+
+        }
+
+        function solveSimpleMath(
+            text
+        ) {
+
+            const match =
+                text.match(
+                    /(-?\d+(?:[.,]\d+)?)\s*([\+\-\*x×\/])\s*(-?\d+(?:[.,]\d+)?)/
+                );
+
+            if (!match) {
+                return null;
+            }
+
+            const a =
+                Number(
+                    match[1].replace(",", ".")
+                );
+
+            const b =
+                Number(
+                    match[3].replace(",", ".")
+                );
+
+            const op =
+                match[2];
+
+            let result;
+
+            switch (op) {
+
+                case "+":
+                    result =
+                        a + b;
+                    break;
+
+                case "-":
+                    result =
+                        a - b;
+                    break;
+
+                case "*":
+                case "x":
+                case "×":
+                    result =
+                        a * b;
+                    break;
+
+                case "/":
+
+                    if (
+                        b === 0
+                    ) {
+
+                        return (
+                            "Bu işlemde bölen 0 olduğu için sonuç tanımsızdır."
+                        );
+
+                    }
+
+                    result =
+                        a / b;
+
+                    break;
+
+                default:
+                    return null;
+
+            }
+
+            return (
+                "**Basit işlem çözümü**\n\n" +
+                `1. İlk sayı: ${a}\n` +
+                `2. İşlem: ${op}\n` +
+                `3. İkinci sayı: ${b}\n` +
+                `4. Sonuç: ${result}\n\n` +
+                "Daha kapsamlı bir soruyu tam metniyle veya görseliyle gönderebilirsin."
+            );
+
+        }
+
+        function sleep(
+            ms
+        ) {
+
+            return new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        ms
+                    )
+            );
+
+        }
+
+        /* =========================================================
+           TYPING
+           ========================================================= */
+
+        function showTyping() {
+
+            state.typing =
+                true;
+
+            DOM.typing.classList.add(
+                "show"
+            );
+
+            scrollToBottom();
+
+        }
+
+        function hideTyping() {
+
+            state.typing =
+                false;
+
+            DOM.typing.classList.remove(
+                "show"
+            );
+
+        }
+
+        /* =========================================================
+           NEW CHAT
+           ========================================================= */
+
+        DOM.newChat.addEventListener(
+            "click",
+            () => {
+
+                state.messages =
+                    [];
+
+                saveMessages();
+
+                DOM.messages.innerHTML =
+                    "";
+
+                addAIMessage(
+                    `Yeni sohbet hazır${state.profile?.firstName ? ` ${state.profile.firstName}` : ""}.\n\nNe yapmak istediğini yazabilir veya aşağıdaki çalışma alanlarından birini seçebilirsin.`,
+                    "chat"
+                );
+
+                setMode(
+                    "chat"
+                );
+
+                closeSidebar();
+
+            }
+        );
+
+        /* =========================================================
+           MOBILE SIDEBAR
+           ========================================================= */
+
+        function openSidebar() {
+
+            DOM.sidebar.classList.add(
+                "open"
+            );
+
+            DOM.sidebarOverlay.style.display =
+                "block";
+
+            document.body.classList.add(
+                "locked"
+            );
+
+        }
+
+        function closeSidebar() {
+
+            DOM.sidebar.classList.remove(
+                "open"
+            );
+
+            DOM.sidebarOverlay.style.display =
+                "none";
+
+            if (
+                !DOM.welcomeModal.classList.contains(
+                    "show"
+                )
+            ) {
+
+                document.body.classList.remove(
+                    "locked"
+                );
+
+            }
+
+        }
+
+        DOM.mobileMenu.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    DOM.sidebar.classList.contains(
+                        "open"
+                    )
+                ) {
+
+                    closeSidebar();
+
+                } else {
+
+                    openSidebar();
+
+                }
+
+            }
+        );
+
+        DOM.sidebarOverlay.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+        /* =========================================================
+           WORKSPACE PANEL
+           ========================================================= */
+
+        function openPanel({
+            kicker,
+            title,
+            description,
+            body,
+            confirmText,
+            mode,
+            onConfirm
+        }) {
+
+            state.panelMode =
+                mode;
+
+            DOM.panelKicker.textContent =
+                kicker;
+
+            DOM.panelTitle.textContent =
+                title;
+
+            DOM.panelDescription.textContent =
+                description;
+
+            DOM.panelBody.innerHTML =
+                body;
+
+            DOM.panelConfirm.textContent =
+                confirmText;
+
+            DOM.workspaceOverlay.classList.add(
+                "show"
+            );
+
+            document.body.classList.add(
+                "locked"
+            );
+
+            DOM.panelConfirm.onclick =
+                onConfirm;
+
+        }
+
+        function closePanel() {
+
+            DOM.workspaceOverlay.classList.remove(
+                "show"
+            );
+
+            if (
+                !DOM.welcomeModal.classList.contains(
+                    "show"
+                )
+            ) {
+
+                document.body.classList.remove(
+                    "locked"
+                );
+
+            }
+
+        }
+
+        DOM.panelClose.addEventListener(
+            "click",
+            closePanel
+        );
+
+        DOM.panelCancel.addEventListener(
+            "click",
+            closePanel
+        );
+
+        DOM.workspaceOverlay.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    DOM.workspaceOverlay
+                ) {
+
+                    closePanel();
+
+                }
+
+            }
+        );
+
+        /* =========================================================
+           PLANNER PANEL
+           ========================================================= */
+
+        function openPlannerPanel() {
+
+            openPanel({
+
+                kicker:
+                    "ZYNX PLANNER ENGINE",
+
+                title:
+                    "Ders programı oluştur",
+
+                description:
+                    "Çalışmak istediğin dersleri, günlük süreyi ve plan süresini belirle. ZYNX sana düzenli bir haftalık çalışma planı hazırlasın.",
+
+                mode:
+                    "planner",
+
+                confirmText:
+                    "Programı Oluştur",
+
+                body: `
+                    <div class="form-grid">
+
+                        <div class="form-field">
+                            <label class="form-label">
+                                Plan adı
+                            </label>
+
+                            <input
+                                class="form-input"
+                                id="plannerName"
+                                value="10/D Haftalık Çalışma Programı"
+                            >
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">
+                                Günlük çalışma süresi
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="plannerDuration"
+                            >
+                                <option value="60">
+                                    1 saat
+                                </option>
+
+                                <option value="90" selected>
+                                    1,5 saat
+                                </option>
+
+                                <option value="120">
+                                    2 saat
+                                </option>
+
+                                <option value="150">
+                                    2,5 saat
+                                </option>
+
+                                <option value="180">
+                                    3 saat
+                                </option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">
+                                Program süresi
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="plannerWeeks"
+                            >
+                                <option value="1" selected>
+                                    1 hafta
+                                </option>
+
+                                <option value="2">
+                                    2 hafta
+                                </option>
+
+                                <option value="4">
+                                    4 hafta
+                                </option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">
+                                Öncelik
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="plannerPriority"
+                            >
+                                <option>
+                                    Dengeli
+                                </option>
+
+                                <option>
+                                    Sayısal dersler
+                                </option>
+
+                                <option>
+                                    Sözel dersler
+                                </option>
+
+                                <option>
+                                    Zayıf olduğum dersler
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-field full">
+
+                            <label class="form-label">
+                                Çalışılacak dersler
+                            </label>
+
+                            <div class="subject-grid">
+
+                                ${[
+                                    "Matematik",
+                                    "Fizik",
+                                    "Kimya",
+                                    "Biyoloji",
+                                    "Türk Dili ve Edebiyatı",
+                                    "Tarih",
+                                    "Coğrafya",
+                                    "Felsefe",
+                                    "Din Kültürü",
+                                    "İngilizce",
+                                    "Beden",
+                                    "Görsel / Müzik"
+                                ].map(
+                                    (
+                                        subject,
+                                        index
+                                    ) => `
+                                        <div class="subject-check">
+
+                                            <input
+                                                type="checkbox"
+                                                id="subject-${index}"
+                                                value="${subject}"
+                                                ${index < 5 ? "checked" : ""}
+                                            >
+
+                                            <label for="subject-${index}">
+                                                ${subject}
+                                            </label>
+
+                                        </div>
+                                    `
+                                ).join("")}
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-field full">
+
+                            <label class="form-label">
+                                Ek not
+                            </label>
+
+                            <textarea
+                                class="form-textarea"
+                                id="plannerNote"
+                                placeholder="Örneğin: Matematiğe daha fazla ağırlık ver, hafta sonu daha az çalışayım..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+                `,
+
+                onConfirm:
+                    createPlanner
+
+            });
+
+            setMode(
+                "planner"
+            );
+
+        }
+
+        function createPlanner() {
+
+            const name =
+                $("plannerName")
+                    ?.value.trim()
+                ||
+                "10/D Haftalık Çalışma Programı";
+
+            const duration =
+                Number(
+                    $("plannerDuration")
+                        ?.value
+                    || 90
+                );
+
+            const weeks =
+                Number(
+                    $("plannerWeeks")
+                        ?.value
+                    || 1
+                );
+
+            const priority =
+                $("plannerPriority")
+                    ?.value
+                ||
+                "Dengeli";
+
+            const note =
+                $("plannerNote")
+                    ?.value.trim()
+                || "";
+
+            const subjects =
+                [
+                    ...document
+                        .querySelectorAll(
+                            ".subject-check input:checked"
+                        )
+                ]
+                .map(
+                    input =>
+                        input.value
+                );
+
+            if (
+                subjects.length === 0
+            ) {
+
+                alert(
+                    "En az bir ders seç."
+                );
+
+                return;
+
+            }
+
+            const weekdays = [
+                "Pazartesi",
+                "Salı",
+                "Çarşamba",
+                "Perşembe",
+                "Cuma",
+                "Cumartesi",
+                "Pazar"
+            ];
+
+            const rows = [];
+
+            let subjectIndex =
+                0;
+
+            weekdays.forEach(
+                (
+                    day,
+                    dayIndex
+                ) => {
+
+                    const lessonsPerDay =
+                        dayIndex < 5
+                            ? 1
+                            : 2;
+
+                    for (
+                        let i = 0;
+                        i < lessonsPerDay;
+                        i++
+                    ) {
+
+                        if (
+                            subjectIndex >=
+                            subjects.length
+                        ) {
+
+                            subjectIndex = 0;
+
+                        }
+
+                        const subject =
+                            subjects[
+                                subjectIndex
+                            ];
+
+                        const block =
+                            Math.max(
+                                20,
+                                Math.round(
+                                    duration /
+                                    lessonsPerDay
+                                )
+                            );
+
+                        rows.push({
+
+                            day,
+
+                            subject,
+
+                            duration:
+                                `${block} dk`,
+
+                            note:
+                                priority
+
+                        });
+
+                        subjectIndex++;
+
+                    }
+
+                }
+            );
+
+            renderPlannerToChat(
+                name,
+                weeks,
+                duration,
+                priority,
+                note,
+                rows
+            );
+
+            createPrintTable(
+                rows
+            );
+
+            closePanel();
+
+            setMode(
+                "pdf"
+            );
+
+            setTimeout(
+                () => {
+
+                    addAIMessage(
+                        `**${name}** hazır.\n\n` +
+                        `Plan süresi: ${weeks} hafta\n` +
+                        `Günlük süre: ${duration} dakika\n` +
+                        `Öncelik: ${priority}\n\n` +
+                        `Program oluşturuldu. PDF'e dönüştürmek için “PDF Hazırla” çalışma alanını kullanabilirsin.`,
+                        "planner"
+                    );
+
+                    scrollToBottom();
+
+                },
+                120
+            );
+
+        }
+
+        function renderPlannerToChat(
+            name,
+            weeks,
+            duration,
+            priority,
+            note,
+            rows
+        ) {
+
+            let text =
+                `**${name}**\n\n` +
+                `• Program süresi: ${weeks} hafta\n` +
+                `• Günlük hedef: ${duration} dakika\n` +
+                `• Öncelik: ${priority}\n`;
+
+            if (note) {
+
+                text +=
+                    `• Not: ${note}\n`;
+
+            }
+
+            text +=
+                "\n**Haftalık plan**\n";
+
+            rows.forEach(
+                row => {
+
+                    text +=
+                        `\n${row.day} — ${row.subject} — ${row.duration}`;
+
+                }
+            );
+
+            addAIMessage(
+                text,
+                "planner"
+            );
+
+        }
+
+        function createPrintTable(
+            rows
+        ) {
+
+            DOM.printTableBody.innerHTML =
+                "";
+
+            DOM.printStudentName.textContent =
+                state.profile
+                    ? `${state.profile.firstName} ${state.profile.lastName}`
+                    : "ZYNX Kullanıcısı";
+
+            rows.forEach(
+                row => {
+
+                    const tr =
+                        document.createElement(
+                            "tr"
+                        );
+
+                    tr.innerHTML = `
+                        <td>
+                            ${escapeHtml(
+                                row.day
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                row.subject
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                row.note
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                row.duration
+                            )}
+                        </td>
+                    `;
+
+                    DOM.printTableBody.appendChild(
+                        tr
+                    );
+
+                }
+            );
+
+        }
+
+        /* =========================================================
+           PDF PANEL
+           ========================================================= */
+
+        function openPdfPanel() {
+
+            openPanel({
+
+                kicker:
+                    "ZYNX DOCUMENT ENGINE",
+
+                title:
+                    "PDF hazırla",
+
+                description:
+                    "Metnini belge düzenine getir, önizle ve tarayıcının PDF kaydetme özelliğiyle dosya olarak kaydet.",
+
+                mode:
+                    "pdf",
+
+                confirmText:
+                    "PDF Önizlemesini Oluştur",
+
+                body: `
+
+                    <div class="form-grid">
+
+                        <div class="form-field full">
+
+                            <label class="form-label">
+                                Belge başlığı
+                            </label>
+
+                            <input
+                                class="form-input"
+                                id="pdfTitle"
+                                value="10/D ZYNX AI Çalışma Belgesi"
+                            >
+
+                        </div>
+
+                        <div class="form-field full">
+
+                            <label class="form-label">
+                                İçerik
+                            </label>
+
+                            <textarea
+                                class="form-textarea"
+                                id="pdfContent"
+                                style="min-height:180px"
+                                placeholder="PDF'e dönüştürmek istediğin metni buraya yaz..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                `,
+
+                onConfirm:
+                    createPdfPreview
+
+            });
+
+        }
+
+        function createPdfPreview() {
+
+            const title =
+                $("pdfTitle")
+                    ?.value.trim()
+                ||
+                "ZYNX AI Belgesi";
+
+            const content =
+                $("pdfContent")
+                    ?.value.trim();
+
+            if (!content) {
+
+                alert(
+                    "PDF içeriği boş bırakılamaz."
+                );
+
+                return;
+
+            }
+
+            const lines =
+                content
+                    .split("\n")
+                    .filter(
+                        line =>
+                            line.trim()
+                    );
+
+            const html =
+                `
+                    <div class="pdf-preview">
+
+                        <div class="pdf-page">
+
+                            <div class="pdf-page-title">
+                                ${escapeHtml(
+                                    title
+                                )}
+                            </div>
+
+                            <div class="pdf-page-subtitle">
+                                ${
+                                    state.profile
+                                    ? `Hazırlayan: ${escapeHtml(
+                                        state.profile.firstName
+                                    )} ${escapeHtml(
+                                        state.profile.lastName
+                                    )}`
+                                    : "ZYNX AI"
+                                }
+                            </div>
+
+                            <div class="pdf-rule"></div>
+
+                            <div class="pdf-section-title">
+                                İçerik
+                            </div>
+
+                            <div class="pdf-lines">
+
+                                ${lines.map(
+                                    line => `
+                                        <div class="pdf-line">
+                                            <span>
+                                                ${escapeHtml(
+                                                    line
+                                                )}
+                                            </span>
+                                        </div>
+                                    `
+                                ).join("")}
+
+                            </div>
+
+                            <div class="pdf-footer">
+                                ZYNX AI · 10/D Dijital Sınıf
+                            </div>
+
+                        </div>
+
+                    </div>
+                `;
+
+            openPanel({
+
+                kicker:
+                    "ZYNX DOCUMENT PREVIEW",
+
+                title:
+                    "PDF önizlemesi",
+
+                description:
+                    "Belge hazır. Şimdi yazdır seçeneğinden “PDF olarak kaydet” seçeneğini kullanabilirsin.",
+
+                mode:
+                    "pdf-preview",
+
+                confirmText:
+                    "PDF Olarak Kaydet",
+
+                body:
+                    html,
+
+                onConfirm:
+                    () => {
+
+                        updatePrintDocument(
+                            title,
+                            lines
+                        );
+
+                        closePanel();
+
+                        setTimeout(
+                            () => {
+                                window.print();
+                            },
+                            120
+                        );
+
+                    }
+
+            });
+
+        }
+
+        function updatePrintDocument(
+            title,
+            lines
+        ) {
+
+            DOM.printStudentName.textContent =
+                state.profile
+                    ? `${state.profile.firstName} ${state.profile.lastName}`
+                    : "ZYNX Kullanıcısı";
+
+            DOM.printTableBody.innerHTML =
+                "";
+
+            lines.forEach(
+                line => {
+
+                    const tr =
+                        document.createElement(
+                            "tr"
+                        );
+
+                    tr.innerHTML = `
+                        <td>
+                            ${escapeHtml(
+                                line
+                            )}
+                        </td>
+                        <td>
+                            -
+                        </td>
+                        <td>
+                            -
+                        </td>
+                        <td>
+                            ZYNX AI
+                        </td>
+                    `;
+
+                    DOM.printTableBody.appendChild(
+                        tr
+                    );
+
+                }
+            );
+
+            document
+                .querySelector(
+                    ".print-document h1"
+                )
+                .textContent =
+                title;
+
+        }
+
+        /* =========================================================
+           SET PDF / PLANNER ACTIONS
+           ========================================================= */
+
+        document
+            .querySelectorAll(
+                '[data-mode="planner"]'
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "dblclick",
+                        openPlannerPanel
+                    );
+
+                }
+            );
+
+        /* =========================================================
+           ESCAPE KEY
+           ========================================================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closePanel();
+                    closeSidebar();
+
+                }
+
+            }
+        );
+
+        /* =========================================================
+           INITIALIZE
+           ========================================================= */
+
+        function initialize() {
+
+            loadProfile();
+
+            loadHistory();
+
+            const restored =
+                loadMessages();
+
+            if (
+                !restored &&
+                state.profile
+            ) {
+
+                addAIMessage(
+                    `Merhaba ${escapeHtml(
+                        state.profile.firstName
+                    )} 👋\n\n` +
+                    "ZYNX AI çalışma alanın hazır.\n\n" +
+                    "Bana normal bir soru yazabilir, soru çözme moduna geçebilir, görsel yükleyebilir, ders programı oluşturabilir veya PDF hazırlayabilirsin.",
+                    "chat"
+                );
+
+            }
+
+            setMode(
+                "chat"
+            );
+
+            updateSendButton();
+
+        }
+
+        initialize();
+
+    </script>
+
+</body>
+</html>

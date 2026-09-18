@@ -1,0 +1,7482 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07111f"
+    >
+
+    <meta
+        name="description"
+        content="10/D Dijital Sınıf dersler merkezi. Derslerini keşfet, konularını incele, ilerlemeni takip et ve çalışma planını yönet."
+    >
+
+    <title>Dersler | 10/D Dijital Sınıf</title>
+
+    <!-- =========================================================
+         GOOGLE FONTS
+    ========================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           ROOT
+        ====================================================== */
+
+        :root {
+
+            --bg:
+                #07111f;
+
+            --bg-secondary:
+                #0a1627;
+
+            --bg-tertiary:
+                #0d1b2e;
+
+            --panel:
+                rgba(13, 28, 47, 0.82);
+
+            --panel-solid:
+                #0f2035;
+
+            --panel-soft:
+                rgba(255, 255, 255, 0.035);
+
+            --panel-hover:
+                rgba(255, 255, 255, 0.055);
+
+            --line:
+                rgba(255, 255, 255, 0.075);
+
+            --line-strong:
+                rgba(255, 255, 255, 0.13);
+
+            --text:
+                #f7f9fd;
+
+            --text-secondary:
+                #b6c2d4;
+
+            --text-muted:
+                #8997aa;
+
+            --text-faint:
+                #647389;
+
+            --primary:
+                #6078ff;
+
+            --primary-light:
+                #8999ff;
+
+            --secondary:
+                #7d67ff;
+
+            --cyan:
+                #46d9ff;
+
+            --green:
+                #50dda0;
+
+            --yellow:
+                #ffc862;
+
+            --red:
+                #ff7187;
+
+            --shadow:
+                0 25px 75px rgba(0, 0, 0, 0.30);
+
+            --shadow-small:
+                0 12px 35px rgba(0, 0, 0, 0.18);
+
+            --radius-xl:
+                28px;
+
+            --radius-lg:
+                21px;
+
+            --radius-md:
+                16px;
+
+            --radius-sm:
+                11px;
+
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            color:
+                var(--text);
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(96, 120, 255, 0.15),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 90% 8%,
+                    rgba(70, 217, 255, 0.08),
+                    transparent 22%
+                ),
+
+                linear-gradient(
+                    180deg,
+                    #07111f 0%,
+                    #081423 52%,
+                    #07111f 100%
+                );
+
+            overflow-x:
+                hidden;
+        }
+
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events:
+                none;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,.016) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.016) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                38px 38px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,.65),
+                    transparent 85%
+                );
+
+            z-index:
+                -1;
+        }
+
+
+        a {
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+        }
+
+
+        button,
+        input,
+        select {
+            font:
+                inherit;
+        }
+
+
+        button {
+            border:
+                0;
+
+            cursor:
+                pointer;
+        }
+
+
+        ::selection {
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(96,120,255,.32);
+        }
+
+
+        /* =====================================================
+           SCROLLBAR
+        ====================================================== */
+
+        ::-webkit-scrollbar {
+            width:
+                8px;
+
+            height:
+                8px;
+        }
+
+
+        ::-webkit-scrollbar-track {
+            background:
+                rgba(255,255,255,.02);
+        }
+
+
+        ::-webkit-scrollbar-thumb {
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,.10);
+        }
+
+
+        ::-webkit-scrollbar-thumb:hover {
+
+            background:
+                rgba(255,255,255,.17);
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .site-header {
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                100;
+
+            width:
+                100%;
+
+            border-bottom:
+                1px solid var(--line);
+
+            background:
+                rgba(7,17,31,.80);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+        }
+
+
+        .header-inner {
+
+            width:
+                min(
+                    1320px,
+                    calc(100% - 40px)
+                );
+
+            min-height:
+                76px;
+
+            margin:
+                0 auto;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                18px;
+        }
+
+
+        .brand {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            flex-shrink:
+                0;
+        }
+
+
+        .brand-logo {
+
+            position:
+                relative;
+
+            width:
+                43px;
+
+            height:
+                43px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                13px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            box-shadow:
+                0 12px 30px rgba(96,120,255,.25);
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                17px;
+
+            font-weight:
+                800;
+        }
+
+
+        .brand-logo::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                1px;
+
+            border:
+                1px solid rgba(255,255,255,.25);
+
+            border-radius:
+                inherit;
+        }
+
+
+        .brand-info strong {
+
+            display:
+                block;
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                14px;
+
+            letter-spacing:
+                -.35px;
+        }
+
+
+        .brand-info span {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                var(--text-faint);
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                .65px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .main-nav {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                3px;
+        }
+
+
+        .main-nav a {
+
+            padding:
+                9px 11px;
+
+            border-radius:
+                10px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                10px;
+
+            font-weight:
+                600;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .main-nav a:hover {
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(255,255,255,.045);
+        }
+
+
+        .main-nav a.active {
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(96,120,255,.12);
+
+            box-shadow:
+                inset 0 0 0 1px rgba(96,120,255,.13);
+        }
+
+
+        .header-actions {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+        }
+
+
+        .header-button {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            min-width:
+                37px;
+
+            height:
+                37px;
+
+            padding:
+                0 10px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                11px;
+
+            color:
+                var(--text-secondary);
+
+            background:
+                rgba(255,255,255,.03);
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .header-button:hover {
+
+            color:
+                #ffffff;
+
+            border-color:
+                var(--line-strong);
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+
+        .user-pill {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            padding:
+                4px 8px 4px 4px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                12px;
+
+            background:
+                rgba(255,255,255,.028);
+        }
+
+
+        .user-avatar {
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #304570,
+                    #566c9e
+                );
+
+            color:
+                white;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+        }
+
+
+        .user-text strong {
+
+            display:
+                block;
+
+            font-size:
+                9px;
+        }
+
+
+        .user-text span {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                var(--text-faint);
+
+            font-size:
+                7px;
+        }
+
+
+        .mobile-menu {
+
+            display:
+                none;
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                11px;
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(255,255,255,.035);
+
+            font-size:
+                17px;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .page {
+
+            width:
+                min(
+                    1320px,
+                    calc(100% - 40px)
+                );
+
+            margin:
+                0 auto;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+
+            position:
+                relative;
+
+            min-height:
+                350px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            padding:
+                65px 0 55px;
+        }
+
+
+        .hero-content {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            max-width:
+                790px;
+        }
+
+
+        .hero-eyebrow {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            padding:
+                7px 10px;
+
+            margin-bottom:
+                16px;
+
+            border:
+                1px solid rgba(96,120,255,.20);
+
+            border-radius:
+                999px;
+
+            color:
+                #acb8ff;
+
+            background:
+                rgba(96,120,255,.08);
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1.1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .hero-eyebrow-dot {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--green);
+
+            box-shadow:
+                0 0 12px rgba(80,221,160,.7);
+        }
+
+
+        .hero h1 {
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                clamp(34px, 5vw, 58px);
+
+            line-height:
+                1.05;
+
+            letter-spacing:
+                -2.5px;
+        }
+
+
+        .hero h1 span {
+
+            background:
+
+                linear-gradient(
+                    100deg,
+                    #ffffff,
+                    #aebaff 55%,
+                    #65e2ff
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            color:
+                transparent;
+        }
+
+
+        .hero-description {
+
+            max-width:
+                690px;
+
+            margin-top:
+                18px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+
+            line-height:
+                1.9;
+        }
+
+
+        .hero-decoration {
+
+            position:
+                absolute;
+
+            right:
+                -60px;
+
+            top:
+                30px;
+
+            width:
+                470px;
+
+            height:
+                350px;
+
+            pointer-events:
+                none;
+        }
+
+
+        .hero-circle {
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+        }
+
+
+        .hero-circle.one {
+
+            width:
+                340px;
+
+            height:
+                340px;
+
+            right:
+                15px;
+
+            top:
+                0;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(96,120,255,.17),
+                    transparent 68%
+                );
+        }
+
+
+        .hero-circle.two {
+
+            width:
+                230px;
+
+            height:
+                230px;
+
+            right:
+                90px;
+
+            top:
+                50px;
+
+            border:
+                1px solid rgba(96,120,255,.16);
+        }
+
+
+        .hero-circle.three {
+
+            width:
+                140px;
+
+            height:
+                140px;
+
+            right:
+                135px;
+
+            top:
+                95px;
+
+            border:
+                1px solid rgba(70,217,255,.13);
+        }
+
+
+        .floating-subject {
+
+            position:
+                absolute;
+
+            width:
+                45px;
+
+            height:
+                45px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border:
+                1px solid rgba(255,255,255,.08);
+
+            border-radius:
+                13px;
+
+            color:
+                #b9c5e3;
+
+            background:
+                rgba(12,26,43,.88);
+
+            box-shadow:
+                var(--shadow-small);
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+            backdrop-filter:
+                blur(12px);
+        }
+
+
+        .floating-subject.a {
+            top:
+                35px;
+
+            right:
+                250px;
+        }
+
+
+        .floating-subject.b {
+            top:
+                105px;
+
+            right:
+                25px;
+        }
+
+
+        .floating-subject.c {
+            bottom:
+                45px;
+
+            right:
+                190px;
+        }
+
+
+        .floating-subject.d {
+            bottom:
+                35px;
+
+            right:
+                70px;
+        }
+
+
+        /* =====================================================
+           TOP STATS
+        ====================================================== */
+
+        .overview-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                10px;
+
+            padding-bottom:
+                8px;
+        }
+
+
+        .overview-card {
+
+            position:
+                relative;
+
+            padding:
+                20px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                17px;
+
+            background:
+                rgba(13,28,47,.63);
+
+            overflow:
+                hidden;
+        }
+
+
+        .overview-card::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                110px;
+
+            height:
+                110px;
+
+            right:
+                -60px;
+
+            bottom:
+                -65px;
+
+            border-radius:
+                50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(96,120,255,.09),
+                    transparent 70%
+                );
+        }
+
+
+        .overview-icon {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                10px;
+
+            color:
+                #9daaff;
+
+            background:
+                rgba(96,120,255,.10);
+
+            font-size:
+                12px;
+
+            margin-bottom:
+                12px;
+        }
+
+
+        .overview-value {
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                23px;
+
+            letter-spacing:
+                -.8px;
+        }
+
+
+        .overview-label {
+
+            margin-top:
+                3px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+        }
+
+
+        .overview-change {
+
+            display:
+                inline-flex;
+
+            margin-top:
+                10px;
+
+            padding:
+                4px 6px;
+
+            border-radius:
+                999px;
+
+            color:
+                #6fe5ac;
+
+            background:
+                rgba(80,221,160,.07);
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+        }
+
+
+        /* =====================================================
+           MAIN CONTROL AREA
+        ====================================================== */
+
+        .section-block {
+
+            padding:
+                55px 0;
+        }
+
+
+        .section-head {
+
+            display:
+                flex;
+
+            align-items:
+                flex-end;
+
+            justify-content:
+                space-between;
+
+            gap:
+                25px;
+
+            margin-bottom:
+                21px;
+        }
+
+
+        .section-title-wrap {
+
+            max-width:
+                700px;
+        }
+
+
+        .section-kicker {
+
+            display:
+                block;
+
+            margin-bottom:
+                8px;
+
+            color:
+                #7c8eff;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1.35px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .section-title {
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                clamp(24px, 3vw, 34px);
+
+            line-height:
+                1.15;
+
+            letter-spacing:
+                -1.3px;
+        }
+
+
+        .section-description {
+
+            margin-top:
+                8px;
+
+            max-width:
+                650px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                10px;
+
+            line-height:
+                1.8;
+        }
+
+
+        .results-count {
+
+            white-space:
+                nowrap;
+
+            color:
+                var(--text-faint);
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           FILTER TOOLBAR
+        ====================================================== */
+
+        .toolbar {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(250px, 1.3fr) minmax(260px, .8fr);
+
+            gap:
+                10px;
+
+            padding:
+                12px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                18px;
+
+            background:
+                rgba(13,28,47,.72);
+
+            box-shadow:
+                var(--shadow-small);
+        }
+
+
+        .search-box {
+
+            position:
+                relative;
+        }
+
+
+        .search-icon {
+
+            position:
+                absolute;
+
+            left:
+                14px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                var(--text-faint);
+
+            font-size:
+                13px;
+
+            pointer-events:
+                none;
+        }
+
+
+        .search-input {
+
+            width:
+                100%;
+
+            height:
+                43px;
+
+            padding:
+                0 15px 0 39px;
+
+            outline:
+                none;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                12px;
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(255,255,255,.025);
+
+            font-size:
+                10px;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .search-input::placeholder {
+
+            color:
+                #68768c;
+        }
+
+
+        .search-input:focus {
+
+            border-color:
+                rgba(96,120,255,.45);
+
+            box-shadow:
+                0 0 0 4px rgba(96,120,255,.07);
+        }
+
+
+        .filter-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            overflow-x:
+                auto;
+
+            scrollbar-width:
+                none;
+        }
+
+
+        .filter-row::-webkit-scrollbar {
+            display:
+                none;
+        }
+
+
+        .filter-btn {
+
+            height:
+                37px;
+
+            padding:
+                0 11px;
+
+            white-space:
+                nowrap;
+
+            border:
+                1px solid transparent;
+
+            border-radius:
+                10px;
+
+            color:
+                var(--text-muted);
+
+            background:
+                rgba(255,255,255,.025);
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .filter-btn:hover {
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(255,255,255,.055);
+        }
+
+
+        .filter-btn.active {
+
+            color:
+                #ffffff;
+
+            border-color:
+                rgba(96,120,255,.2);
+
+            background:
+                rgba(96,120,255,.12);
+        }
+
+
+        /* =====================================================
+           COURSE GRID
+        ====================================================== */
+
+        .course-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                13px;
+        }
+
+
+        .course-card {
+
+            position:
+                relative;
+
+            min-width:
+                0;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                19px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,32,53,.88),
+                    rgba(10,23,39,.78)
+                );
+
+            overflow:
+                hidden;
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        .course-card:hover {
+
+            transform:
+                translateY(-4px);
+
+            border-color:
+                rgba(96,120,255,.22);
+
+            box-shadow:
+                0 24px 55px rgba(0,0,0,.23);
+        }
+
+
+        .course-card.hidden {
+            display:
+                none;
+        }
+
+
+        .course-top {
+
+            position:
+                relative;
+
+            height:
+                100px;
+
+            padding:
+                15px;
+
+            overflow:
+                hidden;
+        }
+
+
+        .course-top::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                200px;
+
+            height:
+                200px;
+
+            right:
+                -75px;
+
+            top:
+                -105px;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255,255,255,.07);
+        }
+
+
+        .course-top.math {
+            background:
+                linear-gradient(
+                    135deg,
+                    #3047a5,
+                    #4d63d6
+                );
+        }
+
+
+        .course-top.literature {
+            background:
+                linear-gradient(
+                    135deg,
+                    #8b3153,
+                    #bb5272
+                );
+        }
+
+
+        .course-top.physics {
+            background:
+                linear-gradient(
+                    135deg,
+                    #136b8b,
+                    #239ab9
+                );
+        }
+
+
+        .course-top.chemistry {
+            background:
+                linear-gradient(
+                    135deg,
+                    #5a438c,
+                    #8068ba
+                );
+        }
+
+
+        .course-top.biology {
+            background:
+                linear-gradient(
+                    135deg,
+                    #276e53,
+                    #45a979
+                );
+        }
+
+
+        .course-top.history {
+            background:
+                linear-gradient(
+                    135deg,
+                    #845521,
+                    #b47838
+                );
+        }
+
+
+        .course-top.geography {
+            background:
+                linear-gradient(
+                    135deg,
+                    #126c6c,
+                    #2b9692
+                );
+        }
+
+
+        .course-top.philosophy {
+            background:
+                linear-gradient(
+                    135deg,
+                    #414b63,
+                    #697792
+                );
+        }
+
+
+        .course-top.english {
+            background:
+                linear-gradient(
+                    135deg,
+                    #49528e,
+                    #6975c1
+                );
+        }
+
+
+        .course-top.religion {
+            background:
+                linear-gradient(
+                    135deg,
+                    #6b5743,
+                    #947b5d
+                );
+        }
+
+
+        .course-top.pe {
+            background:
+                linear-gradient(
+                    135deg,
+                    #245a8d,
+                    #3b83be
+                );
+        }
+
+
+        .course-top-icon {
+
+            position:
+                relative;
+
+            width:
+                38px;
+
+            height:
+                38px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border:
+                1px solid rgba(255,255,255,.18);
+
+            border-radius:
+                11px;
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(255,255,255,.13);
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+            backdrop-filter:
+                blur(6px);
+        }
+
+
+        .course-code {
+
+            position:
+                absolute;
+
+            right:
+                14px;
+
+            top:
+                15px;
+
+            padding:
+                5px 7px;
+
+            border:
+                1px solid rgba(255,255,255,.17);
+
+            border-radius:
+                999px;
+
+            color:
+                rgba(255,255,255,.84);
+
+            background:
+                rgba(0,0,0,.13);
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .7px;
+        }
+
+
+        .favorite-btn {
+
+            position:
+                absolute;
+
+            right:
+                13px;
+
+            bottom:
+                13px;
+
+            width:
+                31px;
+
+            height:
+                31px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border:
+                1px solid rgba(255,255,255,.13);
+
+            border-radius:
+                9px;
+
+            color:
+                rgba(255,255,255,.65);
+
+            background:
+                rgba(0,0,0,.15);
+
+            font-size:
+                12px;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .favorite-btn:hover,
+        .favorite-btn.active {
+
+            color:
+                #ffd66f;
+
+            background:
+                rgba(255,214,111,.10);
+        }
+
+
+        .course-content {
+
+            padding:
+                17px;
+        }
+
+
+        .course-category {
+
+            color:
+                #7f91ab;
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .course-name {
+
+            margin-top:
+                5px;
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                15px;
+
+            letter-spacing:
+                -.45px;
+        }
+
+
+        .course-teacher {
+
+            margin-top:
+                5px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+        }
+
+
+        .course-description {
+
+            min-height:
+                47px;
+
+            margin-top:
+                11px;
+
+            color:
+                #7f8ca1;
+
+            font-size:
+                8px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .course-progress-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+            margin-top:
+                13px;
+        }
+
+
+        .progress-label {
+
+            color:
+                #728095;
+
+            font-size:
+                7px;
+        }
+
+
+        .progress-value {
+
+            color:
+                #a4b0c3;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+        }
+
+
+        .progress-bar {
+
+            width:
+                100%;
+
+            height:
+                5px;
+
+            margin-top:
+                6px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,.055);
+
+            overflow:
+                hidden;
+        }
+
+
+        .progress-fill {
+
+            height:
+                100%;
+
+            width:
+                var(--progress);
+
+            border-radius:
+                inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--cyan)
+                );
+        }
+
+
+        .course-footer {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                9px;
+
+            margin-top:
+                15px;
+        }
+
+
+        .course-meta {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            color:
+                #68778d;
+
+            font-size:
+                7px;
+        }
+
+
+        .course-meta span {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                4px;
+        }
+
+
+        .course-open {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                6px;
+
+            height:
+                31px;
+
+            padding:
+                0 10px;
+
+            border:
+                1px solid rgba(96,120,255,.17);
+
+            border-radius:
+                9px;
+
+            color:
+                #abb7ff;
+
+            background:
+                rgba(96,120,255,.07);
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .course-open:hover {
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(96,120,255,.14);
+        }
+
+
+        /* =====================================================
+           NO RESULTS
+        ====================================================== */
+
+        .no-results {
+
+            display:
+                none;
+
+            padding:
+                65px 25px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(13,28,47,.60);
+
+            text-align:
+                center;
+        }
+
+
+        .no-results.show {
+            display:
+                block;
+        }
+
+
+        .no-results-icon {
+
+            width:
+                50px;
+
+            height:
+                50px;
+
+            margin:
+                0 auto 13px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                15px;
+
+            color:
+                #8c9ab0;
+
+            background:
+                rgba(255,255,255,.045);
+
+            font-size:
+                18px;
+        }
+
+
+        .no-results strong {
+
+            display:
+                block;
+
+            font-size:
+                12px;
+        }
+
+
+        .no-results p {
+
+            max-width:
+                390px;
+
+            margin:
+                7px auto 0;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                9px;
+
+            line-height:
+                1.7;
+        }
+
+
+        /* =====================================================
+           FEATURED STUDY AREA
+        ====================================================== */
+
+        .study-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.2fr .8fr;
+
+            gap:
+                13px;
+        }
+
+
+        .study-card {
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,32,53,.85),
+                    rgba(10,23,39,.72)
+                );
+
+            box-shadow:
+                var(--shadow-small);
+
+            overflow:
+                hidden;
+        }
+
+
+        .study-card.large {
+
+            position:
+                relative;
+
+            min-height:
+                285px;
+
+            padding:
+                29px;
+        }
+
+
+        .study-badge {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                6px 8px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(96,120,255,.10);
+
+            color:
+                #aab5ff;
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .9px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .study-card.large h3 {
+
+            max-width:
+                500px;
+
+            margin-top:
+                14px;
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                24px;
+
+            line-height:
+                1.17;
+
+            letter-spacing:
+                -1px;
+        }
+
+
+        .study-card.large p {
+
+            max-width:
+                540px;
+
+            margin-top:
+                10px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                9px;
+
+            line-height:
+                1.8;
+        }
+
+
+        .study-actions {
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px;
+
+            margin-top:
+                20px;
+        }
+
+
+        .study-primary,
+        .study-secondary {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            min-height:
+                37px;
+
+            padding:
+                0 12px;
+
+            border-radius:
+                10px;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .study-primary {
+
+            color:
+                #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            box-shadow:
+                0 10px 25px rgba(96,120,255,.20);
+        }
+
+
+        .study-primary:hover {
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .study-secondary {
+
+            color:
+                var(--text-secondary);
+
+            border:
+                1px solid var(--line);
+
+            background:
+                rgba(255,255,255,.025);
+        }
+
+
+        .study-secondary:hover {
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(255,255,255,.055);
+        }
+
+
+        .study-decoration {
+
+            position:
+                absolute;
+
+            right:
+                15px;
+
+            bottom:
+                -35px;
+
+            width:
+                240px;
+
+            height:
+                240px;
+
+            border-radius:
+                50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(96,120,255,.18),
+                    transparent 68%
+                );
+        }
+
+
+        .study-decoration-inner {
+
+            position:
+                absolute;
+
+            inset:
+                40px;
+
+            border:
+                1px solid rgba(96,120,255,.15);
+
+            border-radius:
+                50%;
+        }
+
+
+        .study-side {
+
+            display:
+                grid;
+
+            gap:
+                10px;
+
+            grid-template-rows:
+                1fr 1fr;
+        }
+
+
+        .small-study {
+
+            padding:
+                19px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                17px;
+
+            background:
+                rgba(13,28,47,.72);
+        }
+
+
+        .small-study-top {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+        }
+
+
+        .small-study-icon {
+
+            width:
+                32px;
+
+            height:
+                32px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                10px;
+
+            color:
+                #aab5ff;
+
+            background:
+                rgba(96,120,255,.10);
+
+            font-size:
+                12px;
+        }
+
+
+        .small-study-status {
+
+            color:
+                #6fe5ac;
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+        }
+
+
+        .small-study strong {
+
+            display:
+                block;
+
+            margin-top:
+                13px;
+
+            font-size:
+                10px;
+        }
+
+
+        .small-study p {
+
+            margin-top:
+                4px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                8px;
+
+            line-height:
+                1.65;
+        }
+
+
+        /* =====================================================
+           WEEK PLAN
+        ====================================================== */
+
+        .week-card {
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(13,28,47,.70);
+
+            overflow:
+                hidden;
+        }
+
+
+        .week-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding:
+                18px 20px;
+
+            border-bottom:
+                1px solid var(--line);
+        }
+
+
+        .week-title strong {
+
+            display:
+                block;
+
+            font-size:
+                11px;
+        }
+
+
+        .week-title span {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                var(--text-faint);
+
+            font-size:
+                7px;
+        }
+
+
+        .week-link {
+
+            color:
+                #aab5ff;
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+        }
+
+
+        .week-days {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+        }
+
+
+        .day {
+
+            min-height:
+                145px;
+
+            padding:
+                15px;
+
+            border-right:
+                1px solid var(--line);
+        }
+
+
+        .day:last-child {
+            border-right:
+                none;
+        }
+
+
+        .day-name {
+
+            color:
+                var(--text-faint);
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .8px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .day-number {
+
+            margin-top:
+                3px;
+
+            color:
+                var(--text-secondary);
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                16px;
+        }
+
+
+        .day-course {
+
+            margin-top:
+                13px;
+
+            padding:
+                9px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(255,255,255,.025);
+        }
+
+
+        .day-course span {
+
+            display:
+                block;
+
+            color:
+                #748298;
+
+            font-size:
+                6px;
+
+            font-weight:
+                700;
+        }
+
+
+        .day-course strong {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            font-size:
+                8px;
+        }
+
+
+        .day-course em {
+
+            display:
+                block;
+
+            margin-top:
+                4px;
+
+            color:
+                #5f6f85;
+
+            font-size:
+                6px;
+
+            font-style:
+                normal;
+        }
+
+
+        .day.active {
+
+            background:
+                rgba(96,120,255,.035);
+        }
+
+
+        .day.active .day-name {
+
+            color:
+                #93a3ff;
+        }
+
+
+        /* =====================================================
+           MODAL
+        ====================================================== */
+
+        .modal {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                500;
+
+            display:
+                none;
+
+            place-items:
+                center;
+
+            padding:
+                20px;
+
+            background:
+                rgba(2,6,13,.76);
+
+            backdrop-filter:
+                blur(9px);
+
+            -webkit-backdrop-filter:
+                blur(9px);
+        }
+
+
+        .modal.show {
+            display:
+                grid;
+        }
+
+
+        .modal-box {
+
+            position:
+                relative;
+
+            width:
+                min(
+                    760px,
+                    100%
+                );
+
+            max-height:
+                calc(100vh - 40px);
+
+            overflow-y:
+                auto;
+
+            border:
+                1px solid var(--line-strong);
+
+            border-radius:
+                23px;
+
+            background:
+                #0e1d31;
+
+            box-shadow:
+                0 35px 100px rgba(0,0,0,.45);
+
+            animation:
+                modalIn .25s ease;
+        }
+
+
+        @keyframes modalIn {
+
+            from {
+                opacity:
+                    0;
+
+                transform:
+                    translateY(12px)
+                    scale(.985);
+            }
+
+            to {
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        .modal-header {
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                2;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding:
+                17px 20px;
+
+            border-bottom:
+                1px solid var(--line);
+
+            background:
+                rgba(14,29,49,.93);
+
+            backdrop-filter:
+                blur(16px);
+        }
+
+
+        .modal-course-title {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+        }
+
+
+        .modal-icon {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                11px;
+
+            color:
+                #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6078ff,
+                    #7d67ff
+                );
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+        }
+
+
+        .modal-title-text strong {
+
+            display:
+                block;
+
+            font-size:
+                12px;
+        }
+
+
+        .modal-title-text span {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                var(--text-faint);
+
+            font-size:
+                7px;
+        }
+
+
+        .modal-close {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                10px;
+
+            color:
+                #aab6c8;
+
+            background:
+                rgba(255,255,255,.035);
+
+            font-size:
+                16px;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .modal-close:hover {
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(255,255,255,.07);
+        }
+
+
+        .modal-content {
+
+            padding:
+                23px;
+        }
+
+
+        .modal-hero {
+
+            padding:
+                21px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(96,120,255,.10),
+                    rgba(255,255,255,.02)
+                );
+        }
+
+
+        .modal-hero-label {
+
+            color:
+                #8493ff;
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .modal-hero h3 {
+
+            margin-top:
+                7px;
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                22px;
+
+            letter-spacing:
+                -.8px;
+        }
+
+
+        .modal-hero p {
+
+            margin-top:
+                8px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                9px;
+
+            line-height:
+                1.8;
+        }
+
+
+        .modal-progress {
+
+            margin-top:
+                17px;
+        }
+
+
+        .modal-progress-head {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                7px;
+        }
+
+
+        .modal-progress-value {
+
+            color:
+                #adbbff;
+
+            font-weight:
+                800;
+        }
+
+
+        .modal-progress-bar {
+
+            height:
+                6px;
+
+            margin-top:
+                7px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,.06);
+
+            overflow:
+                hidden;
+        }
+
+
+        .modal-progress-bar span {
+
+            display:
+                block;
+
+            height:
+                100%;
+
+            border-radius:
+                inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--cyan)
+                );
+        }
+
+
+        .modal-section-title {
+
+            margin-top:
+                24px;
+
+            margin-bottom:
+                11px;
+
+            font-size:
+                10px;
+        }
+
+
+        .topic-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                8px;
+        }
+
+
+        .topic {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            padding:
+                11px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,.023);
+        }
+
+
+        .topic-status {
+
+            width:
+                23px;
+
+            height:
+                23px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            flex:
+                0 0 auto;
+
+            border-radius:
+                8px;
+
+            color:
+                #71e5ad;
+
+            background:
+                rgba(80,221,160,.07);
+
+            font-size:
+                8px;
+        }
+
+
+        .topic-status.pending {
+
+            color:
+                #8794aa;
+
+            background:
+                rgba(255,255,255,.045);
+        }
+
+
+        .topic strong {
+
+            display:
+                block;
+
+            font-size:
+                8px;
+        }
+
+
+        .topic span {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                #68788f;
+
+            font-size:
+                6px;
+        }
+
+
+        .resource-list {
+
+            display:
+                grid;
+
+            gap:
+                8px;
+        }
+
+
+        .resource {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+            padding:
+                11px 12px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,.022);
+        }
+
+
+        .resource-info {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+        }
+
+
+        .resource-icon {
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                8px;
+
+            color:
+                #aab6ff;
+
+            background:
+                rgba(96,120,255,.08);
+
+            font-size:
+                9px;
+        }
+
+
+        .resource-info strong {
+
+            display:
+                block;
+
+            font-size:
+                8px;
+        }
+
+
+        .resource-info span {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                #68788f;
+
+            font-size:
+                6px;
+        }
+
+
+        .resource-action {
+
+            height:
+                28px;
+
+            padding:
+                0 8px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius:
+                8px;
+
+            color:
+                #91a0b5;
+
+            background:
+                rgba(255,255,255,.025);
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+        }
+
+
+        .resource-action:hover {
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+
+        /* =====================================================
+           TOAST
+        ====================================================== */
+
+        .toast {
+
+            position:
+                fixed;
+
+            right:
+                22px;
+
+            bottom:
+                22px;
+
+            z-index:
+                700;
+
+            min-width:
+                230px;
+
+            max-width:
+                360px;
+
+            padding:
+                13px 15px;
+
+            border:
+                1px solid var(--line-strong);
+
+            border-radius:
+                13px;
+
+            color:
+                #f4f7fc;
+
+            background:
+                rgba(12,24,41,.96);
+
+            box-shadow:
+                0 22px 60px rgba(0,0,0,.35);
+
+            font-size:
+                9px;
+
+            transform:
+                translateY(120px);
+
+            opacity:
+                0;
+
+            pointer-events:
+                none;
+
+            transition:
+                .25s ease;
+        }
+
+
+        .toast.show {
+
+            transform:
+                translateY(0);
+
+            opacity:
+                1;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .site-footer {
+
+            margin-top:
+                30px;
+
+            border-top:
+                1px solid var(--line);
+
+            background:
+                rgba(4,10,18,.52);
+        }
+
+
+        .footer-inner {
+
+            width:
+                min(
+                    1320px,
+                    calc(100% - 40px)
+                );
+
+            margin:
+                0 auto;
+
+            min-height:
+                95px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+        }
+
+
+        .footer-brand strong {
+
+            display:
+                block;
+
+            font-family:
+                "Plus Jakarta Sans",
+                sans-serif;
+
+            font-size:
+                10px;
+        }
+
+
+        .footer-brand span {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                var(--text-faint);
+
+            font-size:
+                7px;
+        }
+
+
+        .footer-links {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                13px;
+        }
+
+
+        .footer-links a {
+
+            color:
+                #68778c;
+
+            font-size:
+                7px;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .footer-links a:hover {
+
+            color:
+                #ffffff;
+        }
+
+
+        .footer-copy {
+
+            color:
+                #59677b;
+
+            font-size:
+                7px;
+
+            text-align:
+                right;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =====================================================
+           MOBILE SIDEBAR OVERLAY
+        ====================================================== */
+
+        .sidebar-overlay {
+
+            display:
+                none;
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                90;
+
+            background:
+                rgba(0,0,0,.48);
+
+            backdrop-filter:
+                blur(3px);
+        }
+
+
+        .sidebar-overlay.show {
+            display:
+                block;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1120px) {
+
+            .main-nav {
+                display:
+                    none;
+            }
+
+            .mobile-menu {
+                display:
+                    grid;
+
+                place-items:
+                    center;
+            }
+
+            .header-inner {
+                width:
+                    min(
+                        100% - 28px,
+                        1320px
+                    );
+            }
+
+            .page {
+                width:
+                    min(
+                        100% - 28px,
+                        1320px
+                    );
+            }
+
+            .course-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .hero-decoration {
+                opacity:
+                    .55;
+            }
+        }
+
+
+        @media (max-width: 850px) {
+
+            .overview-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .study-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .study-side {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                grid-template-rows:
+                    auto;
+            }
+
+            .week-days {
+
+                overflow-x:
+                    auto;
+
+                grid-template-columns:
+                    repeat(5, minmax(150px, 1fr));
+            }
+
+            .week-card {
+
+                overflow-x:
+                    auto;
+            }
+
+            .week-days {
+
+                min-width:
+                    750px;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .header-inner {
+                min-height:
+                    67px;
+            }
+
+            .user-text {
+                display:
+                    none;
+            }
+
+            .hero {
+
+                padding:
+                    50px 0 40px;
+            }
+
+            .hero-decoration {
+                display:
+                    none;
+            }
+
+            .hero h1 {
+
+                font-size:
+                    36px;
+
+                letter-spacing:
+                    -1.8px;
+            }
+
+            .hero-description {
+
+                font-size:
+                    10px;
+            }
+
+            .overview-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap:
+                    8px;
+            }
+
+            .overview-card {
+
+                padding:
+                    15px;
+            }
+
+            .overview-value {
+
+                font-size:
+                    20px;
+            }
+
+            .toolbar {
+
+                grid-template-columns:
+                    1fr;
+
+                padding:
+                    9px;
+            }
+
+            .filter-row {
+
+                padding-bottom:
+                    1px;
+            }
+
+            .course-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .section-block {
+
+                padding:
+                    40px 0;
+            }
+
+            .section-head {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+                gap:
+                    6px;
+            }
+
+            .study-card.large {
+
+                padding:
+                    23px;
+
+                min-height:
+                    250px;
+            }
+
+            .study-side {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .topic-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .modal {
+
+                padding:
+                    10px;
+            }
+
+            .modal-box {
+
+                max-height:
+                    calc(100vh - 20px);
+
+                border-radius:
+                    18px;
+            }
+
+            .footer-inner {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+                padding:
+                    24px 0;
+            }
+
+            .footer-copy {
+
+                text-align:
+                    left;
+            }
+        }
+
+
+        @media (max-width: 440px) {
+
+            .overview-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .header-button {
+
+                display:
+                    none;
+            }
+
+            .hero h1 {
+
+                font-size:
+                    32px;
+            }
+
+            .course-footer {
+
+                align-items:
+                    flex-end;
+
+                flex-direction:
+                    column;
+            }
+
+            .course-open {
+
+                width:
+                    100%;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <header class="site-header">
+
+        <div class="header-inner">
+
+
+            <a
+                href="index.html"
+                class="brand"
+            >
+
+                <div class="brand-logo">
+                    T
+                </div>
+
+                <div class="brand-info">
+
+                    <strong>
+                        10/D Dijital Sınıf
+                    </strong>
+
+                    <span>
+                        Eğitim Merkezi
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="main-nav">
+
+                <a href="index.html">
+                    Ana Sayfa
+                </a>
+
+                <a
+                    href="dersler.html"
+                    class="active"
+                >
+                    Dersler
+                </a>
+
+                <a href="odevler.html">
+                    Ödevler
+                </a>
+
+                <a href="program.html">
+                    Program
+                </a>
+
+                <a href="duyurular.html">
+                    Duyurular
+                </a>
+
+                <a href="zynx.html">
+                    ZYNX AI
+                </a>
+
+                <a href="hakkimizda.html">
+                    Hakkımızda
+                </a>
+
+            </nav>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    aria-label="Menüyü aç"
+                >
+                    ☰
+                </button>
+
+
+                <button
+                    class="header-button"
+                    id="focusButton"
+                    title="Odaklanma modu"
+                >
+                    ◉
+                </button>
+
+
+                <a
+                    href="zynx.html"
+                    class="header-button"
+                    title="ZYNX AI"
+                >
+                    ✦
+                    <span>AI</span>
+                </a>
+
+
+                <div class="user-pill">
+
+                    <div class="user-avatar">
+                        B
+                    </div>
+
+                    <div class="user-text">
+
+                        <strong>
+                            Öğrenci
+                        </strong>
+
+                        <span>
+                            10/D
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         MOBILE OVERLAY
+    ========================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =========================================================
+         PAGE
+    ========================================================== -->
+
+    <main class="page">
+
+
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
+
+        <section class="hero">
+
+
+            <div class="hero-content">
+
+                <div class="hero-eyebrow">
+
+                    <span class="hero-eyebrow-dot"></span>
+
+                    10/D DERS MERKEZİ
+
+                </div>
+
+
+                <h1>
+
+                    Bütün derslerin
+                    <span>tek bir merkezde.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Derslerini keşfet, konularını incele,
+                    çalışma ilerlemeni takip et ve ihtiyacın
+                    olan eğitim kaynaklarına hızlıca ulaş.
+                    10/D Dijital Sınıf'ın ders merkezi,
+                    günlük çalışmalarını daha düzenli
+                    yönetebilmen için tasarlandı.
+
+                </p>
+
+            </div>
+
+
+            <div class="hero-decoration">
+
+                <div class="hero-circle one"></div>
+                <div class="hero-circle two"></div>
+                <div class="hero-circle three"></div>
+
+
+                <div class="floating-subject a">
+                    MAT
+                </div>
+
+                <div class="floating-subject b">
+                    FZK
+                </div>
+
+                <div class="floating-subject c">
+                    EDB
+                </div>
+
+                <div class="floating-subject d">
+                    BİY
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             OVERVIEW
+        ====================================================== -->
+
+        <section class="overview-grid">
+
+
+            <article class="overview-card">
+
+                <div class="overview-icon">
+                    ◫
+                </div>
+
+                <div class="overview-value">
+                    11
+                </div>
+
+                <div class="overview-label">
+                    Sistemde bulunan ders
+                </div>
+
+                <div class="overview-change">
+                    Aktif
+                </div>
+
+            </article>
+
+
+            <article class="overview-card">
+
+                <div class="overview-icon">
+                    ✓
+                </div>
+
+                <div class="overview-value">
+                    42%
+                </div>
+
+                <div class="overview-label">
+                    Genel ders ilerlemen
+                </div>
+
+                <div class="overview-change">
+                    +6% bu hafta
+                </div>
+
+            </article>
+
+
+            <article class="overview-card">
+
+                <div class="overview-icon">
+                    ✦
+                </div>
+
+                <div class="overview-value">
+                    24
+                </div>
+
+                <div class="overview-label">
+                    Çalışılan konu
+                </div>
+
+                <div class="overview-change">
+                    Bu dönem
+                </div>
+
+            </article>
+
+
+            <article class="overview-card">
+
+                <div class="overview-icon">
+                    ⏱
+                </div>
+
+                <div class="overview-value">
+                    6s 20dk
+                </div>
+
+                <div class="overview-label">
+                    Toplam çalışma süresi
+                </div>
+
+                <div class="overview-change">
+                    Bu hafta
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             COURSES SECTION
+        ====================================================== -->
+
+        <section class="section-block">
+
+
+            <div class="section-head">
+
+                <div class="section-title-wrap">
+
+                    <span class="section-kicker">
+                        Dersler
+                    </span>
+
+                    <h2 class="section-title">
+                        Derslerini keşfet
+                    </h2>
+
+                    <p class="section-description">
+                        Aşağıdaki derslerden birini seçerek
+                        ilgili konuları, kaynakları ve çalışma
+                        ilerlemeni görüntüleyebilirsin.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="results-count"
+                    id="resultsCount"
+                >
+                    11 ders gösteriliyor
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 TOOLBAR
+            ================================================== -->
+
+            <div class="toolbar">
+
+
+                <div class="search-box">
+
+                    <span class="search-icon">
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="courseSearch"
+                        class="search-input"
+                        placeholder="Ders veya konu ara..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div class="filter-row">
+
+                    <button
+                        class="filter-btn active"
+                        data-filter="all"
+                    >
+                        Tümü
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="sayisal"
+                    >
+                        Sayısal
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="sozel"
+                    >
+                        Sözel
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="dil"
+                    >
+                        Dil
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="yan"
+                    >
+                        Diğer
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="favorite"
+                    >
+                        ★ Favoriler
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COURSE CARDS
+            ================================================== -->
+
+            <div
+                class="course-grid"
+                id="courseGrid"
+            >
+
+
+                <!-- MATEMATİK -->
+
+                <article
+                    class="course-card"
+                    data-course="matematik"
+                    data-category="sayisal"
+                    data-search="matematik fonksiyonlar polinomlar denklemler sayılar"
+                    data-progress="68"
+                    data-icon="π"
+                    data-title="Matematik"
+                >
+
+                    <div class="course-top math">
+
+                        <div class="course-top-icon">
+                            π
+                        </div>
+
+                        <div class="course-code">
+                            MAT
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Matematiği favorilere ekle"
+                            data-favorite="matematik"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Sayısal
+                        </div>
+
+                        <h3 class="course-name">
+                            Matematik
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Ana ders
+                        </div>
+
+                        <p class="course-description">
+                            Sayılar, denklemler, fonksiyonlar,
+                            polinomlar ve matematiksel problem
+                            çözme çalışmalarının merkezi.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                68%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:68%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+
+                                <span>
+                                    ▦ 8 konu
+                                </span>
+
+                                <span>
+                                    ◉ 24 soru
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="matematik"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- EDEBİYAT -->
+
+                <article
+                    class="course-card"
+                    data-course="edebiyat"
+                    data-category="sozel"
+                    data-search="türk dili edebiyatı edebiyat şiir hikaye roman dil"
+                    data-progress="53"
+                    data-icon="E"
+                    data-title="Türk Dili ve Edebiyatı"
+                >
+
+                    <div class="course-top literature">
+
+                        <div class="course-top-icon">
+                            E
+                        </div>
+
+                        <div class="course-code">
+                            TDE
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Edebiyatı favorilere ekle"
+                            data-favorite="edebiyat"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Sözel
+                        </div>
+
+                        <h3 class="course-name">
+                            Türk Dili ve Edebiyatı
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Ana ders
+                        </div>
+
+                        <p class="course-description">
+                            Dil bilgisi, edebî türler, metin
+                            inceleme, şiir, hikâye ve Türk
+                            edebiyatının temel yapısı.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                53%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:53%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 10 konu</span>
+                                <span>◉ 18 soru</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="edebiyat"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FİZİK -->
+
+                <article
+                    class="course-card"
+                    data-course="fizik"
+                    data-category="sayisal"
+                    data-search="fizik kuvvet hareket enerji basınç elektrik"
+                    data-progress="41"
+                    data-icon="F"
+                    data-title="Fizik"
+                >
+
+                    <div class="course-top physics">
+
+                        <div class="course-top-icon">
+                            F
+                        </div>
+
+                        <div class="course-code">
+                            FZK
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Fiziği favorilere ekle"
+                            data-favorite="fizik"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Sayısal
+                        </div>
+
+                        <h3 class="course-name">
+                            Fizik
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Fen bilimleri
+                        </div>
+
+                        <p class="course-description">
+                            Hareket, kuvvet, enerji, elektrik
+                            ve fiziksel olayların temel
+                            prensiplerini keşfet.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                41%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:41%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 7 konu</span>
+                                <span>◉ 16 soru</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="fizik"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- KİMYA -->
+
+                <article
+                    class="course-card"
+                    data-course="kimya"
+                    data-category="sayisal"
+                    data-search="kimya atom periyodik sistem kimyasal bağ bileşik"
+                    data-progress="35"
+                    data-icon="K"
+                    data-title="Kimya"
+                >
+
+                    <div class="course-top chemistry">
+
+                        <div class="course-top-icon">
+                            K
+                        </div>
+
+                        <div class="course-code">
+                            KMY
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Kimyayı favorilere ekle"
+                            data-favorite="kimya"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Sayısal
+                        </div>
+
+                        <h3 class="course-name">
+                            Kimya
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Fen bilimleri
+                        </div>
+
+                        <p class="course-description">
+                            Atom yapısı, periyodik sistem,
+                            kimyasal bağlar, bileşikler ve
+                            temel kimyasal süreçler.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                35%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:35%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 7 konu</span>
+                                <span>◉ 15 soru</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="kimya"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- BİYOLOJİ -->
+
+                <article
+                    class="course-card"
+                    data-course="biyoloji"
+                    data-category="sayisal"
+                    data-search="biyoloji hücre canlılar sistemler genetik ekoloji"
+                    data-progress="47"
+                    data-icon="B"
+                    data-title="Biyoloji"
+                >
+
+                    <div class="course-top biology">
+
+                        <div class="course-top-icon">
+                            B
+                        </div>
+
+                        <div class="course-code">
+                            BYO
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Biyolojiyi favorilere ekle"
+                            data-favorite="biyoloji"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Sayısal
+                        </div>
+
+                        <h3 class="course-name">
+                            Biyoloji
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Fen bilimleri
+                        </div>
+
+                        <p class="course-description">
+                            Hücre, canlıların temel yapısı,
+                            yaşam süreçleri, sistemler ve
+                            biyolojik ilişkiler üzerine çalışmalar.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                47%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:47%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 8 konu</span>
+                                <span>◉ 17 soru</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="biyoloji"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- TARİH -->
+
+                <article
+                    class="course-card"
+                    data-course="tarih"
+                    data-category="sozel"
+                    data-search="tarih türk tarihi devletler savaşlar medeniyetler"
+                    data-progress="61"
+                    data-icon="T"
+                    data-title="Tarih"
+                >
+
+                    <div class="course-top history">
+
+                        <div class="course-top-icon">
+                            T
+                        </div>
+
+                        <div class="course-code">
+                            TAR
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Tarihi favorilere ekle"
+                            data-favorite="tarih"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Sözel
+                        </div>
+
+                        <h3 class="course-name">
+                            Tarih
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Sosyal bilimler
+                        </div>
+
+                        <p class="course-description">
+                            Tarihsel olayları kronolojik ve
+                            neden-sonuç ilişkisi içerisinde
+                            inceleyebileceğin çalışma alanı.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                61%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:61%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 9 konu</span>
+                                <span>◉ 20 soru</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="tarih"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- COĞRAFYA -->
+
+                <article
+                    class="course-card"
+                    data-course="cografya"
+                    data-category="sozel"
+                    data-search="coğrafya harita iklim nüfus çevre yer şekilleri"
+                    data-progress="55"
+                    data-icon="C"
+                    data-title="Coğrafya"
+                >
+
+                    <div class="course-top geography">
+
+                        <div class="course-top-icon">
+                            C
+                        </div>
+
+                        <div class="course-code">
+                            COG
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Coğrafyayı favorilere ekle"
+                            data-favorite="cografya"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Sözel
+                        </div>
+
+                        <h3 class="course-name">
+                            Coğrafya
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Sosyal bilimler
+                        </div>
+
+                        <p class="course-description">
+                            Doğa, insan, iklim, yer şekilleri,
+                            harita bilgisi ve çevre ilişkilerini
+                            anlamaya yönelik ders merkezi.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                55%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:55%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 7 konu</span>
+                                <span>◉ 19 soru</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="cografya"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FELSEFE -->
+
+                <article
+                    class="course-card"
+                    data-course="felsefe"
+                    data-category="sozel"
+                    data-search="felsefe düşünce bilgi etik mantık varlık"
+                    data-progress="28"
+                    data-icon="Φ"
+                    data-title="Felsefe"
+                >
+
+                    <div class="course-top philosophy">
+
+                        <div class="course-top-icon">
+                            Φ
+                        </div>
+
+                        <div class="course-code">
+                            FEL
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Felsefeyi favorilere ekle"
+                            data-favorite="felsefe"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Sözel
+                        </div>
+
+                        <h3 class="course-name">
+                            Felsefe
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Düşünce eğitimi
+                        </div>
+
+                        <p class="course-description">
+                            Bilgi, varlık, etik, düşünce ve
+                            insanın dünyayı anlama biçimleri
+                            üzerine düşünmeyi öğren.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                28%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:28%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 6 konu</span>
+                                <span>◉ 13 soru</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="felsefe"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- İNGİLİZCE -->
+
+                <article
+                    class="course-card"
+                    data-course="ingilizce"
+                    data-category="dil"
+                    data-search="ingilizce english grammar vocabulary reading speaking"
+                    data-progress="72"
+                    data-icon="EN"
+                    data-title="İngilizce"
+                >
+
+                    <div class="course-top english">
+
+                        <div class="course-top-icon">
+                            EN
+                        </div>
+
+                        <div class="course-code">
+                            ENG
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="İngilizceyi favorilere ekle"
+                            data-favorite="ingilizce"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Dil
+                        </div>
+
+                        <h3 class="course-name">
+                            İngilizce
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Yabancı dil
+                        </div>
+
+                        <p class="course-description">
+                            Kelime bilgisi, grammar, okuma,
+                            yazma ve günlük iletişim becerilerini
+                            geliştirmeye yönelik çalışma alanı.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                72%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:72%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 9 konu</span>
+                                <span>◉ 25 soru</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="ingilizce"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- DİN -->
+
+                <article
+                    class="course-card"
+                    data-course="din"
+                    data-category="yan"
+                    data-search="din kültürü ahlak bilgi değerler toplum"
+                    data-progress="48"
+                    data-icon="D"
+                    data-title="Din Kültürü ve Ahlak Bilgisi"
+                >
+
+                    <div class="course-top religion">
+
+                        <div class="course-top-icon">
+                            D
+                        </div>
+
+                        <div class="course-code">
+                            DKAB
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Din Kültürünü favorilere ekle"
+                            data-favorite="din"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Diğer
+                        </div>
+
+                        <h3 class="course-name">
+                            Din Kültürü ve Ahlak Bilgisi
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Yardımcı ders
+                        </div>
+
+                        <p class="course-description">
+                            Din, ahlak, değerler ve toplumsal
+                            yaşamla ilişkili temel kavramların
+                            incelendiği çalışma alanı.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                48%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:48%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 6 konu</span>
+                                <span>◉ 14 soru</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="din"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- BEDEN -->
+
+                <article
+                    class="course-card"
+                    data-course="beden"
+                    data-category="yan"
+                    data-search="beden eğitimi spor hareket sağlık kondisyon"
+                    data-progress="80"
+                    data-icon="PE"
+                    data-title="Beden Eğitimi"
+                >
+
+                    <div class="course-top pe">
+
+                        <div class="course-top-icon">
+                            PE
+                        </div>
+
+                        <div class="course-code">
+                            BED
+                        </div>
+
+                        <button
+                            class="favorite-btn"
+                            aria-label="Beden Eğitimini favorilere ekle"
+                            data-favorite="beden"
+                        >
+                            ☆
+                        </button>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <div class="course-category">
+                            Diğer
+                        </div>
+
+                        <h3 class="course-name">
+                            Beden Eğitimi
+                        </h3>
+
+                        <div class="course-teacher">
+                            10. sınıf • Uygulamalı ders
+                        </div>
+
+                        <p class="course-description">
+                            Hareket, spor, fiziksel aktivite,
+                            sağlıklı yaşam ve takım çalışması
+                            üzerine uygulamalı ders alanı.
+                        </p>
+
+
+                        <div class="course-progress-row">
+
+                            <span class="progress-label">
+                                İlerleme
+                            </span>
+
+                            <span class="progress-value">
+                                80%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+                            <span
+                                class="progress-fill"
+                                style="--progress:80%"
+                            ></span>
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <div class="course-meta">
+                                <span>▦ 5 konu</span>
+                                <span>◉ 8 görev</span>
+                            </div>
+
+                            <button
+                                class="course-open"
+                                data-open-course="beden"
+                            >
+                                İncele →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 NO RESULTS
+            ================================================== -->
+
+            <div
+                class="no-results"
+                id="noResults"
+            >
+
+                <div class="no-results-icon">
+                    ⌕
+                </div>
+
+                <strong>
+                    Aradığın ders bulunamadı
+                </strong>
+
+                <p>
+                    Arama kelimeni değiştirmeyi veya farklı
+                    bir ders kategorisi seçmeyi deneyebilirsin.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             STUDY RECOMMENDATION
+        ====================================================== -->
+
+        <section class="section-block">
+
+
+            <div class="section-head">
+
+                <div class="section-title-wrap">
+
+                    <span class="section-kicker">
+                        Çalışma merkezi
+                    </span>
+
+                    <h2 class="section-title">
+                        Bugün ne çalışmalısın?
+                    </h2>
+
+                    <p class="section-description">
+                        Sistem, mevcut ilerleme durumuna göre
+                        çalışmaya başlayabileceğin alanları
+                        burada öne çıkarır.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="study-grid">
+
+
+                <article class="study-card large">
+
+                    <div class="study-badge">
+                        ✦ ÖNERİLEN ÇALIŞMA
+                    </div>
+
+
+                    <h3>
+                        Matematikte fonksiyonlar
+                        konusunu pekiştir.
+                    </h3>
+
+
+                    <p>
+                        Son çalışmalarındaki ilerleme durumuna
+                        göre bu konuyu tekrar etmen, ardından
+                        kısa bir soru seti çözmen öneriliyor.
+                        Zorlandığın bölümleri ZYNX AI ile
+                        birlikte inceleyebilirsin.
+                    </p>
+
+
+                    <div class="study-actions">
+
+                        <button
+                            class="study-primary"
+                            id="startRecommended"
+                        >
+                            Çalışmaya başla
+                            →
+                        </button>
+
+                        <a
+                            href="zynx.html"
+                            class="study-secondary"
+                        >
+                            ZYNX AI ile çalış
+                            ✦
+                        </a>
+
+                    </div>
+
+
+                    <div class="study-decoration">
+                        <div class="study-decoration-inner"></div>
+                    </div>
+
+                </article>
+
+
+                <div class="study-side">
+
+
+                    <article class="small-study">
+
+                        <div class="small-study-top">
+
+                            <div class="small-study-icon">
+                                ⏱
+                            </div>
+
+                            <span class="small-study-status">
+                                BUGÜN
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            25 dakikalık tekrar
+                        </strong>
+
+                        <p>
+                            Edebiyat konu özetini
+                            inceleyip kısa tekrar yap.
+                        </p>
+
+                    </article>
+
+
+                    <article class="small-study">
+
+                        <div class="small-study-top">
+
+                            <div class="small-study-icon">
+                                ✓
+                            </div>
+
+                            <span class="small-study-status">
+                                ÖDEV
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            Ödevlerini kontrol et
+                        </strong>
+
+                        <p>
+                            Teslim tarihi yaklaşan
+                            çalışmalarını gözden geçir.
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             WEEK PROGRAM
+        ====================================================== -->
+
+        <section class="section-block">
+
+
+            <div class="section-head">
+
+                <div class="section-title-wrap">
+
+                    <span class="section-kicker">
+                        Haftalık görünüm
+                    </span>
+
+                    <h2 class="section-title">
+                        Ders programından kısa görünüm
+                    </h2>
+
+                    <p class="section-description">
+                        Haftanın derslerini hızlıca görüntüle.
+                        Tam program için program sayfasına geçebilirsin.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="program.html"
+                    class="study-secondary"
+                >
+                    Tam programı aç →
+                </a>
+
+            </div>
+
+
+            <div class="week-card">
+
+
+                <div class="week-header">
+
+                    <div class="week-title">
+
+                        <strong>
+                            Haftalık ders akışı
+                        </strong>
+
+                        <span>
+                            10/D • Pazartesi – Cuma
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="program.html"
+                        class="week-link"
+                    >
+                        Ayrıntılı program
+                    </a>
+
+                </div>
+
+
+                <div class="week-days">
+
+
+                    <div class="day active">
+
+                        <div class="day-name">
+                            Pazartesi
+                        </div>
+
+                        <div class="day-number">
+                            01
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                1. DERS
+                            </span>
+
+                            <strong>
+                                Matematik
+                            </strong>
+
+                            <em>
+                                08:30
+                            </em>
+
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                2. DERS
+                            </span>
+
+                            <strong>
+                                Edebiyat
+                            </strong>
+
+                            <em>
+                                09:20
+                            </em>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="day">
+
+                        <div class="day-name">
+                            Salı
+                        </div>
+
+                        <div class="day-number">
+                            02
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                1. DERS
+                            </span>
+
+                            <strong>
+                                Fizik
+                            </strong>
+
+                            <em>
+                                08:30
+                            </em>
+
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                3. DERS
+                            </span>
+
+                            <strong>
+                                İngilizce
+                            </strong>
+
+                            <em>
+                                10:10
+                            </em>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="day">
+
+                        <div class="day-name">
+                            Çarşamba
+                        </div>
+
+                        <div class="day-number">
+                            03
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                2. DERS
+                            </span>
+
+                            <strong>
+                                Kimya
+                            </strong>
+
+                            <em>
+                                09:20
+                            </em>
+
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                4. DERS
+                            </span>
+
+                            <strong>
+                                Tarih
+                            </strong>
+
+                            <em>
+                                11:00
+                            </em>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="day">
+
+                        <div class="day-name">
+                            Perşembe
+                        </div>
+
+                        <div class="day-number">
+                            04
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                1. DERS
+                            </span>
+
+                            <strong>
+                                Biyoloji
+                            </strong>
+
+                            <em>
+                                08:30
+                            </em>
+
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                3. DERS
+                            </span>
+
+                            <strong>
+                                Coğrafya
+                            </strong>
+
+                            <em>
+                                10:10
+                            </em>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="day">
+
+                        <div class="day-name">
+                            Cuma
+                        </div>
+
+                        <div class="day-number">
+                            05
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                2. DERS
+                            </span>
+
+                            <strong>
+                                Felsefe
+                            </strong>
+
+                            <em>
+                                09:20
+                            </em>
+
+                        </div>
+
+
+                        <div class="day-course">
+
+                            <span>
+                                5. DERS
+                            </span>
+
+                            <strong>
+                                Beden Eğitimi
+                            </strong>
+
+                            <em>
+                                11:50
+                            </em>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================================================
+         COURSE DETAIL MODAL
+    ========================================================== -->
+
+    <div
+        class="modal"
+        id="courseModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal-box">
+
+
+            <div class="modal-header">
+
+
+                <div class="modal-course-title">
+
+                    <div
+                        class="modal-icon"
+                        id="modalIcon"
+                    >
+                        π
+                    </div>
+
+
+                    <div class="modal-title-text">
+
+                        <strong id="modalCourseTitle">
+                            Matematik
+                        </strong>
+
+                        <span id="modalCourseMeta">
+                            10. sınıf
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="modal-close"
+                    id="modalClose"
+                    aria-label="Pencereyi kapat"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-content">
+
+
+                <div class="modal-hero">
+
+                    <div class="modal-hero-label">
+                        Ders merkezi
+                    </div>
+
+
+                    <h3 id="modalHeroTitle">
+                        Matematik
+                    </h3>
+
+
+                    <p id="modalDescription">
+                        Matematik dersi ile ilgili konuları,
+                        çalışma durumunu ve kaynakları burada
+                        görüntüleyebilirsin.
+                    </p>
+
+
+                    <div class="modal-progress">
+
+
+                        <div class="modal-progress-head">
+
+                            <span>
+                                Genel ilerleme
+                            </span>
+
+                            <span
+                                class="modal-progress-value"
+                                id="modalProgressText"
+                            >
+                                68%
+                            </span>
+
+                        </div>
+
+
+                        <div class="modal-progress-bar">
+
+                            <span
+                                id="modalProgressBar"
+                                style="width:68%"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-section-title">
+                    Konular
+                </div>
+
+
+                <div
+                    class="topic-grid"
+                    id="topicGrid"
+                ></div>
+
+
+                <div class="modal-section-title">
+                    Ders kaynakları
+                </div>
+
+
+                <div
+                    class="resource-list"
+                    id="resourceList"
+                ></div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         TOAST
+    ========================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    ></div>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-inner">
+
+
+            <div class="footer-brand">
+
+                <strong>
+                    10/D Dijital Sınıf
+                </strong>
+
+                <span>
+                    Eğitim • Teknoloji • Düzenli Çalışma
+                </span>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="index.html">
+                    Ana Sayfa
+                </a>
+
+                <a href="dersler.html">
+                    Dersler
+                </a>
+
+                <a href="odevler.html">
+                    Ödevler
+                </a>
+
+                <a href="program.html">
+                    Program
+                </a>
+
+                <a href="zynx.html">
+                    ZYNX AI
+                </a>
+
+                <a href="hakkimizda.html">
+                    Hakkımızda
+                </a>
+
+                <a href="mailto:trlifeinfo@gmail.com">
+                    Destek
+                </a>
+
+            </div>
+
+
+            <div class="footer-copy">
+
+                © <span id="year"></span>
+                TR LIFE Studios.<br>
+
+                Tüm hakları saklıdır.
+
+            </div>
+
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        /* =====================================================
+           DATA
+        ====================================================== */
+
+        const courseData = {
+
+            matematik: {
+
+                title:
+                    "Matematik",
+
+                icon:
+                    "π",
+
+                meta:
+                    "10. sınıf • Sayısal",
+
+                progress:
+                    68,
+
+                description:
+                    "Matematik dersindeki temel konuları düzenli bir sırayla takip edebilir, çalıştığın konuları gözden geçirebilir ve soru çözüm sürecini planlayabilirsin.",
+
+                topics: [
+
+                    ["Fonksiyonlar", "Tamamlandı", true],
+                    ["Polinomlar", "Tamamlandı", true],
+                    ["İkinci derece denklemler", "Çalışılıyor", false],
+                    ["Sayılar", "Bekliyor", false],
+                    ["Problem çözme", "Bekliyor", false],
+                    ["Grafikler", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Konu özeti", "PDF / Ders notu", "PDF"],
+                    ["Örnek soru seti", "24 soru", "Aç"],
+                    ["ZYNX AI çalışma modu", "Yapay zekâ desteği", "Aç"]
+
+                ]
+
+            },
+
+
+            edebiyat: {
+
+                title:
+                    "Türk Dili ve Edebiyatı",
+
+                icon:
+                    "E",
+
+                meta:
+                    "10. sınıf • Sözel",
+
+                progress:
+                    53,
+
+                description:
+                    "Türk Dili ve Edebiyatı dersinde metinleri daha iyi anlamak, edebî türleri öğrenmek ve yazılı sınavlara hazırlık yapmak için çalışma alanını kullanabilirsin.",
+
+                topics: [
+
+                    ["Şiir", "Tamamlandı", true],
+                    ["Hikâye", "Tamamlandı", true],
+                    ["Roman", "Çalışılıyor", false],
+                    ["Metin inceleme", "Bekliyor", false],
+                    ["Dil bilgisi", "Bekliyor", false],
+                    ["Söz sanatları", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Ders özetleri", "Konu notu", "Aç"],
+                    ["Örnek metinler", "Metin çalışma", "Aç"],
+                    ["ZYNX AI Edebiyat", "AI çalışma modu", "Aç"]
+
+                ]
+
+            },
+
+
+            fizik: {
+
+                title:
+                    "Fizik",
+
+                icon:
+                    "F",
+
+                meta:
+                    "10. sınıf • Sayısal",
+
+                progress:
+                    41,
+
+                description:
+                    "Fizik konularını kavramlar, örnekler ve problem çözme yöntemiyle çalışabileceğin eğitim alanı.",
+
+                topics: [
+
+                    ["Hareket", "Tamamlandı", true],
+                    ["Kuvvet", "Çalışılıyor", false],
+                    ["Enerji", "Bekliyor", false],
+                    ["Basınç", "Bekliyor", false],
+                    ["Elektrik", "Bekliyor", false],
+                    ["Fiziksel sistemler", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Konu anlatımı", "Ders notu", "Aç"],
+                    ["Problem seti", "16 soru", "Aç"],
+                    ["ZYNX AI Fizik", "AI çalışma modu", "Aç"]
+
+                ]
+
+            },
+
+
+            kimya: {
+
+                title:
+                    "Kimya",
+
+                icon:
+                    "K",
+
+                meta:
+                    "10. sınıf • Sayısal",
+
+                progress:
+                    35,
+
+                description:
+                    "Kimyanın temel kavramlarını düzenli şekilde inceleyebilir, periyodik sistem ve kimyasal bağlar gibi başlıklarda tekrar yapabilirsin.",
+
+                topics: [
+
+                    ["Atom yapısı", "Tamamlandı", true],
+                    ["Periyodik sistem", "Çalışılıyor", false],
+                    ["Kimyasal bağlar", "Bekliyor", false],
+                    ["Bileşikler", "Bekliyor", false],
+                    ["Kimyasal tepkimeler", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Konu özeti", "Ders notu", "Aç"],
+                    ["Soru bankası", "15 soru", "Aç"],
+                    ["AI konu tekrarı", "ZYNX AI", "Aç"]
+
+                ]
+
+            },
+
+
+            biyoloji: {
+
+                title:
+                    "Biyoloji",
+
+                icon:
+                    "B",
+
+                meta:
+                    "10. sınıf • Sayısal",
+
+                progress:
+                    47,
+
+                description:
+                    "Canlıların yapısını, temel biyolojik süreçleri ve ders içerisindeki kavramları daha düzenli bir şekilde çalışabilmen için hazırlanmış bölüm.",
+
+                topics: [
+
+                    ["Hücre", "Tamamlandı", true],
+                    ["Canlıların yapısı", "Tamamlandı", true],
+                    ["Sistemler", "Çalışılıyor", false],
+                    ["Enerji dönüşümleri", "Bekliyor", false],
+                    ["Ekoloji", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Biyoloji özeti", "Ders notu", "Aç"],
+                    ["Kavram kartları", "Tekrar", "Aç"],
+                    ["ZYNX AI Biyoloji", "AI desteği", "Aç"]
+
+                ]
+
+            },
+
+
+            tarih: {
+
+                title:
+                    "Tarih",
+
+                icon:
+                    "T",
+
+                meta:
+                    "10. sınıf • Sözel",
+
+                progress:
+                    61,
+
+                description:
+                    "Tarih konularını olayların nedenleri, sonuçları ve tarihsel bağlamlarıyla birlikte inceleyebileceğin çalışma alanı.",
+
+                topics: [
+
+                    ["Tarihsel düşünme", "Tamamlandı", true],
+                    ["Türk tarihi", "Tamamlandı", true],
+                    ["Devletler", "Tamamlandı", true],
+                    ["Savaşlar", "Çalışılıyor", false],
+                    ["Medeniyetler", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Kronoloji", "Tekrar materyali", "Aç"],
+                    ["Konu kartları", "Kısa tekrar", "Aç"],
+                    ["Tarih soru seti", "20 soru", "Aç"]
+
+                ]
+
+            },
+
+
+            cografya: {
+
+                title:
+                    "Coğrafya",
+
+                icon:
+                    "C",
+
+                meta:
+                    "10. sınıf • Sözel",
+
+                progress:
+                    55,
+
+                description:
+                    "Coğrafi olayları haritalar, doğal süreçler ve insan-çevre ilişkileri üzerinden öğrenmeye yardımcı olan ders alanı.",
+
+                topics: [
+
+                    ["Harita bilgisi", "Tamamlandı", true],
+                    ["İklim", "Tamamlandı", true],
+                    ["Yer şekilleri", "Çalışılıyor", false],
+                    ["Nüfus", "Bekliyor", false],
+                    ["Çevre", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Harita çalışması", "Görsel materyal", "Aç"],
+                    ["Konu özeti", "Ders notu", "Aç"],
+                    ["Coğrafya testi", "19 soru", "Aç"]
+
+                ]
+
+            },
+
+
+            felsefe: {
+
+                title:
+                    "Felsefe",
+
+                icon:
+                    "Φ",
+
+                meta:
+                    "10. sınıf • Sözel",
+
+                progress:
+                    28,
+
+                description:
+                    "Felsefi düşünmenin temel kavramlarını tanımak, düşünceyi sorgulamak ve farklı görüşleri değerlendirebilmek için çalışma alanı.",
+
+                topics: [
+
+                    ["Felsefeye giriş", "Tamamlandı", true],
+                    ["Bilgi felsefesi", "Çalışılıyor", false],
+                    ["Varlık felsefesi", "Bekliyor", false],
+                    ["Etik", "Bekliyor", false],
+                    ["Düşünce", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Kavram sözlüğü", "Temel kavramlar", "Aç"],
+                    ["Konu özeti", "Ders notu", "Aç"],
+                    ["ZYNX AI Felsefe", "AI desteği", "Aç"]
+
+                ]
+
+            },
+
+
+            ingilizce: {
+
+                title:
+                    "İngilizce",
+
+                icon:
+                    "EN",
+
+                meta:
+                    "10. sınıf • Dil",
+
+                progress:
+                    72,
+
+                description:
+                    "İngilizce kelime, grammar, reading, writing ve iletişim becerilerini geliştirmek için günlük çalışma alanı.",
+
+                topics: [
+
+                    ["Vocabulary", "Tamamlandı", true],
+                    ["Grammar", "Tamamlandı", true],
+                    ["Reading", "Tamamlandı", true],
+                    ["Writing", "Çalışılıyor", false],
+                    ["Speaking", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Vocabulary listesi", "Kelime çalışması", "Aç"],
+                    ["Grammar tekrar", "Konu özeti", "Aç"],
+                    ["English AI", "ZYNX AI", "Aç"]
+
+                ]
+
+            },
+
+
+            din: {
+
+                title:
+                    "Din Kültürü ve Ahlak Bilgisi",
+
+                icon:
+                    "D",
+
+                meta:
+                    "10. sınıf • Diğer",
+
+                progress:
+                    48,
+
+                description:
+                    "Ders içerisinde işlenen temel kavramları, değerleri ve konuları düzenli biçimde tekrar edebileceğin çalışma alanı.",
+
+                topics: [
+
+                    ["Temel kavramlar", "Tamamlandı", true],
+                    ["Değerler", "Çalışılıyor", false],
+                    ["Ahlak", "Bekliyor", false],
+                    ["Toplum", "Bekliyor", false]
+
+                ],
+
+                resources: [
+
+                    ["Konu özeti", "Ders notu", "Aç"],
+                    ["Kavram kartları", "Tekrar", "Aç"],
+                    ["Soru seti", "14 soru", "Aç"]
+
+                ]
+
+            },
+
+
+            beden: {
+
+                title:
+                    "Beden Eğitimi",
+
+                icon:
+                    "PE",
+
+                meta:
+                    "10. sınıf • Diğer",
+
+                progress:
+                    80,
+
+                description:
+                    "Fiziksel aktivite, spor, sağlıklı yaşam, hareket ve takım çalışmasıyla ilgili ders çalışmalarının bulunduğu alan.",
+
+                topics: [
+
+                    ["Temel hareketler", "Tamamlandı", true],
+                    ["Takım çalışması", "Tamamlandı", true],
+                    ["Spor kültürü", "Tamamlandı", true],
+                    ["Sağlıklı yaşam", "Tamamlandı", true]
+
+                ],
+
+                resources: [
+
+                    ["Çalışma özeti", "Ders notu", "Aç"],
+                    ["Görev listesi", "8 görev", "Aç"],
+                    ["Ders notları", "Materyal", "Aç"]
+
+                ]
+
+            }
+
+        };
+
+
+        /* =====================================================
+           ELEMENTS
+        ====================================================== */
+
+        const searchInput =
+            document.getElementById("courseSearch");
+
+        const filterButtons =
+            document.querySelectorAll(".filter-btn");
+
+        const courseCards =
+            document.querySelectorAll(".course-card");
+
+        const resultsCount =
+            document.getElementById("resultsCount");
+
+        const noResults =
+            document.getElementById("noResults");
+
+        const courseModal =
+            document.getElementById("courseModal");
+
+        const modalClose =
+            document.getElementById("modalClose");
+
+        const modalIcon =
+            document.getElementById("modalIcon");
+
+        const modalCourseTitle =
+            document.getElementById("modalCourseTitle");
+
+        const modalCourseMeta =
+            document.getElementById("modalCourseMeta");
+
+        const modalHeroTitle =
+            document.getElementById("modalHeroTitle");
+
+        const modalDescription =
+            document.getElementById("modalDescription");
+
+        const modalProgressText =
+            document.getElementById("modalProgressText");
+
+        const modalProgressBar =
+            document.getElementById("modalProgressBar");
+
+        const topicGrid =
+            document.getElementById("topicGrid");
+
+        const resourceList =
+            document.getElementById("resourceList");
+
+        const toast =
+            document.getElementById("toast");
+
+
+        /* =====================================================
+           STATE
+        ====================================================== */
+
+        let activeFilter =
+            "all";
+
+
+        let favorites =
+            JSON.parse(
+                localStorage.getItem("10d_favorites") || "[]"
+            );
+
+
+        /* =====================================================
+           TOAST
+        ====================================================== */
+
+        function showToast(message) {
+
+            toast.textContent =
+                message;
+
+            toast.classList.add("show");
+
+            clearTimeout(
+                showToast.timer
+            );
+
+            showToast.timer =
+                setTimeout(
+                    () => {
+                        toast.classList.remove("show");
+                    },
+                    2500
+                );
+        }
+
+
+        /* =====================================================
+           FAVORITES
+        ====================================================== */
+
+        function updateFavoriteButtons() {
+
+            document
+                .querySelectorAll(".favorite-btn")
+                .forEach(button => {
+
+                    const id =
+                        button.dataset.favorite;
+
+                    const isFavorite =
+                        favorites.includes(id);
+
+                    button.classList.toggle(
+                        "active",
+                        isFavorite
+                    );
+
+                    button.textContent =
+                        isFavorite
+                            ? "★"
+                            : "☆";
+
+                });
+        }
+
+
+        updateFavoriteButtons();
+
+
+        document
+            .querySelectorAll(".favorite-btn")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+                        const id =
+                            button.dataset.favorite;
+
+                        if (
+                            favorites.includes(id)
+                        ) {
+
+                            favorites =
+                                favorites.filter(
+                                    item =>
+                                        item !== id
+                                );
+
+                            showToast(
+                                "Ders favorilerden çıkarıldı."
+                            );
+
+                        } else {
+
+                            favorites.push(id);
+
+                            showToast(
+                                "Ders favorilere eklendi."
+                            );
+
+                        }
+
+                        localStorage.setItem(
+                            "10d_favorites",
+                            JSON.stringify(
+                                favorites
+                            )
+                        );
+
+                        updateFavoriteButtons();
+
+                        applyFilters();
+
+                    }
+                );
+
+            });
+
+
+        /* =====================================================
+           SEARCH + FILTER
+        ====================================================== */
+
+        function applyFilters() {
+
+            const query =
+                searchInput.value
+                    .trim()
+                    .toLocaleLowerCase("tr-TR");
+
+
+            let visible =
+                0;
+
+
+            courseCards.forEach(card => {
+
+                const category =
+                    card.dataset.category;
+
+                const searchable =
+                    card.dataset.search
+                        .toLocaleLowerCase("tr-TR");
+
+                const courseName =
+                    card.dataset.title
+                        .toLocaleLowerCase("tr-TR");
+
+                const matchesSearch =
+                    !query ||
+                    searchable.includes(query) ||
+                    courseName.includes(query);
+
+
+                let matchesFilter =
+                    true;
+
+
+                if (
+                    activeFilter !==
+                    "all"
+                ) {
+
+                    if (
+                        activeFilter ===
+                        "favorite"
+                    ) {
+
+                        matchesFilter =
+                            favorites.includes(
+                                card.dataset.course
+                            );
+
+                    } else {
+
+                        matchesFilter =
+                            category ===
+                            activeFilter;
+
+                    }
+
+                }
+
+
+                const show =
+                    matchesSearch &&
+                    matchesFilter;
+
+
+                card.classList.toggle(
+                    "hidden",
+                    !show
+                );
+
+
+                if (show) {
+                    visible++;
+                }
+
+            });
+
+
+            resultsCount.textContent =
+                `${visible} ders gösteriliyor`;
+
+
+            noResults.classList.toggle(
+                "show",
+                visible === 0
+            );
+
+        }
+
+
+        filterButtons.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    filterButtons.forEach(
+                        item =>
+                            item.classList.remove(
+                                "active"
+                            )
+                    );
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                    activeFilter =
+                        button.dataset.filter;
+
+                    applyFilters();
+
+                }
+            );
+
+        });
+
+
+        searchInput.addEventListener(
+            "input",
+            applyFilters
+        );
+
+
+        /* =====================================================
+           MODAL
+        ====================================================== */
+
+        function openCourse(courseId) {
+
+            const course =
+                courseData[courseId];
+
+            if (!course) {
+                return;
+            }
+
+
+            modalIcon.textContent =
+                course.icon;
+
+            modalCourseTitle.textContent =
+                course.title;
+
+            modalCourseMeta.textContent =
+                course.meta;
+
+            modalHeroTitle.textContent =
+                course.title;
+
+            modalDescription.textContent =
+                course.description;
+
+            modalProgressText.textContent =
+                `${course.progress}%`;
+
+            modalProgressBar.style.width =
+                `${course.progress}%`;
+
+
+            topicGrid.innerHTML =
+                "";
+
+
+            course.topics.forEach(
+                topic => {
+
+                    const [
+                        title,
+                        status,
+                        completed
+                    ] = topic;
+
+
+                    const element =
+                        document.createElement(
+                            "div"
+                        );
+
+                    element.className =
+                        "topic";
+
+
+                    element.innerHTML = `
+
+                        <div
+                            class="topic-status ${
+                                completed
+                                    ? ""
+                                    : "pending"
+                            }"
+                        >
+                            ${completed ? "✓" : "•"}
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                ${title}
+                            </strong>
+
+                            <span>
+                                ${status}
+                            </span>
+
+                        </div>
+
+                    `;
+
+
+                    topicGrid.appendChild(
+                        element
+                    );
+
+                }
+            );
+
+
+            resourceList.innerHTML =
+                "";
+
+
+            course.resources.forEach(
+                resource => {
+
+                    const [
+                        title,
+                        subtitle,
+                        action
+                    ] = resource;
+
+
+                    const element =
+                        document.createElement(
+                            "div"
+                        );
+
+                    element.className =
+                        "resource";
+
+
+                    element.innerHTML = `
+
+                        <div class="resource-info">
+
+                            <div class="resource-icon">
+                                ◈
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    ${title}
+                                </strong>
+
+                                <span>
+                                    ${subtitle}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="resource-action"
+                            type="button"
+                        >
+                            ${action}
+                        </button>
+
+                    `;
+
+
+                    const actionButton =
+                        element.querySelector(
+                            ".resource-action"
+                        );
+
+
+                    actionButton.addEventListener(
+                        "click",
+                        () => {
+
+                            if (
+                                title
+                                    .toLocaleLowerCase(
+                                        "tr-TR"
+                                    )
+                                    .includes(
+                                        "zynx"
+                                    ) ||
+                                title
+                                    .toLocaleLowerCase(
+                                        "tr-TR"
+                                    )
+                                    .includes(
+                                        "ai"
+                                    )
+                            ) {
+
+                                window.location.href =
+                                    "zynx.html";
+
+                                return;
+
+                            }
+
+
+                            showToast(
+                                `${title} kaynağı seçildi.`
+                            );
+
+                        }
+                    );
+
+
+                    resourceList.appendChild(
+                        element
+                    );
+
+                }
+            );
+
+
+            courseModal.classList.add(
+                "show"
+            );
+
+            courseModal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function closeCourseModal() {
+
+            courseModal.classList.remove(
+                "show"
+            );
+
+            courseModal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        document
+            .querySelectorAll(
+                "[data-open-course]"
+            )
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        openCourse(
+                            button.dataset.openCourse
+                        );
+
+                    }
+                );
+
+            });
+
+
+        modalClose.addEventListener(
+            "click",
+            closeCourseModal
+        );
+
+
+        courseModal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    courseModal
+                ) {
+
+                    closeCourseModal();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeCourseModal();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           RECOMMENDED STUDY
+        ====================================================== */
+
+        const startRecommended =
+            document.getElementById(
+                "startRecommended"
+            );
+
+
+        startRecommended.addEventListener(
+            "click",
+            () => {
+
+                openCourse(
+                    "matematik"
+                );
+
+                showToast(
+                    "Matematik çalışma alanı açıldı."
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           FOCUS MODE
+        ====================================================== */
+
+        const focusButton =
+            document.getElementById(
+                "focusButton"
+            );
+
+
+        let focusMode =
+            false;
+
+
+        focusButton.addEventListener(
+            "click",
+            () => {
+
+                focusMode =
+                    !focusMode;
+
+
+                if (focusMode) {
+
+                    document.body.style.setProperty(
+                        "--panel",
+                        "rgba(10,22,38,.96)"
+                    );
+
+                    document
+                        .querySelectorAll(
+                            ".site-header, .hero-decoration"
+                        )
+                        .forEach(
+                            element => {
+                                element.style.opacity =
+                                    ".35";
+                            }
+                        );
+
+
+                    focusButton.textContent =
+                        "◉";
+
+                    showToast(
+                        "Odaklanma modu aktif."
+                    );
+
+                } else {
+
+                    document.body.style.setProperty(
+                        "--panel",
+                        "rgba(13,28,47,.82)"
+                    );
+
+                    document
+                        .querySelectorAll(
+                            ".site-header, .hero-decoration"
+                        )
+                        .forEach(
+                            element => {
+                                element.style.opacity =
+                                    "";
+                            }
+                        );
+
+
+                    showToast(
+                        "Odaklanma modu kapatıldı."
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           MOBILE NAV
+        ====================================================== */
+
+        const mobileMenu =
+            document.getElementById(
+                "mobileMenu"
+            );
+
+        const sidebarOverlay =
+            document.getElementById(
+                "sidebarOverlay"
+            );
+
+
+        mobileMenu.addEventListener(
+            "click",
+            () => {
+
+                sidebarOverlay.classList.toggle(
+                    "show"
+                );
+
+                showToast(
+                    "Mobil menü için site navigasyonunu kullanabilirsin."
+                );
+
+            }
+        );
+
+
+        sidebarOverlay.addEventListener(
+            "click",
+            () => {
+
+                sidebarOverlay.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           YEAR
+        ====================================================== */
+
+        document.getElementById(
+            "year"
+        ).textContent =
+            new Date().getFullYear();
+
+
+        /* =====================================================
+           CARD KEYBOARD ACCESS
+        ====================================================== */
+
+        courseCards.forEach(
+            card => {
+
+                card.setAttribute(
+                    "tabindex",
+                    "0"
+                );
+
+
+                card.addEventListener(
+                    "keydown",
+                    event => {
+
+                        if (
+                            event.key ===
+                            "Enter"
+                        ) {
+
+                            const button =
+                                card.querySelector(
+                                    "[data-open-course]"
+                                );
+
+                            if (button) {
+                                button.click();
+                            }
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           INITIAL FILTER
+        ====================================================== */
+
+        applyFilters();
+
+    </script>
+
+
+</body>
+</html>
+```
